@@ -42,11 +42,24 @@ jobs:
             --include='docs/' --include='docs/GUIDA-FUNZIONI-STARTER-THEME.pdf' --exclude='docs/*' \
             --exclude='.git/' --exclude='.github/' --exclude='.gitignore' --exclude='README.md' --exclude='.claude/' --exclude='.DS_Store' \
             --exclude='node_modules/' --exclude='package.json' --exclude='package-lock.json' --exclude='tools/' \
-            --exclude='dist-zip/' --exclude='images/demo-video-*.mp4' --exclude='*.bak*' --exclude='*.orig' --exclude='*.map' --exclude='*.log' \
+            --exclude='dist-zip/' --exclude='bundle/' --exclude='child.zip' --exclude='images/demo-video-*.mp4' --exclude='*.bak*' --exclude='*.orig' --exclude='*.map' --exclude='*.log' \
             ./ dist-zip/starter-theme/
           (cd dist-zip && zip -qr starter-theme.zip starter-theme)
+
+      # Pacchetto con i due temi (padre + figlio) per chi li carica sul sito da File Manager/FTP: WordPress, da Carica tema, accetta un solo tema per zip.
+      # Il figlio è l'ultima release di StarterChildWP; se non c'è ancora, il pacchetto completo viene saltato.
+      - name: Crea il pacchetto completo (tema + tema figlio)
+        run: |
+          if curl -fsSL -o child.zip https://github.com/BurOrub/StarterChildWP/releases/latest/download/starter-theme-child.zip; then
+            mkdir -p bundle
+            cp -r dist-zip/starter-theme bundle/
+            unzip -q child.zip -d bundle
+            (cd bundle && zip -qr ../dist-zip/starter-pacchetto-completo.zip starter-theme starter-theme-child)
+          else
+            echo "Tema figlio non ancora pubblicato: pacchetto completo saltato."
+          fi
 
       - name: Pubblica la release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" dist-zip/starter-theme.zip --title "Starter Theme ${GITHUB_REF_NAME#v}" --generate-notes
+        run: gh release create "$GITHUB_REF_NAME" dist-zip/*.zip --title "Starter Theme ${GITHUB_REF_NAME#v}" --generate-notes
