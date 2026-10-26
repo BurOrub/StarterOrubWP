@@ -1,0 +1,17 @@
+{
+	"name": "starter-theme",
+	"private": true,
+	"scripts": {
+		"build": "node tools/build.js",
+		"vendor": "node tools/update-vendor.js",
+		"smoke": "node tools/smoke-test.js"
+	},
+	"devDependencies": {
+		"esbuild": "^0.25.0",
+		"lightningcss": "^1.30.0",
+		"postcss": "^8.5.0"
+	},
+	"allowScripts": {
+		"esbuild@0.25.12": true
+	}
+}

@@ -1,0 +1,203 @@
+/* Selettore di icone (campo ACF "Icona"): solo backend. */
+.starter-icon-field {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.starter-icon-field__open.button {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	min-height: 40px;
+}
+
+.starter-icon-field__preview {
+	display: inline-flex;
+	width: 24px;
+	height: 24px;
+}
+
+.starter-icon-field__preview svg {
+	width: 24px;
+	height: 24px;
+}
+
+/* Finestra di scelta */
+/* Selettore icone (.sip): finestra, sfondo e intestazione */
+.sip[hidden] {
+	display: none;
+}
+
+.sip {
+	position: fixed;
+	inset: 0;
+	z-index: 1000000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.sip__backdrop {
+	position: absolute;
+	inset: 0;
+	background: rgba(3, 20, 40, 0.55);
+}
+
+.sip__box {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: min(820px, calc(100vw - 32px));
+	height: min(640px, calc(100vh - 48px));
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+	overflow: hidden;
+}
+
+.sip__head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 14px 18px;
+	border-bottom: 1px solid #e3e3e3;
+	font-size: 15px;
+}
+
+.sip__x {
+	border: 0;
+	background: none;
+	font-size: 26px;
+	line-height: 1;
+	cursor: pointer;
+	color: #1d2327;
+}
+
+/* Barra strumenti: ricerca e schede */
+.sip__tools {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	padding: 12px 18px;
+	flex-wrap: wrap;
+}
+
+.sip__search {
+	flex: 1 1 260px;
+	min-height: 38px;
+	padding: 0 12px;
+	border: 1.5px solid #c3c4c7;
+	border-radius: 8px;
+	font-size: 14px;
+}
+
+.sip__search:focus {
+	border-color: #031428;
+	outline: 0;
+	box-shadow: 0 0 0 3px rgba(183, 255, 0, 0.55);
+}
+
+.sip__tabs {
+	display: flex;
+	gap: 4px;
+}
+
+.sip__tabs button {
+	border: 1.5px solid #c3c4c7;
+	background: #fff;
+	border-radius: 999px;
+	padding: 6px 14px;
+	font-size: 13px;
+	cursor: pointer;
+	color: #1d2327;
+	transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.sip__tabs button.is-on {
+	background: #b7ff00;
+	border-color: #031428;
+	color: #031428;
+	font-weight: 600;
+}
+
+/* Griglia delle icone e singola icona */
+.sip__grid {
+	flex: 1;
+	overflow-y: auto;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+	gap: 6px;
+	padding: 4px 18px 16px;
+	align-content: start;
+}
+
+.sip__item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	height: 78px;
+	border: 1.5px solid transparent;
+	border-radius: 10px;
+	background: #f6f7f7;
+	color: #031428;
+	cursor: pointer;
+	padding: 6px 4px;
+	transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.sip__item:hover,
+.sip__item:focus-visible {
+	background: #b7ff00;
+	border-color: #031428;
+	transform: translateY(-1px);
+	outline: 0;
+}
+
+.sip__item span {
+	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 10.5px;
+	color: #50575e;
+}
+
+.sip__item:hover span {
+	color: #031428;
+}
+
+/* Messaggio "nessun risultato" */
+.sip__empty {
+	grid-column: 1 / -1;
+	padding: 28px 0;
+	text-align: center;
+	color: #50575e;
+}
+
+.sip__foot {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 18px;
+	border-top: 1px solid #e3e3e3;
+	font-size: 13px;
+	color: #50575e;
+}
+
+/* Blocca lo scroll della pagina mentre il selettore è aperto */
+html.sip-open {
+	overflow: hidden;
+}
+
+/* L'attributo hidden deve vincere sugli stili dei pulsanti di WordPress. */
+.sip [hidden],
+.starter-icon-field [hidden] {
+	display: none !important;
+}
+
+.sip__upload.button {
+	margin-left: auto;
+}

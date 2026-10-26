@@ -1,0 +1,14 @@
+{
+	"gsap": {
+		"npm": "gsap",
+		"file": "dist/gsap.min.js",
+		"dest": "JS/vendor/gsap.min.js",
+		"version": "3.15.0"
+	},
+	"lenis": {
+		"npm": "lenis",
+		"file": "dist/lenis.min.js",
+		"dest": "JS/vendor/lenis.min.js",
+		"version": "1.3.27"
+	}
+}

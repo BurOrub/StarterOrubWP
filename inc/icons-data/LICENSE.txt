@@ -1,0 +1,3 @@
+Icone lineari: Lucide (https://lucide.dev), licenza ISC.
+Loghi dei brand: Simple Icons (https://simpleicons.org), licenza CC0; LinkedIn, Amazon, Slack e Skype da Bootstrap Icons (https://icons.getbootstrap.com), licenza MIT.
+I marchi appartengono ai rispettivi proprietari.

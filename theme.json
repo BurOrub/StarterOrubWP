@@ -1,0 +1,108 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"settings": {
+		"appearanceTools": true,
+		"color": {
+			"defaultPalette": false,
+			"palette": [
+				{
+					"slug": "principale",
+					"name": "Principale",
+					"color": "#0073aa"
+				},
+				{
+					"slug": "secondario",
+					"name": "Secondario",
+					"color": "#1a1a1a"
+				},
+				{
+					"slug": "testo",
+					"name": "Testo",
+					"color": "#1a1a1a"
+				},
+				{
+					"slug": "in-risalto",
+					"name": "In risalto",
+					"color": "#c6ff00"
+				},
+				{
+					"slug": "sfondo",
+					"name": "Sfondo",
+					"color": "#ffffff"
+				}
+			]
+		},
+		"typography": {
+			"defaultFontSizes": false,
+			"customFontSize": false,
+			"fontSizes": [
+				{
+					"slug": "display",
+					"name": "Titolo grande (hero)",
+					"size": "clamp(3.5rem, 2.444rem + 4.507vw, 6.5rem)"
+				},
+				{
+					"slug": "title-1",
+					"name": "Titolo 1 (H1)",
+					"size": "clamp(2.75rem, 1.958rem + 3.38vw, 5rem)"
+				},
+				{
+					"slug": "title-2",
+					"name": "Titolo 2 (H2)",
+					"size": "clamp(2.25rem, 1.81rem + 1.878vw, 3.5rem)"
+				},
+				{
+					"slug": "title-3",
+					"name": "Titolo 3 (H3)",
+					"size": "clamp(1.75rem, 1.486rem + 1.127vw, 2.5rem)"
+				},
+				{
+					"slug": "title-4",
+					"name": "Titolo 4 (H4)",
+					"size": "clamp(1.5rem, 1.324rem + 0.7512vw, 2rem)"
+				},
+				{
+					"slug": "title-5",
+					"name": "Titolo 5 (H5)",
+					"size": "clamp(1.125rem, 1.081rem + 0.1878vw, 1.25rem)"
+				},
+				{
+					"slug": "eyebrow",
+					"name": "Titolo 6 / etichetta (H6)",
+					"size": "0.8125rem"
+				},
+				{
+					"slug": "xx-large",
+					"name": "XXL (frase in evidenza)",
+					"size": "clamp(2rem, 1.6rem + 1.9vw, 3.25rem)"
+				},
+				{
+					"slug": "x-large",
+					"name": "XL (testo in evidenza)",
+					"size": "clamp(1.375rem, 1.243rem + 0.5634vw, 1.75rem)"
+				},
+				{
+					"slug": "large",
+					"name": "Grande (testo introduttivo)",
+					"size": "clamp(1.188rem, 1.121rem + 0.2817vw, 1.375rem)"
+				},
+				{
+					"slug": "medium",
+					"name": "Media (testo)",
+					"size": "clamp(1.062rem, 1.04rem + 0.0939vw, 1.125rem)"
+				},
+				{
+					"slug": "small",
+					"name": "Piccola",
+					"size": "0.9375rem"
+				},
+				{
+					"slug": "button",
+					"name": "Pulsanti",
+					"size": "0.9375rem"
+				}
+			]
+		}
+	}
+}

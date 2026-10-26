@@ -1,0 +1,12 @@
+# Dipendenze e file generati dalla build (npm run build li ricrea)
+node_modules/
+CSS/dist/
+JS/dist/
+
+# Assistente, macOS, temporanei
+.claude/
+.DS_Store
+*.log
+*.bak*
+*.orig
+*.map

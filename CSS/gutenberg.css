@@ -1,0 +1,169 @@
+/**
+ * Stili validi SOLO nell'area admin (editor a blocchi).
+ *
+ * Caricato tramite add_editor_style() in functions.php. Serve a far
+ * apparire nell'editor lo stesso stile che i blocchi (core e i custom
+ * block ACF in /template-parts) hanno nel frontend, cosi' chi scrive i
+ * contenuti vede un'anteprima fedele. Duplica qui solo le regole visive
+ * necessarie: non serve reimportare tutto style.css.
+ */
+
+.editor-styles-wrapper {
+	font-family: var(--font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+	color: var(--color-text, #1a1a1a);
+}
+
+/* Esempio: stile del blocco ACF "example-block" replicato per l'editor. */
+.wp-block-starter-theme-example-block {
+	padding: 1.5rem;
+	border: 1px dashed #cccccc;
+	border-radius: 4px;
+}
+
+/* Larghezza del contenuto nell'editor: come sul sito (--content-width, e --gutter ai lati), così il testo non tocca i bordi del browser.
+   Il valore di --gutter/--content-width arriva da CSS/starter.css (caricato anche nell'editor) e dalle opzioni del tema. */
+.editor-styles-wrapper {
+	padding-inline: var(--gutter, 24px);
+}
+
+.editor-styles-wrapper .is-root-container > .wp-block:not([data-align="full"]):not([data-align="wide"]) {
+	max-width: var(--content-width, 1280px);
+	margin-inline: auto;
+}
+
+/* I blocchi ACF a tutta larghezza annullano il padding laterale e arrivano ai bordi come sul sito. */
+.editor-styles-wrapper .is-root-container > .wp-block[data-align="full"] {
+	margin-inline: calc(-1 * var(--gutter, 24px));
+}
+
+/* Blocchi con testo in Gutenberg dentro (Sezione affiancata): il contenitore di ACF si comporta come ".split__text--free" sul sito */
+.editor-styles-wrapper .split__text--free .acf-innerblocks-container {
+	display: grid;
+	gap: 20px;
+}
+
+.editor-styles-wrapper .split__text--free .acf-innerblocks-container > * {
+	margin: 0;
+}
+
+/* Sezioni fatte con il blocco Gruppo (tag section, a tutta larghezza): spaziature e colori come sul sito */
+.editor-styles-wrapper .wp-block-group.alignfull {
+	padding-inline: var(--gutter, 24px);
+}
+
+/* Blocchi ACF: l'anteprima non deve mai essere più larga della colonna dell'editor */
+.editor-styles-wrapper .hero-split__grid,
+.editor-styles-wrapper .split__grid {
+	max-width: 100%;
+}
+
+/* Nell'editor non c'è lo scroll: le sezioni "a comparsa" restano visibili */
+.editor-styles-wrapper .reveal-pending {
+	opacity: 1;
+	transform: none;
+}
+
+/* Campo trappola dei moduli e icone dell'header non servono nell'editor */
+.editor-styles-wrapper .form-hp {
+	display: none;
+}
+
+/* Gruppi a tutta larghezza: contenuto nella larghezza del sito, come sul frontend */
+.editor-styles-wrapper .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull):not(.alignwide)) {
+	max-width: var(--content-width, 1280px);
+	margin-inline: auto;
+}
+
+/* Pulsanti del blocco "Pulsanti": nell'editor sono <div> (testo modificabile) e non <a>, quindi le regole "a.wp-block-button__link" del sito
+   non li raggiungono. Stesso aspetto del sito (senza l'animazione del passaggio del mouse): usano le stesse variabili --b-* delle 4 varianti di
+   Opzioni → Pulsanti (Pieno, Contorno, Pieno 2, Contorno 2 sono definite in CSS/starter.css), così nell'editor il pulsante è quello che si vede fuori. */
+.editor-styles-wrapper .wp-block-button__link {
+	--b-bg: var(--color-primary);
+	--b-bg-h: var(--color-accent-cta);
+	--b-tx: var(--color-primary-text);
+	--b-tx-h: var(--color-primary-text-hover);
+	--b-bd: var(--btn-f1-border, var(--b-bg));
+	--b-bd-h: var(--btn-f1-border-hover, var(--b-bg-h));
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: var(--header-button-size, 54px);
+	min-width: 100px;
+	padding: 0 1.5rem;
+	border: 1px solid var(--b-bd);
+	border-radius: var(--radius-btn, var(--radius-button, 10px));
+	background-color: var(--b-bg);
+	background-clip: padding-box;
+	color: var(--b-tx);
+	font-size: var(--wp--preset--font-size--button);
+	font-weight: 600;
+	text-decoration: none;
+	text-transform: var(--btn-transform, none);
+}
+
+/* Il riempimento dell'hover (sfondo a gradiente) non c'è nell'editor: lo stile del sito lo tiene a 0 di altezza, qui non esiste proprio */
+.editor-styles-wrapper .wp-block-button .wp-block-button__link,
+.editor-styles-wrapper .wp-block-button[class*="is-style-"] .wp-block-button__link {
+	background-image: none;
+}
+
+.editor-styles-wrapper .wp-block-button.is-style-outline .wp-block-button__link,
+.editor-styles-wrapper .wp-block-button.is-style-outline-2 .wp-block-button__link,
+.editor-styles-wrapper .wp-block-button.is-style-fill-2 .wp-block-button__link {
+	border: 1px solid var(--b-bd);
+	background-color: var(--b-bg);
+	color: var(--b-tx);
+}
+
+/* Moduli di Contact Form 7 nell'anteprima: il foglio di stile del plugin non c'è nell'editor, quindi i campi nascosti e il messaggio d'esito vuoto
+   restano visibili (riquadri vuoti). Si nascondono come sul sito. */
+.editor-styles-wrapper .hidden-fields-container,
+.editor-styles-wrapper .screen-reader-response,
+.editor-styles-wrapper .wpcf7-response-output:empty,
+.editor-styles-wrapper .wpcf7-spinner {
+	display: none;
+}
+
+/* Nell'editor i link non devono funzionare: un clic su un pulsante o un link dell'anteprima di un blocco (ACF) non porta alla pagina collegata,
+   ma seleziona il blocco. Restano attivi i link dentro i testi che si stanno scrivendo (campi modificabili) e i pulsanti del core,
+   che sono campi di testo editabili. */
+.editor-styles-wrapper a:not([contenteditable]):not([contenteditable] *) {
+	pointer-events: none;
+	cursor: default;
+}
+
+/* Anteprima della testata del progetto (blocco "Progetto — testata"): solo lettura; la copertina a tutto schermo si limita ad altezza editor */
+.editor-styles-wrapper .project-preview {
+	pointer-events: none;
+}
+
+.editor-styles-wrapper .project-preview .project-cover--full img,
+.editor-styles-wrapper .project-preview .project-cover--full video {
+	height: 70vh;
+}
+
+/* Titolo di pagine, articoli e CPT nell'editor: largo come il contenuto, più piccolo, con una riga che lo separa dal resto */
+.editor-styles-wrapper .editor-visual-editor__post-title-wrapper,
+.editor-styles-wrapper .edit-post-visual-editor__post-title-wrapper {
+	max-width: var(--content-width, 1280px);
+	margin-top: 4rem;
+	margin-inline: auto;
+	margin-bottom: clamp(24px, 3vw, 40px);
+	border-bottom: 1px solid color-mix(in srgb, var(--color-text, #1a1a1a) 15%, transparent);
+}
+
+.editor-styles-wrapper .editor-post-title.editor-post-title__input,
+.editor-styles-wrapper .wp-block-post-title.editor-post-title {
+	font-size: clamp(1.75rem, 1.5rem + 1vw, 2.75rem);
+	line-height: 1.15;
+}
+
+/* Nell'editor non c'è l'header fisso: lo spazio che il sito lascia sotto di lui (--header-height) qui è solo vuoto sopra il titolo */
+.editor-styles-wrapper {
+	padding-top: 0;
+}
+
+/* Anteprima della testata: con la copertina a tutto schermo il titolo parte più sotto, come sul sito (body.project-cover-full .project-head) */
+.editor-styles-wrapper .project-preview .project-cover--full + .project-head {
+	padding-top: clamp(32px, 5vw, 64px);
+}

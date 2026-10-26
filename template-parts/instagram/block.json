@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "starter-theme/instagram",
+	"title": "Instagram",
+	"description": "Foto statiche dal profilo con link (nessun collegamento esterno).",
+	"category": "starter",
+	"icon": "instagram",
+	"keywords": [
+		"instagram",
+		"social",
+		"foto"
+	],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php"
+	},
+	"supports": {
+		"align": [
+			"full"
+		],
+		"anchor": true,
+		"customClassName": true,
+		"html": false
+	},
+	"textdomain": "slug-theme",
+	"attributes": {
+		"align": {
+			"type": "string",
+			"default": "full"
+		}
+	}
+}

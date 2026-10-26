@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "starter-theme/example-block",
+	"title": "Example Block",
+	"description": "Blocco di esempio: duplica questa cartella per creare un nuovo custom block ACF.",
+	"category": "text",
+	"icon": "layout",
+	"keywords": [ "esempio", "acf" ],
+	"acf": {
+		"mode": "auto",
+		"renderTemplate": "render.php"
+	},
+	"supports": {
+		"align": true,
+		"anchor": true
+	},
+	"textdomain": "starter-theme"
+}

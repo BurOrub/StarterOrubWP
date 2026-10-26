@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "starter-theme/ultimi-articoli",
+	"title": "Ultimi articoli",
+	"description": "Gli articoli più recenti (anche di una sola categoria) con la card del blog.",
+	"category": "starter",
+	"icon": "media-text",
+	"keywords": [
+		"articoli",
+		"blog"
+	],
+	"acf": {
+		"mode": "preview",
+		"renderTemplate": "render.php"
+	},
+	"supports": {
+		"align": [
+			"full"
+		],
+		"anchor": true,
+		"customClassName": true,
+		"html": false
+	},
+	"textdomain": "slug-theme",
+	"attributes": {
+		"align": {
+			"type": "string",
+			"default": "full"
+		}
+	}
+}

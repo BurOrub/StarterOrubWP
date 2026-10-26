@@ -1,0 +1,20 @@
+/*
+Theme Name: Starter Theme
+Theme URI: https://example.com/starter-theme
+Author: Denis Burani
+Author URI: https://buranidenis.com
+Description: Tema base leggero per la creazione di nuovi progetti WordPress con Gutenberg (editor a blocchi) e ACF per i custom block. Pensato come punto di partenza minimale, facile da estendere.
+Version: 1.0.0
+Requires at least: 6.4
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: starter-theme
+*/
+
+/**
+ * Questo file serve solo a fornire l'header di tema richiesto da WordPress
+ * (nome, versione, text domain, ecc.). NON aggiungere qui lo stile del
+ * sito: usa CSS/starter.css, che è il foglio di stile effettivamente
+ * caricato in frontend (vedi starter_theme_enqueue_assets() in functions.php).
+ */
