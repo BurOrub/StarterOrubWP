@@ -436,3 +436,10 @@ GSAP e Lenis vengono caricati da CDN (cdnjs/jsdelivr) tramite `starter_enqueue_a
 - **Versione**: la release ha il tag `v1.2.0`; il numero deve coincidere con `Version:` in `style.css` del padre. Pacchetto: il file `starter-theme*.zip` allegato alla release (con dentro la cartella `starter-theme/`); se manca si usa lo zip automatico di GitHub, rinominando la cartella.
 - **Controllo**: ogni 6 ore; "Controlla di nuovo" in Bacheca → Aggiornamenti interroga subito GitHub. I pacchetti si accettano solo da github.com.
 - **Repository privato**: definire in `wp-config.php` `define( 'STARTER_GITHUB_TOKEN', '...' )` con un token di sola lettura.
+
+
+**Installare i plugin del sistema in un colpo solo** (*Aspetto → Installa plugin*, `inc/plugins-required.php`, libreria TGM Plugin Activation in `inc/tgmpa/`): dopo aver attivato il tema WordPress mostra l'avviso "Questo tema richiede i seguenti plugin"; dalla schermata si spuntano i plugin, si sceglie *Installa* e poi *Attiva*.
+- **Richiesti** (l'avviso resta finché mancano): ACF Pro e Contact Form 7. **Consigliati**: Flamingo, Yoast SEO, WooCommerce (solo con negozio), CookieYes, LiteSpeed Cache, Starter Live, Starter Security.
+- **ACF Pro** è a pagamento e non si ridistribuisce: si scarica da ACF con la chiave di licenza. Prima di installare, in `wp-config.php` (sopra la riga "That's all, stop editing") aggiungi `define( 'ACF_PRO_LICENSE', 'la-tua-chiave' );`. Con la chiave definita ACF Pro compare nell'elenco; la stessa costante gli serve poi per attivare la licenza da solo. Senza la chiave compare un avviso e va installato a mano.
+- **Starter Live e Starter Security** si scaricano dalle release dei loro repository GitHub (`BurOrub/StarterLiveWP`, `BurOrub/StarterSecurityWP`).
+- L'elenco è in un solo punto: `starter_register_required_plugins()`.

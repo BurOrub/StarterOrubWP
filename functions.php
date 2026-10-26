@@ -49,6 +49,9 @@ require_once get_template_directory() . '/inc/duplicate.php';
 /* Aggiornamenti del tema da GitHub (notifica classica di WordPress): inerte finché non è indicato il repository. */
 require_once get_template_directory() . '/inc/updater.php';
 
+/* Schermata "Aspetto → Installa plugin": ACF Pro, Contact Form 7, Yoast e gli altri plugin del sistema, da installare in un colpo solo. */
+require_once get_template_directory() . '/inc/plugins-required.php';
+
 /* Setup tema: supporti, menu, textdomain. */
 function starter_setup() {
 	load_theme_textdomain( 'slug-theme', get_template_directory() . '/languages' );

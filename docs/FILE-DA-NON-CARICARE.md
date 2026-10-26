@@ -31,8 +31,8 @@ Si carica per intero (`style.css`, `functions.php`, e i template che avrà) tran
 
 | Plugin | Non caricare |
 |---|---|
-| `starter-live` | `README.md` |
-| `starter-security` | `README.md` |
+| `starter-live` | `README.md`, `.git/`, `.gitignore`, `.github/` |
+| `starter-security` | `README.md`, `.git/`, `.gitignore`, `.github/` |
 
 ## Fuori dal tema
 

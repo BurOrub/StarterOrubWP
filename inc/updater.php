@@ -107,6 +107,11 @@ add_filter(
 			return $transient;
 		}
 
+		// Copia di sviluppo (c'è .git): l'aggiornamento sostituirebbe la cartella e cancellerebbe il repository.
+		if ( is_dir( get_template_directory() . '/.git' ) ) {
+			return $transient;
+		}
+
 		$release = starter_update_latest_release();
 
 		if ( ! $release || '' === $release['version'] ) {
