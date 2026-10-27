@@ -69,8 +69,10 @@ The workflow in `.github/workflows/release.yml` checks that tag and `Version:` m
 
 ## Documentation
 
-[`docs/documentation.pdf`](docs/documentation.pdf): feature guide (in Italian), also included in the theme zip.
+In the [`docs/`](docs) folder (Italian):
 
+- [`GUIDA-TEMA.md`](docs/GUIDA-TEMA.md): how to use the theme, option by option
+- [`documentation.pdf`](docs/documentation.pdf): feature guide, also included in the theme zip
 ---
 
 ## Italiano
@@ -141,4 +143,7 @@ L'automazione in `.github/workflows/release.yml` controlla che tag e `Version:` 
 
 ### Documentazione
 
-[`docs/documentation.pdf`](docs/documentation.pdf): guida alle funzioni, compresa anche nello zip del tema.
+Nella cartella [`docs/`](docs):
+
+- [`GUIDA-TEMA.md`](docs/GUIDA-TEMA.md): come usare il tema, voce per voce
+- [`documentation.pdf`](docs/documentation.pdf): guida alle funzioni, compresa anche nello zip del tema
