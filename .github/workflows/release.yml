@@ -39,7 +39,7 @@ jobs:
         run: |
           mkdir -p dist-zip/starter-theme
           rsync -a \
-            --include='docs/' --include='docs/GUIDA-FUNZIONI-STARTER-THEME.pdf' --exclude='docs/*' \
+            --include='docs/' --include='docs/documentation.pdf' --exclude='docs/*' \
             --exclude='.git/' --exclude='.github/' --exclude='.gitignore' --exclude='README.md' --exclude='.claude/' --exclude='.DS_Store' \
             --exclude='node_modules/' --exclude='package.json' --exclude='package-lock.json' --exclude='tools/' \
             --exclude='dist-zip/' --exclude='bundle/' --exclude='child.zip' --exclude='images/demo-video-*.mp4' --exclude='*.bak*' --exclude='*.orig' --exclude='*.map' --exclude='*.log' \

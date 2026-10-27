@@ -44,8 +44,7 @@ Do not use the *Code → Download ZIP* button: GitHub's automatic zip has no com
 
 ## Child theme
 
-Working in a **child theme** ([StarterChildWP](https://github.com/BurOrub/StarterChildWP)) is recommended for every site, so parent updates never touch your customizations. With the child active, *Customize → Options* works as before: on first activation the child copies the parent's options, then you edit them from there. Your CSS goes in the child's `style.css`, which loads after all the parent's styles; templates are replaced by copying the file with the same path. Details in [`docs/GUIDA-TEMA.md`](docs/GUIDA-TEMA.md) (Italian).
-
+Working in a **child theme** ([StarterChildWP](https://github.com/BurOrub/StarterChildWP)) is recommended for every site, so parent updates never touch your customizations. With the child active, *Customize → Options* works as before: on first activation the child copies the parent's options, then you edit them from there. Your CSS goes in the child's `style.css`, which loads after all the parent's styles; templates are replaced by copying the file with the same path.
 ## Updates
 
 The theme reads the latest release of this repository (`inc/updater.php`): when its version is higher than the installed one, WordPress shows the usual notice in *Dashboard → Updates*. Only the parent is updated; the child is left as it is. On development copies (a folder containing `.git`) the notice is not shown, so the repository folder is never replaced. The two plugins update the same way from their own repositories.
@@ -70,10 +69,7 @@ The workflow in `.github/workflows/release.yml` checks that tag and `Version:` m
 
 ## Documentation
 
-In the [`docs/`](docs) folder (Italian):
-
-- [`GUIDA-TEMA.md`](docs/GUIDA-TEMA.md): how to use the theme, option by option
-- [`GUIDA-FUNZIONI-STARTER-THEME.pdf`](docs/GUIDA-FUNZIONI-STARTER-THEME.pdf): feature guide
+[`docs/documentation.pdf`](docs/documentation.pdf): feature guide (in Italian), also included in the theme zip.
 
 ---
 
@@ -120,8 +116,7 @@ Non usare il pulsante *Code → Download ZIP*: lo zip automatico di GitHub non c
 
 ### Tema figlio
 
-Per ogni sito si consiglia di lavorare in un **tema figlio** ([StarterChildWP](https://github.com/BurOrub/StarterChildWP)), così gli aggiornamenti del padre non toccano le personalizzazioni. Con il figlio attivo le opzioni di *Personalizza → Opzioni* funzionano come prima: alla prima attivazione il figlio copia quelle del padre, poi si modificano da lì. Il tuo CSS va in `style.css` del figlio, che si carica dopo tutti quelli del padre; i template si sostituiscono copiando il file con lo stesso percorso. Dettagli in [`docs/GUIDA-TEMA.md`](docs/GUIDA-TEMA.md).
-
+Per ogni sito si consiglia di lavorare in un **tema figlio** ([StarterChildWP](https://github.com/BurOrub/StarterChildWP)), così gli aggiornamenti del padre non toccano le personalizzazioni. Con il figlio attivo le opzioni di *Personalizza → Opzioni* funzionano come prima: alla prima attivazione il figlio copia quelle del padre, poi si modificano da lì. Il tuo CSS va in `style.css` del figlio, che si carica dopo tutti quelli del padre; i template si sostituiscono copiando il file con lo stesso percorso.
 ### Aggiornamenti
 
 Il tema legge l'ultima release di questo repository (`inc/updater.php`): se la versione è più alta di quella installata, WordPress mostra la notifica normale in *Bacheca → Aggiornamenti*. Si aggiorna sempre il padre; il figlio resta com'è. Sulle copie di sviluppo (cartella con `.git`) la notifica non compare, per non sostituire la cartella del repository. I due plugin si aggiornano allo stesso modo dai loro repository.
@@ -146,7 +141,4 @@ L'automazione in `.github/workflows/release.yml` controlla che tag e `Version:` 
 
 ### Documentazione
 
-Nella cartella [`docs/`](docs):
-
-- [`GUIDA-TEMA.md`](docs/GUIDA-TEMA.md): come usare il tema, voce per voce
-- [`GUIDA-FUNZIONI-STARTER-THEME.pdf`](docs/GUIDA-FUNZIONI-STARTER-THEME.pdf): guida alle funzioni
+[`docs/documentation.pdf`](docs/documentation.pdf): guida alle funzioni, compresa anche nello zip del tema.
