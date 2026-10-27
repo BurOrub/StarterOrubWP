@@ -1,445 +1,767 @@
-# Guida al tema — Starter Theme
+# Starter Theme · Documentazione
 
-Questa guida spiega come usare e gestire questo tema WordPress: dove si trovano le impostazioni, come funzionano header, footer, tipografia, colori, blog e menu, e cosa manca ancora. È pensata per chi conosce WordPress a livello base/medio — niente codice, solo "dove clicco per cambiare X".
+*Versione del tema 1.0.4 · aggiornata al 27 ottobre 2026.* Questo file e `documentation.pdf` nascono dagli stessi testi e vanno di pari passo.
 
----
 
-## 1. Prima di usarlo per un nuovo progetto
+# Benvenuto
 
-Il tema è nato come base riutilizzabile. Prima di consegnarlo su un progetto vero:
+## Che cos'è Starter Theme
 
-- In `style.css`: aggiorna **Theme Name**, **Author URI**, **Description**.
-- Il *text domain* usato nel tema è `slug-theme` (un segnaposto): se vuoi, sostituiscilo ovunque con lo slug reale del progetto tramite "trova e sostituisci".
-- Carica **logo**, **icona del sito** e imposta i **social** (vedi sotto).
+**Starter Theme** è un tema WordPress pensato come **punto di partenza per costruire siti nuovi** senza ripartire ogni volta da zero. È un tema "classico" (non a blocchi), leggero e veloce, che unisce due cose:
 
----
+- **un pannello Opzioni** dentro *Personalizza*, con cui si decidono header, footer, colori, font, pulsanti, blog, negozio e prestazioni senza toccare il codice;
+- **una raccolta di blocchi pronti** (hero, slider, sezioni affiancate, recensioni, team, mappa, elenchi…) con cui si compongono le pagine dall'editor di WordPress, senza page builder.
 
-## 2. Logo e identità del sito
+In più porta con sé due **moduli facoltativi**, Portfolio e Immobili, che si accendono solo se servono, e funziona insieme a due plugin dello stesso sistema: uno per **modificare i contenuti direttamente dal sito** e uno per la **sicurezza di base**.
 
-**Dove:** *Aspetto → Personalizza → Identità del sito*
+## A cosa serve
 
-- **Logo**: il logo normale del sito. Viene usato anche come sfondo del logo nella **pagina di login** di WordPress (`/wp-login.php`), al posto dell'icona di WordPress — non serve caricarlo una seconda volta, e il link del logo lì porta all'home del sito invece che a wordpress.org.
-- **Icona del sito**: la favicon (quella nella scheda del browser). Serve un'immagine quadrata almeno 512×512px.
-- **Logo per l'header trasparente**: un secondo logo opzionale, pensato per quando l'header è ancora trasparente sopra la hero della homepage (dove il logo normale potrebbe avere poco contrasto su una foto scura). Si attiva con l'apposito checkbox, poi carichi l'immagine. Appena l'utente scrolla e l'header prende lo sfondo bianco, torna automaticamente il logo normale — non serve fare nulla, è automatico. Questo stesso logo "chiaro" viene riusato anche nel footer (vedi sezione 8).
+Starter Theme va bene per:
 
----
+- **siti vetrina** di aziende, studi e professionisti;
+- **portfolio** di creativi, agenzie e fotografi;
+- **siti immobiliari**, con schede, filtri e scheda in PDF;
+- **blog** con elenco, archivi e ricerca curati;
+- **negozi WooCommerce** con filtri, preferiti e cassa pronta per la fattura.
 
-## 3. Generale (commenti, animazioni, social)
+È pensato per chi costruisce **più siti con la stessa base**: si imposta tutto una volta, e ogni sito nuovo parte già in ordine. Gli aggiornamenti arrivano da soli, e le personalizzazioni di ogni sito restano al sicuro in un tema figlio.
 
-**Dove:** *Aspetto → Personalizza → Opzioni → Generale*
+## Com'è fatto il sistema
 
-- **Disattiva i commenti su tutto il sito**: rimuove commenti e pingback da articoli e pagine, nasconde il form e la voce "Commenti" dal menu di WordPress. Reversibile: se lo disattivi torna tutto come prima.
-- **Animazione di caricamento**: mostra il logo a tutto schermo mentre la pagina carica, poi si apre sul contenuto.
-- **Scroll fluido**: rende lo scroll del sito più morbido. Si disattiva da solo per chi ha impostato "riduci le animazioni" nel proprio dispositivo (accessibilità).
+Il sistema ha quattro pezzi, che trovi ognuno con il suo repository su GitHub:
 
-Le due opzioni di animazione caricano una libreria esterna (GSAP, più Lenis per lo scroll fluido) solo se almeno una delle due è attiva — se le disattivi entrambe, il tema non carica nessun file aggiuntivo.
+| Pezzo | A cosa serve |
+|---|---|
+| **Starter Theme** (tema padre) | Il tema vero e proprio: opzioni, blocchi, moduli. Si aggiorna da solo. |
+| **Starter Theme Child** (tema figlio) | Il tema che si attiva sul sito. Contiene le personalizzazioni di quel sito. |
+| **Starter Live** (plugin) | Modifica testi, immagini e link direttamente dal sito. |
+| **Starter Security** (plugin) | Protezioni di base: header di sicurezza, login, XML-RPC, limiti alle API. |
 
-### Social
+C'è anche una **skill per Claude** (facoltativa) che spiega all'assistente com'è fatto il tema, utile a chi sviluppa con il suo aiuto.
 
-Compila l'URL solo dei social che vuoi mostrare (Instagram, LinkedIn, Facebook, X, YouTube, TikTok, Substack): se lasci un campo vuoto, quell'icona semplicemente non compare — non serve "disattivarla" a parte. Questi social sono **condivisi** tra header e footer: li compili una volta sola qui, e poi decidi separatamente se mostrarli nell'header e/o nel footer (vedi rispettive sezioni).
+## Come usare questa guida
+
+La guida è pensata per chi conosce WordPress a livello **base o medio**: niente codice, solo "dove clicco per cambiare questa cosa". È divisa in quattro capitoli, da leggere nell'ordine la prima volta e da consultare a piacere dopo.
+
+| Capitolo | Che cosa trovi |
+|---|---|
+| **1 · Installazione e primi passi** | Scaricare e installare tema, tema figlio e plugin; i primi passi su un sito nuovo; aggiornamenti; la skill. |
+| **2 · Le Opzioni** | Il cuore del tema: tutte le sezioni del pannello Opzioni, una per una. |
+| **3 · I moduli (CPT)** | Portfolio, Immobili e i filtri degli elenchi: come si accendono e come si usano. |
+| **4 · I blocchi personalizzati** | I blocchi ACF disponibili nell'editor, a cosa servono e come si impostano. |
+
+**Come leggere i percorsi.** Le indicazioni su dove cliccare sono scritte così: **Aspetto → Personalizza → Opzioni → Generale**. Si legge: nel menu di WordPress a sinistra *Aspetto*, poi *Personalizza*, poi il pannello *Opzioni* e la sezione *Generale*.
+
+**I riquadri colorati** segnalano le cose da non perdere:
+
+> **Nota.** Un'informazione utile da sapere.
+
+> **Consiglio.** Un modo più comodo o più sicuro di fare una cosa.
+
+> **Attenzione.** Qualcosa che può cambiare il sito in modo difficile da annullare, o una trappola già incontrata.
+
+**Contenuti e opzioni** non viaggiano con i file del tema: stanno nel database di ogni sito. Quando metti online un sito costruito in locale, vanno allineati anche quelli.
+
+# 1 · Installazione e primi passi
+
+*Dal download al primo sito funzionante: tema, tema figlio, plugin, primi passi e aggiornamenti.*
+
+## Cosa serve
+
+- **WordPress 6.4 o successivo** e **PHP 7.4 o successivo** (meglio una versione recente di PHP 8).
+- Un **sito WordPress vuoto** su cui lavorare: in locale (per esempio con Local) o su un hosting. Il tema è pensato anche per hosting LiteSpeed come Hostinger.
+- La **licenza di ACF Pro**: è l'unico componente a pagamento e serve per i blocchi e i loro campi.
+- Una ventina di minuti.
+
+## 1.1 Scaricare il sistema
+
+Tutto si scarica dalle pagine **Releases** dei repository su GitHub. Prendi sempre l'**ultima release**.
+
+| Che cosa | Dove | File da scaricare |
+|---|---|---|
+| Tema + tema figlio | github.com/BurOrub/StarterThemeWP/releases/latest | `starter-pacchetto-completo.zip`, oppure `starter-theme.zip` |
+| Tema figlio da solo | github.com/BurOrub/StarterChildWP/releases/latest | `starter-theme-child.zip` |
+| Starter Live | github.com/BurOrub/StarterLiveWP/releases/latest | `starter-live.zip` (di solito non serve: lo installa il tema) |
+| Starter Security | github.com/BurOrub/StarterSecurityWP/releases/latest | `starter-security.zip` (idem) |
+| Skill per Claude | github.com/BurOrub/StarterSkillWP/releases/latest | `starter-theme-skill.zip` |
+
+> **Attenzione.** Non usare il pulsante verde *Code → Download ZIP* di GitHub. Quello zip non contiene il CSS e il JavaScript compilati (il tema funzionerebbe, ma più lento) e la cartella ha un nome diverso da quello giusto.
+
+## 1.2 Installare tema e tema figlio
+
+Sul sito si attiva il **tema figlio**; il padre resta installato accanto e fa il lavoro. Ci sono due modi per installarli.
+
+### Modo A · Due zip da WordPress
+
+1. **Aspetto → Temi → Aggiungi → Carica tema**: carica `starter-theme.zip`. **Non attivarlo.**
+2. Di nuovo **Aspetto → Temi → Aggiungi → Carica tema**: carica `starter-theme-child.zip`.
+3. Attiva **Starter Theme Child**.
+
+### Modo B · Pacchetto completo
+
+1. Decomprimi `starter-pacchetto-completo.zip`: dentro ci sono due cartelle, `starter-theme` e `starter-theme-child`.
+2. Copiale entrambe in `wp-content/themes/` del sito (con il File Manager dell'hosting o con FTP).
+3. In **Aspetto → Temi** attiva **Starter Theme Child**.
+
+> **Nota.** Perché non caricare il pacchetto completo da *Carica tema*? Perché WordPress da quella schermata accetta un solo tema per zip. Il pacchetto completo va quindi decompresso direttamente nella cartella dei temi.
+
+## 1.3 La chiave di ACF Pro
+
+ACF Pro è a pagamento e non può essere distribuito insieme al tema: si scarica da ACF con la tua **chiave di licenza**. Per farlo in automatico, prima di installare i plugin aggiungi la chiave al file `wp-config.php` del sito, sopra la riga *"That's all, stop editing!"*:
+
+```
+define( 'ACF_PRO_LICENSE', 'la-tua-chiave' );
+```
+
+La stessa riga serve poi ad ACF per attivare la licenza da solo. Senza la chiave, nell'amministrazione compare un avviso e ACF Pro va installato a mano dal tuo account ACF.
+
+## 1.4 Installare i plugin in un colpo solo
+
+Dopo l'attivazione, WordPress mostra l'avviso *"Questo tema richiede i seguenti plugin"*. Per installare tutto:
+
+1. Vai in **Aspetto → Installa plugin**.
+2. Seleziona i plugin (con la casella in cima li selezioni tutti) e scegli **Installa**, poi **Applica**.
+3. Torna alla stessa schermata e scegli **Attiva**.
+
+| Plugin | Ruolo | Livello |
+|---|---|---|
+| **ACF Pro** | Campi personalizzati: servono ai blocchi del tema | Obbligatorio |
+| **Contact Form 7** | Moduli di contatto e newsletter | Obbligatorio |
+| Flamingo | Archivio dei messaggi inviati dai moduli | Consigliato |
+| Yoast SEO | SEO; fornisce anche le briciole di pane | Consigliato |
+| WooCommerce | Negozio online | Consigliato, solo per i siti con negozio |
+| CookieYes | Avviso cookie (il tema lo traduce in italiano) | Consigliato |
+| LiteSpeed Cache | Cache di pagina su hosting LiteSpeed (es. Hostinger) | Consigliato |
+| **Starter Live** | Modifica dal sito | Consigliato |
+| **Starter Security** | Sicurezza di base | Consigliato |
+
+> **Consiglio.** I plugin "obbligatori" fanno comparire l'avviso finché mancano; quelli "consigliati" no. Puoi installare solo quelli che servono al sito: per un sito senza negozio, per esempio, salta WooCommerce.
+
+## 1.5 I due plugin Starter
+
+### Starter Live · modificare dal sito
+
+Dopo aver installato Starter Live, chi ha il permesso di modificare una pagina vede in basso al centro il pulsante **✎ Modifica contenuti** (anche nella barra di amministrazione).
+
+1. Passa il mouse sopra un elemento: si evidenzia con la sua etichetta.
+2. Cliccalo e cambia il contenuto, poi premi **Applica**: l'anteprima è immediata.
+3. **Salva e chiudi** scrive tutte le modifiche insieme; **Annulla** le scarta.
+
+Si modificano testi (con grassetto, corsivo, sottolineato e link), immagini, video, gallerie, link, icone, indirizzo della mappa e shortcode, sia nei blocchi dell'editor sia nei blocchi del tema. Funziona anche sulle schede di immobili e progetti, e sui prodotti WooCommerce. Ogni salvataggio crea una **revisione** di WordPress, quindi si può sempre tornare indietro.
+
+> **Nota.** Su schermi fino a 782 px (telefono) la modifica dal sito è disattivata, perché troppo scomoda: si usa da tablet in su. Con LiteSpeed Cache, se il pulsante non compare, escludi `starter-live` da Minimizza / Combina / Ritarda JS.
+
+### Starter Security · protezioni di base
+
+Ogni misura si accende e spegne da **Impostazioni → Starter Security**. Disattivando il plugin tutto torna come prima.
+
+| Misura | Cosa fa |
+|---|---|
+| Header di sicurezza | Protezioni standard inviate dal server a ogni pagina (HSTS facoltativo) |
+| CSP | Solo in modalità report: non blocca nulla, mostra le segnalazioni |
+| XML-RPC | Chiuso (risponde 403) |
+| Versione di WordPress | Nascosta nel codice |
+| Utenti | Gli username non si scoprono da `/?author=N` né dalle API pubbliche |
+| Login | Errore generico; blocco dell'IP dopo 5 tentativi falliti in 15 minuti |
+| Editor dei file | Tolto dall'amministrazione |
+| PHP in `uploads` | Bloccato con una regola `.htaccess` (Apache / LiteSpeed) |
+| Limiti alle API | Ricerca, preferiti e invio moduli limitati per indirizzo IP |
+
+> **Nota.** Se il sito sta dietro Cloudflare o un proxy, scegli nelle impostazioni da dove leggere l'indirizzo IP, altrimenti i limiti contano tutti i visitatori come uno solo.
+
+## 1.6 Il tema figlio
+
+Il **tema figlio** è il tema che resta attivo sul sito. Il padre (`starter-theme`) viene aggiornato da GitHub e non si tocca mai; tutto ciò che è specifico di quel sito sta nel figlio, e gli aggiornamenti del padre non lo sovrascrivono.
+
+- **Le opzioni** del pannello Opzioni funzionano uguali con il figlio attivo. WordPress le salva separatamente per ogni tema attivo, quindi **alla prima attivazione il figlio copia quelle del padre** (se ne ha già, vince il suo valore). Da lì in poi si modificano dal figlio.
+- **Il tuo CSS** va nel file `style.css` del figlio. Si carica **dopo** tutti i CSS del padre, quindi le sue regole vincono. Vale anche nell'editor dei blocchi.
+- **Per cambiare un template** (per esempio `header.php`, `page.php` o `template-parts/content/card.php`), copia il file dal padre nel figlio **con lo stesso percorso** e modificalo lì: WordPress usa quello del figlio.
+- **Per aggiungere codice** si usa `functions.php` del figlio, con `add_action` e `add_filter`. Le funzioni `starter_*` del padre non si ridefiniscono.
+- **Un blocco del figlio** (cartella `template-parts/nome/` con il suo `block.json`) sostituisce il blocco del padre con lo stesso nome.
+- Il figlio non dipende dal nome della sua cartella: per un sito nuovo puoi copiarlo, rinominarlo e cambiare `Theme Name` in `style.css`.
+
+> **Attenzione.** Non scrivere lo stile del sito nel `style.css` del **padre**: il padre non lo carica. Il file su cui lavora il padre è `CSS/starter.css`, ma sui siti vale la regola di lavorare nel figlio.
+
+## 1.7 I primi passi sul sito
+
+Una checklist per partire con il sito nuovo, nell'ordine più comodo.
+
+1. **Logo e icona.** In **Aspetto → Personalizza → Identità del sito** carica il **logo**, l'**icona del sito** (quadrata, almeno 512×512 px) e, se vuoi, il **logo chiaro** per l'header trasparente e per il footer. Il logo compare anche nella pagina di accesso di WordPress.
+2. **Contenuti di prova.** **Strumenti → Contenuti di prova** crea in un clic pagine di base (Home, Chi siamo, Servizi, Contatti, Privacy e Cookie da completare, Preferiti, Blog), un menu con sottomenu, 7 articoli e, con WooCommerce, 12 prodotti finti. Si può rilanciare senza duplicare, e **"Elimina i contenuti di prova"** toglie tutto ciò che è marcato come prova.
+3. **Homepage.** In **Impostazioni → Lettura** scegli *Una pagina statica* e indica la pagina Home e la pagina degli articoli (Blog).
+4. **Menu.** In **Aspetto → Menu** crea il menu principale e assegnalo alla posizione **Header** (vedi il capitolo 2).
+5. **Opzioni.** Percorri le sezioni di **Aspetto → Personalizza → Opzioni**: Generale, Header, Footer, Tipografia, Colori, Pulsanti.
+6. **Social.** Compila gli indirizzi in **Opzioni → Generale → Social**: li usano sia l'header sia il footer.
+7. **Pagine legali.** Completa Privacy Policy e Cookie Policy, e collega Termini di servizio e Credits se li usi: i link del footer ci sono, le pagine di destinazione vanno create per ogni sito.
+8. **Moduli e plugin.** Accendi i moduli che servono in **Opzioni → Moduli (CPT)** (capitolo 3).
+
+> **Nota.** Le **pagine** normali non mostrano un titolo automatico in cima: lasciano libertà di costruire l'intestazione con i blocchi (una hero, il blocco *Intestazione pagina*, o niente). Gli **articoli** invece mostrano titolo, data, autore e categoria da soli.
+
+### Strumenti utili in amministrazione
+
+| Strumento | Dove | A cosa serve |
+|---|---|---|
+| Contenuti di prova | **Strumenti → Contenuti di prova** | Pagine, articoli, prodotti, progetti e immobili di esempio per vedere il tema al lavoro |
+| Clona | Voce accanto a *Modifica* e *Visualizza* | Crea una bozza identica di una pagina, un articolo o un progetto (contenuto, campi, immagine, categorie), senza plugin |
+| Ottimizza immagini | **Media → Ottimizza immagini** | Prepara le immagini già in Libreria (vedi *Prestazioni* nel capitolo 2) |
+
+## 1.8 Gli aggiornamenti
+
+Il tema e i due plugin controllano da soli, ogni 6 ore, l'ultima release su GitHub. Quando ce n'è una più nuova, WordPress mostra la **notifica normale** in **Bacheca → Aggiornamenti** e nella pagina dei Temi o dei Plugin, con il pulsante **Aggiorna**.
+
+- **Si aggiorna il padre**, non il figlio: le personalizzazioni del sito restano intatte.
+- Per forzare subito il controllo: **Bacheca → Aggiornamenti** e *Controlla di nuovo*.
+- Si possono attivare anche gli **aggiornamenti automatici** dalla pagina dei temi e dei plugin.
+- Per escludere un sito dai controlli: nel suo `wp-config.php` si imposta il repository vuoto (`STARTER_UPDATE_REPO`, `STARTER_LIVE_UPDATE_REPO`, `STARTER_SECURITY_UPDATE_REPO`).
+
+> **Attenzione.** Su un sito di **sviluppo** il cui tema è una cartella con un repository Git (`.git`), la notifica non compare di proposito: un aggiornamento sostituirebbe l'intera cartella e cancellerebbe il repository.
+
+## 1.9 La skill per Claude (facoltativa)
+
+Chi sviluppa con l'aiuto di **Claude** può installare la skill di Starter Theme: Claude impara com'è fatto il tema, dove si lavora e quali regole non rompere, senza doverlo rispiegare a ogni sessione. La skill si attiva da sola quando si lavora su un progetto con questo tema.
+
+1. Scarica `starter-theme-skill.zip` dall'ultima release di **StarterSkillWP**.
+2. **Claude Code:** decomprimi lo zip in modo che la cartella `starter-theme` (quella con dentro `SKILL.md`) stia in `~/.claude/skills/` per tutti i progetti, oppure in `.claude/skills/` dentro un singolo progetto.
+3. **App di Claude (web o desktop):** carica lo zip dalla sezione *Skills* delle impostazioni.
+4. Avvia una nuova sessione.
+
+Per aggiornarla basta scaricare la nuova release e sostituire la cartella `starter-theme`.
+
+# 2 · Le Opzioni
+
+*Il cuore del tema: tutto l'aspetto e il comportamento del sito si regola da un unico pannello, senza toccare il codice.*
+
+## Dove sono e come funzionano
+
+Le opzioni stanno in **Aspetto → Personalizza → Opzioni**. Il pannello si apre dentro *Personalizza* di WordPress, con l'anteprima del sito accanto: ogni modifica si vede subito, e diventa definitiva solo quando premi **Pubblica**.
+
+- **Tutto è facoltativo.** Un campo lasciato vuoto non cambia nulla: resta il valore di base del tema.
+- **Gutenberg vince sempre.** Un colore o un font scelto su un singolo blocco nell'editor ha la precedenza su quello impostato qui.
+- **Con il tema figlio** le opzioni funzionano allo stesso modo (alla prima attivazione il figlio copia quelle del padre).
+- Molte opzioni hanno una breve descrizione nel pannello stesso.
+
+| Sezione | Che cosa regola |
+|---|---|
+| **Identità del sito** (WordPress) | Logo, icona del sito, logo chiaro |
+| **Menu** (Aspetto → Menu) | Le posizioni dei menu |
+| **Generale** | Larghezza, bordi, caricamento pagine, scroll, social, briciole, WhatsApp |
+| **Header** | Testata del sito, pulsante CTA, icone, logo |
+| **Footer** | Piè di pagina: 5 stili, colonne, riga finale |
+| **Tipografia** | I font del sito |
+| **Stile testi** | Dimensione e aspetto di titoli e paragrafi |
+| **Colori** | Tavolozza e colori del sito |
+| **Pulsanti** | Le quattro varianti di pulsante |
+| **Barra annunci** | Fascia con testi che scorrono sopra l'header |
+| **Blog** | Elenco, archivi, ricerca e articolo |
+| **Shop** | Negozio WooCommerce (solo con WooCommerce) |
+| **Prestazioni** | Velocità del sito |
+| **Portfolio**, **Immobili** | Opzioni dei moduli (compaiono con il modulo acceso) |
+| **Moduli (CPT)** | Gli interruttori dei moduli |
+
+## 2.1 Identità del sito
+
+**Aspetto → Personalizza → Identità del sito**
+
+| Opzione | Cosa fa |
+|---|---|
+| **Logo** | Il logo normale. Compare anche nella pagina di accesso di WordPress (`/wp-login.php`) al posto dell'icona di WordPress, con il link verso l'home del sito. |
+| **Icona del sito** | La favicon, quella nella scheda del browser. Immagine quadrata di almeno 512×512 px. Da questa il tema genera anche le icone per Google, Android e Apple. |
+| **Logo per l'header trasparente** | Un secondo logo opzionale, **chiaro**, per quando l'header è ancora trasparente sopra una hero scura. Appena si scorre e l'header prende lo sfondo, torna il logo normale in automatico. Lo stesso logo chiaro viene riusato nel footer. |
+
+## 2.2 Menu
+
+**Aspetto → Menu**
+
+Il tema ha cinque posizioni per i menu:
+
+| Posizione | Dove compare |
+|---|---|
+| **Header** | Il menu principale. Compare nella testata e, senza sottomenu, anche come colonna del footer. |
+| **Mobile** *(facoltativa)* | Un menu diverso solo per il pannello mobile e per l'header "Ridotto". Se non assegni nulla, il pannello usa il menu *Header*. |
+| **Privacy** | Predisposta per usi futuri; non è collegata automaticamente ad alcuna area. |
+| **Footer: colonna Link** e **Footer: colonna Riferimenti** | Le due colonne menu del footer Stile 4. Il titolo di ogni colonna è il nome del menu. |
+
+Per creare un **sottomenu**, nell'editor del menu trascina una voce leggermente a destra e sotto un'altra. Nel footer compaiono solo le voci principali.
+
+## 2.3 Generale
+
+**Aspetto → Personalizza → Opzioni → Generale**
+
+| Opzione | Cosa fa |
+|---|---|
+| **Commenti** | Disattiva commenti e pingback su tutto il sito: nasconde il form e la voce *Commenti* nel menu. Reversibile. |
+| **Larghezza contenuto** | Larghezza massima dei contenuti in px (di base 1280). Le sezioni "wide" sono 200 px più larghe. |
+| **Caricamento delle pagine** | Animazione all'apertura di ogni pagina: *nessuna*, *dissolvenza* o *tenda dal basso*. Mostra un testo personalizzato, una percentuale da 0 a 100%, il nome del sito o il logo; si scelgono sfondo e testo dalla Tavolozza. |
+| **Scroll fluido** | Rende lo scorrimento più morbido. Si spegne da solo per chi ha impostato "riduci le animazioni" sul dispositivo. |
+| **SVG come vettori** | Gli SVG entrano nell'HTML e si colorano con il CSS. |
+| **Paginazione: allineamento** | Sinistra, centro o destra: vale per tutte le paginazioni (blog, shop, portfolio, immobili). |
+| **Social** | Sette indirizzi (Instagram, LinkedIn, Facebook, X, YouTube, TikTok, Substack) e fino a 5 **icone personalizzate**. Campo vuoto = icona nascosta. |
+| **Bordi del sito** | Arrotondamento di card, tab, immagini, riquadri e campi: nessuno, piccoli, medi (di base 20 px), grandi, molto grandi o un valore tuo. Vale in tutto il sito, anche dentro i blocchi, tranne i pulsanti (che hanno la loro opzione). |
+| **Briciole di pane** | Mostra o nasconde il percorso *Home / pagina*; si scelgono lo stile (nel titolo della pagina o in una fascia sotto l'header). Usano Yoast SEO se è presente. |
+| **WhatsApp** | Link e testo del pulsante fisso in basso a destra. Campo vuoto = nessun pulsante. Diventa rotondo quando il footer entra in vista. |
 
 ### Icone social personalizzate
 
-Per piattaforme non in elenco (es. Threads, Pinterest, un sito esterno):
+Per piattaforme che non sono in elenco (Threads, Pinterest, un sito esterno):
 
-1. Carica un file **SVG** dell'icona nel campo "Icona personalizzata 1 — file SVG".
-2. Inserisci il link nel campo accanto.
-3. Premi **"+ Aggiungi icona personalizzata"** per sbloccare uno slot successivo (fino a 5 in totale).
+1. Carica un file **SVG** dell'icona nel campo *Icona personalizzata 1 — file SVG*.
+2. Scrivi il link nel campo accanto.
+3. Premi **+ Aggiungi icona personalizzata** per sbloccare quella successiva (fino a 5).
 
-L'icona caricata viene "letta" e trattata come le altre (eredita i colori del tema), non resta un'immagine fissa.
+L'SVG viene "letto" e trattato come le altre icone, ereditando i colori del tema.
 
----
+> **Nota.** Le due animazioni (caricamento pagine e scroll fluido) caricano una libreria esterna (GSAP, più Lenis per lo scroll) solo se almeno una è attiva. Se le disattivi entrambe, il tema non carica alcun file aggiuntivo.
 
-## 4. Tipografia
+## 2.4 Header
 
-**Dove:** *Aspetto → Personalizza → Opzioni → Tipografia*
+**Aspetto → Personalizza → Opzioni → Header**
 
-Permette di scegliere fino a **4 font diversi** e assegnare ciascuno a elementi specifici del sito (H1..H6, oppure "Body" per applicarlo a tutto il sito).
+### Versione dell'header
 
-- **Font 1 e Font 2**: un menu a tendina con due gruppi — **Font di sistema** (Arial, Georgia, Times New Roman, ecc., già installati su ogni computer, nessun caricamento) e **Google Fonts** (una selezione di font popolari, in ordine alfabetico). Finché il menu resta su "— Seleziona Font —", quel font non viene caricato sul sito.
-- **Font 3 e Font 4**: font caricati da te (per un font "di brand" non disponibile su Google Fonts). Ogni font parte nascosto dietro il proprio bottone **"+ Aggiungi Font 3"** / **"+ Aggiungi Font 4"**: premendolo compaiono il campo "Nome del font" e i file da caricare per la prima variante (TTF/WOFF/WOFF2/EOT/SVG — carica solo i formati che ti servono, non serve compilarli tutti).
-  - Ogni font può avere **fino a 4 varianti** (Regular, Bold, Corsivo, Extra Bold, ecc. — scegli Peso e Stile per ciascuna): questo permette che se scrivi un testo in **grassetto** o *corsivo* dentro una pagina, venga usato automaticamente il file giusto invece di un finto grassetto/corsivo disegnato dal browser. Solo la prima variante è visibile di default, le altre si aggiungono con "+ Aggiungi variante".
-  - **"Rimuovi questa variante"** / **"Rimuovi questo font"**: svuotano i campi e richiudono la sezione, così puoi tornare indietro se hai aggiunto qualcosa per errore.
-- **"Applica a"**: sotto ogni font (tranne i bottoni "Rimuovi") trovi 7 checkbox in linea — H1, H2, H3, H4, H5, H6 e "Body" (tutto il sito). Spunta quali elementi devono usare quel font. Se lo stesso elemento è selezionato in più font contemporaneamente, vince l'ultimo (Font 4 batte Font 3, che batte Font 2, che batte Font 1) — meglio evitare di spuntare lo stesso elemento in più font.
+| Versione | Com'è fatta |
+|---|---|
+| **Standard** | Logo a sinistra; menu, CTA e icone raggruppati a destra. |
+| **Centrato** | Logo a sinistra, menu al centro, CTA e icone a destra. |
+| **Ridotto** | Solo il logo e un pulsante **Menu** che apre un pannello con tutto il resto, a qualunque dimensione di schermo. Il pulsante ha un'icona a tre linee che diventa una X, e il testo cambia in *Chiudi*. |
+| **Pillole** | Senza sfondo, sempre visibile, con menu e pulsante in due "pillole" a destra. Mostra solo le icone del negozio, niente social. |
 
----
+*Standard* e *Centrato* sotto i 1180 px diventano da soli come la versione *Ridotto*.
 
-## 5. Colori
+### Le altre opzioni
 
-**Dove:** *Aspetto → Personalizza → Opzioni → Colori* (una sola tab con 4 gruppi: Tavolozza, Sfondi/testi/link, Menu/footer/social, Tag)
+| Opzione | Cosa fa |
+|---|---|
+| **Header flottante** | Si combina con **qualunque** versione. L'header si stacca dai bordi, con sfondo chiaro e angoli arrotondati, ed è sempre visibile (niente trasparenza sopra la hero). Usa sempre il logo normale. |
+| **Header a tutta larghezza** | Logo e menu arrivano fino ai bordi della pagina (massimo 1920 px). Si combina con tutto; con il flottante si allarga anche la card. |
+| **Testo e link del pulsante CTA** | Il pulsante di contatto. Testo vuoto = non compare. Una casella lo fa aprire in una nuova scheda. |
+| **Le voci con sottomenu si aprono col click** | Attiva di base. Le voci diventano pulsanti con una freccia: nel pannello mobile le sottovoci restano chiuse e si aprono toccando; su desktop si aprono anche al passaggio del mouse. |
+| **Mostra i social** | Decide se le icone social (compilate in *Generale → Social*) compaiono nell'header. Indipendente dall'equivalente del footer. |
+| **Stile delle icone** | Con bordo e animazione (come i social), semplici, semplici e vicine. Vale per social e icone. |
+| **Ordine e divisore** | Prima i social o prima le icone, con un divisore facoltativo. |
+| **Icone nell'header** | Ricerca, Account, Preferiti, Carrello: ciascuna si accende o spegne. Account, Preferiti e Carrello compaiono solo con WooCommerce. |
+| **Logo scrollando** | Quando si scorre la pagina il logo resta uguale, diventa più piccolo o diventa un'icona caricata da te. |
 
-Colori di base per tutto il sito — tutti facoltativi: un campo lasciato vuoto non cambia nulla, resta il colore di base del tema.
+> **Attenzione.** Con "le voci con sottomenu si aprono col click" la voce madre **non porta più alla sua pagina**. Aggiungila come prima sottovoce (per esempio *Vedi tutto*). Se disattivi l'opzione tornano i link normali, con le sottovoci sempre visibili su mobile.
 
-- **Sfondo del sito** / **Testo**: i due colori principali usati ovunque (cambiano anche i colori del footer, che li riusa invertiti per il suo sfondo scuro).
-- **Colore principale** / **Colore secondario**: due colori assegnabili ai titoli con lo stesso sistema a checkbox della Tipografia (H1..H6, qui senza "Body" — quello è già il campo "Testo" sopra).
-- **Pulsante principale** (colore, colore hover, colore testo, colore testo hover): ricolora sia il bottone "pieno" dei contenuti (blocco Pulsante di Gutenberg) sia il pulsante CTA dell'header — un solo posto per entrambi.
-- **Pulsante secondario** (stessi 4 campi): il bottone Gutenberg in stile "solo bordo" (variante "Outline" del blocco Pulsante).
-- **Menu mobile** (stessi 4 campi): il pulsante "Menu" dell'header (quello che apre il pannello su mobile/header "Ridotto").
-- **Form newsletter (footer)** (stessi 4 campi): il form di iscrizione nel footer (bordo, casella di spunta, bottone "Iscriviti") — indipendente dagli altri colori del footer.
+La **ricerca** (la lente nell'header) apre un pannello con un'anteprima divisa in Prodotti (solo con WooCommerce), Pagine e Articoli. Le icone del negozio hanno un tooltip al passaggio del mouse (carrello con articoli e subtotale, preferiti con foto e prezzo, account) e, sotto i 600 px, nella barra resta solo il carrello.
 
-**Importante:** questi colori sono solo un punto di partenza. Dentro ogni pagina, con l'editor a blocchi (Gutenberg), puoi sempre scegliere un colore diverso per un singolo blocco — quella scelta vince sempre su quella impostata qui. Ad esempio, se qui hai messo il testo dei paragrafi grigio scuro ma in una pagina hai una sezione con sfondo scuro, puoi impostare quel singolo paragrafo bianco senza alcun problema, senza toccare le impostazioni generali.
+## 2.5 Footer
 
-**Bonus:** tutti questi colori (personalizzati o no) compaiono anche come **swatch pronti all'uso** nel selettore colore di ogni blocco Gutenberg (sotto "Predefinito") — non serve ricopiare il codice esadecimale, sono lì selezionabili con un clic per qualunque testo/sfondo di qualunque blocco, in qualunque pagina.
+**Aspetto → Personalizza → Opzioni → Footer**
 
----
+### I cinque stili
 
-## 6. Header: versione e social
+| Stile | Com'è fatto |
+|---|---|
+| **Stile 1** | Il più ricco: riga introduttiva (titolo e testo) e colonna contatti accanto al menu, poi i social e il form newsletter, il logo a tutta larghezza e la riga finale. |
+| **Stile 2 · editoriale** | Logo e descrizione in alto; sotto tre colonne: menu con voci grandi in grassetto e social, contatti, newsletter. |
+| **Stile 3 · compatto** | Una sola riga con logo, menu in linea e social: per siti che non hanno bisogno di colonne e newsletter. |
+| **Stile 4 · 4 colonne** | Quattro colonne con newsletter e due colonne menu (*Footer: colonna Link* e *Riferimenti*). Ha campi suoi: titolo e shortcode del form newsletter e l'immagine dei metodi di pagamento, per i negozi. |
+| **Stile 5 · titolo grande** | Titolo grande con frase e sedi. Ha i campi *Frase grande* e *Sedi*. |
 
-**Dove:** *Aspetto → Personalizza → Opzioni → Header*
+Tutti gli stili condividono la stessa **riga finale** e gli stessi campi qui sotto. Su tablet e telefono l'ordine degli elementi cambia da solo.
 
-### Versione header
-Tre stili tra cui scegliere:
+### I contenuti
 
-- **Centrato** *(default)*: logo a sinistra, menu al centro, CTA + icone social a destra.
-- **Standard**: logo a sinistra, menu, CTA e icone social raggruppati tutti a destra (nessuna centratura) — il classico header "a due blocchi".
-- **Ridotto**: solo logo e un pulsante "Menu" che apre un pannello con dentro tutto il resto. Sempre così, a qualunque dimensione di schermo — utile per un design più minimale.
+| Opzione | Cosa fa |
+|---|---|
+| **Mostra i social** | Casella indipendente da quella dell'header. |
+| **Colonna testo** | Titolo e testo introduttivo, con un valore di base modificabile. |
+| **Colonna contatti** | Titolo e campo **Voci**, una per riga (indirizzo, telefono, email, orari). Email e telefoni diventano link cliccabili; si può scrivere anche un link HTML. Vuoto = colonna nascosta. |
+| **Colonna menu** | Titolo; usa il menu *Header*. |
+| **Spazio libero** | Uguale in tutti gli stili: titolo, sottotitolo e contenuto (shortcode o HTML). Vuoto = niente. |
+| **Riga finale** | Testo di copyright (con i segnaposto `{anno}` e `{sito}`) e quattro link: **Privacy Policy**, **Cookie Policy**, **Termini di servizio**, **Credits**, ognuno con testo, indirizzo e classi CSS facoltative. Un link senza testo non compare. Gli indirizzi possono essere anche esterni (per esempio Iubenda). |
+| **Colori del footer** | Sfondo, testo, hover dei link e pagina corrente: in *Colori*. |
 
-Sia "Centrato" che "Standard" si riducono da soli sotto gli 1180px, diventando come la versione "Ridotto" (stesso pulsante "Menu").
+> **Attenzione.** Il **form newsletter** del footer è un modulo di Contact Form 7 creato dai *Contenuti di prova*, ma **per ora non è collegato a nessun servizio**: va collegato a un servizio esterno (per esempio Mailchimp) o a un invio email quando serve. Sotto al form c'è una casella di accettazione della privacy obbligatoria, il cui testo si scrive nel relativo campo.
 
-### Header Flottante
-Checkbox indipendente, si può attivare sopra a **qualunque** delle 3 versioni sopra senza cambiare la disposizione di logo/menu/CTA né il comportamento responsive. Quando attivo, l'header si stacca dai bordi (stessa distanza da sinistra, destra e alto, larghezza massima 1440px centrata), con sfondo chiaro e angoli arrotondati come i pulsanti — resta sempre visibile con lo sfondo chiaro, anche sopra una hero (niente più trasparenza in cima alla pagina in questo caso). Con l'header flottante attivo viene sempre usato il logo classico, anche se hai impostato un logo per l'header trasparente.
+## 2.6 Tipografia
 
-### CTA (pulsante di contatto)
-Testo e link della CTA nell'header si modificano dai campi "Testo pulsante CTA" e "Link pulsante CTA" — stessa logica dei social: se lasci il testo vuoto, la CTA non compare. C'è anche un checkbox per farla aprire in una nuova scheda (le icone social lo fanno sempre di default).
+**Aspetto → Personalizza → Opzioni → Tipografia**
 
-### Aspetto dei pulsanti
-CTA e pulsante "Menu" sono colorati (colori diversi tra loro, per distinguerli) con testo in grassetto medio, larghezza minima 100px, e hanno tutti la stessa altezza (CTA, icone social, pulsante Menu). Il raggio degli angoli è condiviso da tutti questi elementi.
+Si scelgono fino a **quattro font** e si assegna ciascuno a elementi specifici: H1…H6 oppure *Body* (tutto il testo del sito).
 
-Al passaggio del mouse: il testo ruota via mentre un suo duplicato prende il suo posto, e il colore di sfondo cambia in un colore acceso/fluo che scorre da sinistra — un colore per la CTA (e in generale per ogni bottone "pieno", inclusi i bottoni Gutenberg — vedi sezione 5 "Colori" per personalizzarli), uno diverso e dedicato per il pulsante "Menu".
+| Slot | Che font |
+|---|---|
+| **Font 1 e Font 2** | Menu a tendina con **font di sistema** (Arial, Georgia, Times New Roman…, già presenti su ogni computer) e **Google Fonts** (una selezione di font popolari). Finché il menu resta su *— Seleziona Font —* il font non viene caricato. |
+| **Font 3 e Font 4** | Font **caricati da te** (per un font di brand): premi *+ Aggiungi Font*, scrivi il nome e carica i file (TTF, WOFF, WOFF2, EOT, SVG: solo quelli che ti servono). |
 
-### Sottomenu col click (menu mobile)
-**Opzioni → Header → "Le voci con sottomenu si aprono col click"** (attiva di base). Le voci con sottomenu diventano pulsanti con una freccia: nel pannello mobile le sottovoci restano **chiuse** e si aprono toccando la voce (un secondo tocco le richiude); su desktop si aprono anche al passaggio del mouse. Tocchi fuori dal pannello, Esc o un link chiudono il menu. Attenzione: la voce madre non porta più alla sua pagina — aggiungila come prima sottovoce (es. "Vedi tutto"). Se disattivi l'opzione tornano i link normali con le sottovoci sempre visibili su mobile.
+- Ogni font caricato ha **fino a 4 varianti** (Regular, Bold, Corsivo, Extra Bold…, scelte per peso e stile): così un testo in grassetto o corsivo usa il file giusto invece di un finto grassetto disegnato dal browser.
+- **Applica a**: sotto ogni font ci sono sette caselle (H1…H6 e *Body*). Se lo stesso elemento è spuntato su più font vince l'ultimo (Font 4 batte 3, che batte 2, che batte 1): meglio non ripetere.
+- **Rimuovi questa variante** / **Rimuovi questo font** svuotano i campi, per tornare indietro.
 
-### Pulsante "Menu" con hamburger animato
-Accanto alla parola "Menu" ci sono tre linee che, a menu aperto, diventano una X mentre il testo diventa "Chiudi".
+> **Consiglio.** Con *Prestazioni → Google Fonts serviti dal tuo sito* i font scelti qui vengono scaricati una volta sul tuo sito: niente richieste a Google, più veloce e più in regola con la privacy.
 
-### Header a tutta larghezza
-**Opzioni → Header → "Header a tutta larghezza"**: logo e menu arrivano fino ai bordi della pagina (max 1920px) invece di fermarsi alla larghezza dei contenuti. Si combina con qualunque versione e con il flottante.
+## 2.7 Stile testi
 
-### Icone shop (solo con WooCommerce)
-**Opzioni → Header → Icone shop**: tre caselle indipendenti — **Account**, **Preferiti**, **Carrello**. Compaiono solo se WooCommerce è installato. Ognuna ha un tooltip al passaggio del mouse (carrello: articoli, quantità, prezzo e subtotale; preferiti: i prodotti salvati con foto e prezzo; account: "Accedi o registrati"). Il carrello e i preferiti mostrano un numero. Sotto i 600px nella barra resta solo il carrello: account e preferiti passano nel pannello del menu.
+**Aspetto → Personalizza → Opzioni → Stile testi**
 
-### Social nell'header
-Checkbox "Mostra i social" per decidere se le icone (compilate in *Opzioni → Generale → Social*, vedi sezione 3) compaiono nell'header — indipendente dal checkbox equivalente nel footer, puoi tenerle in uno solo dei due punti se preferisci.
+Dimensione e aspetto di ogni stile di testo. I valori sono già compilati e **si adattano da soli a ogni schermo**.
 
----
+| Stile | Cosa si regola |
+|---|---|
+| **Titolo grande** (hero), **H1…H6**, **Paragrafo** | Dimensione, interlinea, spaziatura tra le lettere, peso, maiuscolo e margine sotto. |
+| **Dimensioni** XXL, XL, grande, media, piccola | Le misure scelte dal selettore dimensione di Gutenberg. |
+| **Pulsanti** | Dimensione e aspetto del testo dei pulsanti. |
 
-## 7. Menu
+Per ogni stile i valori possono essere diversi per **desktop, tablet e mobile**. *Tablet e Mobile vuoti = come Desktop.* Svuotare un campo riporta al valore standard.
 
-**Dove:** *Aspetto → Menu*
+## 2.8 Colori
 
-Il tema ha tre posizioni disponibili:
+**Aspetto → Personalizza → Opzioni → Colori**
 
-- **Header**: il menu principale — compare sia nell'header sia, senza sottomenu, come colonna menu del footer (vedi sezione 8).
-- **Mobile** *(facoltativa)*: se vuoi un menu diverso apposta per il pannello mobile/header "Ridotto" (ad es. più corto), assegnalo qui. Se non assegni nulla, il pannello mobile continua a mostrare semplicemente lo stesso menu "Header" — nessun rischio, è tutto automatico.
-- **Privacy**: posizione predisposta per usi futuri (es. un menu ad hoc per un blocco a parte), al momento non collegata automaticamente a nessuna area del sito.
+Una sola sezione con **quattro gruppi** che si aprono con un clic. Tutto è facoltativo.
 
-Per creare un **sottomenu** (voce a tendina): nell'editor del menu trascina una voce leggermente a destra e sotto un'altra — diventa una sua "sotto-voce". Compare in automatico una freccina per far capire che è espandibile (su desktop). Nel footer i sottomenu non compaiono (solo le voci principali).
+| Gruppo | Che cosa contiene |
+|---|---|
+| **Tavolozza** | Fino a 10 colori, ognuno con il suo nome. Si scelgono poi in tutte le altre opzioni e nei campi dei blocchi: cambiando un colore qui, cambia ovunque sia usato. |
+| **Sfondi, testi e link** | Sfondo e testo del sito, colore principale e secondario (assegnabili ai titoli H1…H6), colore dei link (normale, hover, sottolineatura). |
+| **Menu, footer e social** | Menu mobile, form newsletter del footer, colori del footer, icone social. |
+| **Tag e categorie** | Colore, hover e bordo di tag e categorie. |
 
----
+> **Nota.** Tutti questi colori compaiono anche come **campioni pronti** nel selettore colore di ogni blocco Gutenberg, sotto *Predefinito*: non serve ricopiare i codici. E un colore scelto su un blocco vince sempre su quello impostato qui: se hai il testo grigio scuro ma una sezione scura, quel paragrafo si può rendere bianco senza toccare le opzioni.
 
-## 8. Footer
+## 2.9 Pulsanti
 
-**Dove:** *Aspetto → Personalizza → Opzioni → Footer*
+**Aspetto → Personalizza → Opzioni → Pulsanti**
 
-Il footer ha **3 stili** selezionabili dal campo "Versione footer", come per l'header:
+L'aspetto di **tutti** i pulsanti del sito, compresi quelli di Gutenberg, dei blocchi e dell'header.
 
-- **Stile 1**: il più ricco — riga introduttiva (titolo + testo) e colonna contatti affiancate al menu, poi riga con i social e il form di iscrizione alla newsletter, poi il logo del sito a tutta larghezza, poi la riga finale.
-- **Stile 2 (editoriale)**: logo + descrizione affiancati in alto, poi tre colonne — menu con voci grandi in grassetto separate da virgole + social, colonna contatti, form newsletter.
-- **Stile 3 (compatto)**: una sola riga con logo, menu in linea e social, pensato per siti che non hanno bisogno delle colonne/newsletter degli altri due stili.
+| Opzione | Cosa fa |
+|---|---|
+| **Arrotondamento** | Come il resto del sito, squadrato, leggero, medio, morbido, a pillola, oppure un valore tuo in px. |
+| **Dimensione e padding** | Normale, piccola o molto piccola; padding verticale e orizzontale personalizzabili. |
+| **Maiuscolo** | Testo dei pulsanti in maiuscolo. |
+| **Pieno 1 e Pieno 2** | Pulsanti con sfondo: colore a riposo e al passaggio del mouse (sfondo, testo, bordo). |
+| **Contorno 1 e Contorno 2** | Pulsanti "solo bordo", con gli stessi campi. |
 
-Tutti e tre condividono la stessa **riga finale** (copyright + link legali) e leggono gli stessi campi qui sotto.
+*Pieno 1* e *Contorno 1* sono anche gli stili *Pieno* e *Contorno* del blocco Pulsante di Gutenberg; *Pieno 2* e *Contorno 2* sono due stili in più. I colori si scelgono dalla Tavolozza. Nei blocchi del tema ogni pulsante ha un menu **Stile del pulsante** per scegliere la variante (vedi il capitolo 4). Il carattere e la dimensione del testo restano in *Tipografia* e *Stile testi*.
 
-### Contenuti personalizzabili
+Al passaggio del mouse il testo ruota via mentre un suo duplicato prende il suo posto, e un colore acceso scorre da sinistra.
 
-- **Mostra i social**: checkbox indipendente da quello dell'header (stessi dati di *Generale → Social*).
-- **Colonna testo**: titolo e testo introduttivo del footer (entrambi hanno un default, personalizzabili liberamente).
-- **Colonna contatti**: titolo + campo **"Voci"**, una voce per riga (indirizzo, telefono, email, orari...). Email e numeri di telefono vengono riconosciuti automaticamente e resi cliccabili. Puoi anche scrivere un link HTML dentro una voce (es. un indirizzo con link a Google Maps) — la colonna resta nascosta finché il campo è vuoto.
-- **Colonna menu**: titolo personalizzabile, usa il menu "Header" (vedi sezione 7).
-- **Newsletter**: il footer (Stile 1 e Stile 2) mostra un form di iscrizione via email — **per ora l'invio non è collegato a nessun servizio**, il form è solo l'elemento visivo/funzionante lato browser, va collegato a un servizio esterno (es. Mailchimp) o a un invio email quando serve davvero. Sotto al form c'è una casella di accettazione privacy obbligatoria, il cui testo si scrive nel campo "Testo accettazione privacy" — può contenere anche un link HTML con classi CSS a tua scelta (utile ad esempio per collegare un servizio come Iubenda).
-- **Riga finale**: testo di copyright (supporta i segnaposto `{anno}` e `{sito}`), più quattro link — **Privacy Policy**, **Cookie Policy**, **Termini di servizio**, **Credits** — ciascuno con testo, indirizzo e (tranne Credits) un campo facoltativo di classi CSS. Ogni link compare nel footer solo se hai scritto un testo per lui: lasciato vuoto, semplicemente non compare (niente spazio vuoto lasciato lì). La Privacy Policy **non è più legata automaticamente** alla pagina Privacy di WordPress: puoi collegarla a qualsiasi indirizzo, anche esterno (utile per un servizio come Iubenda).
+## 2.10 Barra annunci
 
-Su tablet/smartphone l'ordine degli elementi cambia (via CSS, gestito in automatico, non serve toccare nulla a mano).
+**Aspetto → Personalizza → Opzioni → Barra annunci**
 
----
+Una **fascia sopra l'header** con testi che scorrono in continuazione, per annunci, eventi o promozioni.
 
-## 9. Homepage e Hero
+| Opzione | Cosa fa |
+|---|---|
+| **Mostra la barra annunci** | Accende la fascia. |
+| **Annunci** | Un annuncio per riga. |
+| **Etichetta in grassetto, link, separatore** | Un'etichetta in evidenza, un link facoltativo e il separatore tra gli annunci. |
+| **Velocità** | Quanto scorre il testo. |
+| **Pausa al passaggio del mouse** | Ferma lo scorrimento. |
+| **Colori** | Sfondo e testo, dalla Tavolozza. |
 
-**Dove:** *Impostazioni → Lettura*
+La barra scorre via con la pagina e l'header fisso la segue. Con "riduci animazioni" attivo sul dispositivo, il testo sta fermo.
 
-La homepage è una **pagina normale** impostata come "pagina statica" (non il blog). Attualmente è la pagina "Home", con diverse sezioni: hero di presentazione, presentazione del progetto, i vantaggi principali, portfolio, chi sono, form di contatto.
+## 2.11 Blog
 
-La sezione di apertura (hero a tutto schermo con foto, titolo, sottotitolo e pulsante) è semplicemente un **blocco Cover** di Gutenberg all'inizio della pagina — per cambiarla basta modificare la pagina dall'editor a blocchi: cambiare foto, testo, e il link del pulsante.
+**Aspetto → Personalizza → Opzioni → Blog** (la pagina e il numero di articoli si scelgono in **Impostazioni → Lettura**)
 
-Nota: l'header riconosce la hero guardando il contenuto della pagina (cerca un blocco Cover con la classe `hero-section`), non serve che sia per forza la homepage — qualsiasi pagina che inizia con quel blocco Cover ottiene lo stesso header trasparente.
+Le stesse regole valgono per la pagina Blog, le categorie, i tag, gli autori, gli archivi per data e la ricerca. In questi archivi in alto compare una piccola etichetta con la sezione in cui ti trovi ("Categoria", "Tag", "Autore", "Risultati di ricerca") e sotto il titolo grande.
 
----
+| Opzione | Cosa fa |
+|---|---|
+| **Aside** (filtri e ricerca) | La colonna a destra con ricerca, categorie con il numero di articoli, ultimi articoli e tag. Si accende **separatamente** per elenco/archivi/ricerca e per gli articoli, e può essere **fissa**. Se l'area *Sidebar Blog* ha widget in **Aspetto → Widget**, si usano quelli. Su tablet e mobile diventa un pannello che entra da destra. |
+| **Colonne della griglia** | 1, 2, 3 o 4 (3 di base). Con *1 colonna* la foto sta a sinistra e il testo a destra. Su tablet e mobile scendono da sole. |
+| **Articoli per pagina** | Quanti articoli per pagina nell'elenco. |
+| **Ultimo articolo in evidenza** | Il primo articolo a tutta larghezza, solo nella prima pagina. |
+| **Card dell'elenco** | Mostra o nasconde data, autore (anche cliccabile), categorie, tag. |
+| **Articolo** | Data, autore, categorie, **sommario**, tag (a fine articolo), **riquadro autore** (avatar, nome e biografia dal profilo utente), **articoli correlati** ("Continua a leggere", stessa categoria), pulsanti **Condividi**. |
 
-## 10. Blog
+Titolo e testo introduttivo della pagina Blog si modificano editando la pagina "Blog".
 
-**Dove:** *Aspetto → Personalizza → Opzioni → Blog* per tutte le scelte; *Impostazioni → Lettura* per la pagina e il numero di articoli.
+## 2.12 Shop
 
-Le stesse regole valgono per la **pagina Blog**, le **categorie**, i **tag**, gli **autori**, gli **archivi per data** e la **ricerca**: stessa struttura, ma con il **nome della sezione in cui sei** in alto (una piccola etichetta — "Categoria", "Tag", "Autore", "Risultati di ricerca" — e sotto il titolo grande, es. "Guide" oppure “parola cercata”).
+**Aspetto → Personalizza → Opzioni → Shop** (la sezione compare solo con WooCommerce attivo)
 
-- **Aside** (colonna a destra con ricerca, categorie col numero di articoli, ultimi articoli e tag): si accende o spegne **separatamente** per l'elenco/archivi/ricerca e per gli articoli. Se in *Aspetto → Widget* l'area "Sidebar Blog" ha dei widget, si usano quelli. Su tablet e mobile l'aside diventa un pannello che entra da destra col pulsante "Filtri e ricerca".
-- **Colonne della griglia**: 2, 3 o 4 (3 di base; scendono da sole su tablet e mobile). La distanza tra le card è stretta.
-- **Card dell'elenco**: scegli se mostrare data, autore, categorie, tag.
-- **Articolo**: scegli data, autore, categorie, tag (i tag stanno a fine articolo con una linea sopra), il **riquadro autore** (avatar, nome e biografia presi dal profilo utente), gli **articoli correlati** ("Continua a leggere", stessa categoria) e i pulsanti **Condividi**.
-- **Titolo e testo introduttivo** della pagina Blog: si modificano editando la pagina "Blog".
+Tutti i colori, i font e le dimensioni vengono dalle opzioni del tema: nel CSS dello shop non c'è nessun valore scritto a mano. Le pagine di WooCommerce (shop, categorie, scheda prodotto, carrello, cassa, account) hanno già lo stile del tema.
 
----
+| Gruppo | Cosa si regola |
+|---|---|
+| **Filtri** | Si attivano per la pagina Shop e, se vuoi, anche per le categorie. Ogni filtro si accende da solo: ricerca con suggerimenti, categoria, prezzo (da/a), attributi (Colore, Materiale… uno per ogni attributo che ha prodotti). Colonne dei prodotti e conteggio. L'indirizzo resta condivisibile. |
+| **Card prodotto** | Cuore dei preferiti, pulsante *Aggiungi al carrello* al passaggio del mouse, seconda foto all'hover, categorie, descrizione breve. |
+| **Pagine e cassa** | Pagina dei **preferiti** (con lo shortcode `[starter_preferiti]`, creata dai contenuti di prova; i preferiti stanno nel browser del visitatore, senza account). Campi facoltativi per la fattura: Partita IVA, Codice fiscale, Codice SDI/PEC. |
+| **Negozio in test** | Un avviso con il testo che scegli, mostrato come fascia gialla in fondo alla pagina, sotto il footer. |
 
-## 10-bis. Shop (WooCommerce)
+## 2.13 Prestazioni
 
-**Dove:** *Aspetto → Personalizza → Opzioni → Shop* (la sezione compare solo con WooCommerce attivo). Tutti i colori, i font e le dimensioni vengono dalle opzioni del tema: nessun valore nel CSS dello shop è scritto a mano.
+**Aspetto → Personalizza → Opzioni → Prestazioni**
 
-- **Filtri**: attivali per la pagina Shop (e, se vuoi, anche per le categorie). Ogni filtro si accende da solo: ricerca con suggerimenti, categoria, prezzo (da/a), attributi (Colore, Materiale… uno per ogni attributo che ha prodotti). L'URL resta condivisibile. Su tablet e mobile i filtri sono un pannello che entra da sinistra.
-- **Card prodotto**: cuore dei preferiti, pulsante "Aggiungi al carrello" all'hover, seconda foto all'hover, categorie, descrizione breve.
-- **Pagina dei preferiti**: pagina con lo shortcode `[starter_preferiti]` (creata dai contenuti di prova). I preferiti stanno nel browser del visitatore, nessun account.
-- **Cassa**: campi facoltativi Partita IVA, Codice fiscale e Codice SDI/PEC per la fattura.
-- Tutte le pagine di WooCommerce (shop, categorie, scheda prodotto, carrello, cassa, account) hanno già lo stile del tema.
+Il sito è pensato per essere veloce e piacere ai motori di ricerca (Core Web Vitals) senza plugin aggiuntivi.
 
----
+### Sempre attivo
 
-## 10-ter. Footer "Stile 4" e blocchi aggiunti
+Le immagini diventano **WebP** in automatico; gli script del tema non bloccano il caricamento; il collegamento a Google Fonts e alle librerie esterne è anticipato solo se usato; CSS e JavaScript sono compressi e divisi per tipo di pagina; la testata della pagina è ripulita da emoji, feed e script inutili.
 
-- **Footer Stile 4** (4 colonne con newsletter, ripreso da Symbolikamente): riusa i campi già presenti (descrizione, contatti, copyright, credits, social, logo chiaro). Campi nuovi, solo per questo stile: **Titolo** e **Shortcode** del form newsletter (serve a stampare il form di Contact Form 7 nell'ultima colonna) e **Immagine dei metodi di pagamento** (facoltativa, per i negozi). Le due colonne menu usano le posizioni "Footer: colonna Link" e "Footer: colonna Riferimenti" (Aspetto → Menu); il titolo della colonna è il nome del menu.
-- **Blocchi in più**: Hero con slider, Striscia valori, Ultimi articoli, Prodotti in evidenza (Woo), Instagram, Team, Contatti. Li trovi nella categoria "Starter" quando aggiungi un blocco; la pagina "Blocchi di prova" li mostra tutti.
-- **Briciole di pane**: *Opzioni → Generale → Mostra le briciole di pane* (usano Yoast SEO se presente).
+### Le caselle del pannello
 
----
+| Opzione | Cosa fa |
+|---|---|
+| **Compressione e cache del browser** | Il tema scrive nel file `.htaccess` le regole per comprimere i file di testo e far ricordare al browser immagini, font, CSS, JS e video per un anno (l'HTML no). Funziona su Apache e LiteSpeed (per esempio Hostinger). Spegnendo la casella le toglie. |
+| **Google Fonts serviti dal tuo sito** | I font di *Tipografia* vengono scaricati una volta sul tuo sito: niente richieste a Google, più veloce e più in regola con la privacy. |
+| **Precarica la foto di apertura (hero)** | Se la pagina comincia con una hero con foto, il browser la scarica subito, nella misura giusta. |
+| **Contact Form 7 solo dove c'è un modulo** | Niente script e stile dei moduli nelle altre pagine. |
+| **Immagini AVIF (con ripiego WebP)** | Accanto a ogni immagine il tema crea un file `.avif` più leggero; il browser sceglie da solo il formato che sa leggere. Si carica come sempre JPG o PNG. La qualità si regola da 40 a 90. |
+| **Video WebM (con ripiego mp4)** | Carica in Libreria un `.webm` con lo **stesso nome** dell'mp4 (esportato a mano con HandBrake o ffmpeg): il tema offre prima il WebM e poi l'mp4. |
+| **Favicon .ico e icone** | Dall'icona del sito genera `favicon.ico`, le icone per Google, Android e Apple e il manifest. |
+| **Unisci CSS e JS in un solo file** | Spenta di base. Unisce i file consecutivi in uno solo, nello stesso ordine. Per vedere la pagina senza compressione (da amministratore) aggiungi `?starter-raw=1` all'indirizzo. |
+| **Comprimi il codice HTML** | Spenta di base. Toglie commenti, a capo e spazi doppi, senza cambiare ciò che si vede. |
+| **Togli jQuery Migrate** | Rimuove un piccolo script per i vecchi plugin. |
 
-## 10-quater. Pagine di base, Contact Form 7 e contenuti di prova
+### Le immagini già in Libreria
 
-- **Strumenti → Contenuti di prova**: crea in un clic Privacy Policy e Cookie Policy (bozze da completare, con la tabella di CookieYes), Preferiti, Blog, un menu con sottomenu, 7 articoli e — con WooCommerce — 12 prodotti finti con foto segnaposto, categorie e attributi. Si può rilanciare senza duplicare e con "Elimina i contenuti di prova" si toglie tutto ciò che è marcato come prova (le pagine Privacy e Cookie restano).
-- **Contact Form 7 + Flamingo**: ogni modulo ha da solo un anti-spam invisibile (campo trappola + orario) e due campi nascosti, **pagina** e **pagina-url**, che dicono da quale pagina arriva il messaggio: li vedi in Flamingo e in fondo alla mail. Non serve toccare i form.
-- **Spaziature**: classi pronte da scrivere in "Classi CSS aggiuntive" di un blocco — `mt2` (margine sopra 2rem), `mb1`, `pt3`, `pb4`, `p2`… con varianti `-tab` (tablet) e `-sma` (mobile), es. `mt4 mt2-tab mt1-sma`.
+**Media → Ottimizza immagini** crea gli AVIF mancanti (a lotti, con barra di avanzamento) e converte in WebP i JPG e PNG rimasti, aggiornando gli indirizzi in articoli e opzioni.
 
----
+> **Attenzione.** Prima di convertire la Libreria esistente fai un **backup** del database e della cartella `uploads`.
 
-## 10-quinquies. Moduli (CPT): Portfolio, Immobili e quelli futuri
+> **Nota.** Restano fuori dalla conversione gli SVG, il favicon, il logo delle email di WooCommerce e i file con `email` o `nowebp` nel nome. Serve PHP con supporto AVIF: la pagina *Ottimizza immagini* dice se il server lo ha; se manca, restano i WebP.
 
-**Dove:** *Aspetto → Personalizza → Opzioni → Moduli (CPT)*. Un interruttore per ogni modulo, con la sua descrizione.
+**Da fare lato hosting** (non dal tema): PHP aggiornato, la cache di pagina del provider (su Hostinger LiteSpeed Cache o la cache integrata) e un CDN se serve. Per verificare, usa PageSpeed Insights e controlla che la risposta del server abbia l'intestazione `content-encoding: br` o `gzip`.
 
-Un modulo è una funzione facoltativa del tema che porta con sé tutto ciò che serve: il tipo di contenuto (CPT), le categorie, i campi, i blocchi, la scheda e la pagina. **Spento, il suo codice non viene nemmeno caricato**: niente CPT, campi, blocchi, CSS, JS né query in più (l'interruttore sta nelle opzioni del tema, che WordPress legge comunque). Acceso, carica solo ciò che serve alla pagina: il CSS e il JS del modulo partono solo sulle pagine che lo usano.
+## 2.14 Opzioni dei moduli
 
-**Cosa succede quando si accende** (alla richiesta dopo aver pubblicato): gli indirizzi del sito si aggiornano; il modulo crea la sua **pagina** (Portfolio, Immobili) con già dentro il blocco dell'elenco, oppure la ripubblica se l'aveva messa in bozza il tema; compaiono i suoi blocchi nell'editor e le sue opzioni.
+**Aspetto → Personalizza → Opzioni → Moduli (CPT)** contiene un interruttore per ogni modulo. Le sezioni **Portfolio** e **Immobili** compaiono solo se il modulo è acceso. Come funzionano i moduli è spiegato nel capitolo 3; qui l'elenco delle opzioni.
 
-**Cosa succede quando si spegne:** le pagine create dal tema per quel modulo tornano **in bozza**, quindi il loro link smette di funzionare (404), come i link delle schede dei progetti o degli immobili. I **contenuti restano nel database** e tornano riaccendendo il modulo. Una pagina fatta a mano che usa il blocco del modulo resta pubblicata ma il blocco non stampa niente.
+### Portfolio
 
-**Per aggiungere un modulo in futuro:** una voce in `starter_modules()` (`inc/modules.php`) con file, blocchi, pagina e contenuti di prova; l'interruttore compare da solo. I contenuti di prova di ogni modulo acceso si creano da *Strumenti → Contenuti di prova*.
-
-**Siti nuovi:** i moduli partono tutti spenti.
+| Gruppo | Cosa si regola |
+|---|---|
+| **Scheda del progetto** | Se mostrare i dati nella testata (servizi, agenzie, link) e la sezione *Altri progetti* in fondo. |
+| **Passaggio tra i progetti** | L'animazione quando si passa dalla scheda a un altro progetto: nessuna, **copertina a tutto schermo**, **tendina** o **dissolvenza**; scritta del caricamento o percentuale da 0 a 100%; colori di sfondo e testo. |
+| **Altri progetti: categorie** | Stile delle categorie sulle card: testo con simbolo, tab sotto o sopra l'immagine, tab piene o vuote, simbolo e colori, posizione rispetto al titolo, maiuscolo. |
+| **Altri progetti: riassunto e cliente** | Ordine, mostra o nascondi, tag HTML, dimensione, posizione e colori (anche all'hover). |
+| **Altri progetti: immagine** | Proporzione delle immagini (16:9, 3:2, 4:3, 1:1, 4:5), **animazione logo** (al passaggio il nome del cliente scorre sull'immagine), logo con il colore di sfondo, **video al passaggio del mouse**. |
 
 ### Immobili
 
-Portato da Di Guida Real Estate con lo stile del tema: colori, font, dimensioni e **pulsanti** sono quelli delle tue opzioni (stessi pulsanti del resto del sito), niente del sito di origine. Include:
+| Opzione | Cosa fa |
+|---|---|
+| **Shortcode del modulo "Richiedi informazioni"** | Il modulo che compare nella scheda dell'immobile. Si crea da solo con Contact Form 7 quando accendi il modulo. |
 
-- **Tipo di contenuto Immobile** (titolo e immagine; il resto sono campi) e le categorie Tipologia, Contratto, Zona, Consulente ed Evidenza (quest'ultima decide chi compare in Hero home e in Immobili in evidenza).
-- **Scheda dell'immobile**: galleria a scorrimento con lightbox, dati in sintesi, punti di forza, caratteristiche e altri dati, planimetria (con download), **tour virtuale 3D** (link o codice iframe, es. Matterport), video, mappa e punti di interesse, consulente e modulo "Richiedi informazioni", "Altri immobili".
-- **Scheda in PDF** (pulsante "Scarica scheda immobile"): generata al volo con i colori e il logo del tema, messa in cache.
-- **Pagina Immobili** con il blocco **Immobili — Elenco**: riquadro dei filtri come quello dello shop (campi del tema, pulsanti "Cerca immobili" e "Azzera i filtri" grandi in fondo, su mobile un pannello laterale); **ricerca per parola chiave** solo sugli immobili (titolo, indirizzo, descrizioni, etichette, punti di interesse, tipologia, contratto, zona); filtri per tipologia, contratto, zona, prezzo, superficie, locali e bagni; 9 per pagina con paginazione.
-- **Blocchi** (nell'editor hanno il prefisso "Immobili —"): *Immobili — Elenco*, *Immobili — In evidenza* e *Immobili — Hero home* (immobile in evidenza con card).
-- **Modificabile dal frontend con Starter Live**: nella scheda dell'immobile si cambiano titolo, apertura, prezzo, superficie, locali, camere, bagni, note, piano, altri dati, descrizioni, punti di forza, blocchi, indirizzo, zona, punti di interesse, foto della galleria e planimetria. I numeri si scrivono "puliti" (1500000) e la pagina li formatta da sola.
-- **Opzioni → Immobili**: shortcode del modulo "Richiedi informazioni" (creato da solo con Contact Form 7 quando accendi il modulo).
-- **Contenuti di prova**: 3 immobili (uno in vendita, uno **in affitto** e uno **all'asta**, con locali, bagni, prezzi, tipologie e zone diverse per provare i filtri), 4 foto e una planimetria neutra, tutti i campi compilati.
+# 3 · I moduli (CPT)
 
----
+*Funzioni facoltative che portano con sé tipi di contenuto, campi, blocchi e pagine: si accendono solo se servono.*
 
-### Filtri degli elenchi (uno solo, per tutti)
-Shop, Immobili e ogni futuro tipo di contenuto con filtri usano **lo stesso blocco**: `CSS/filters.css` (stile) e `initFilters()` in `JS/scripts.js` (pannello laterale su tablet/mobile, "Azzera i filtri", tendina a scelta multipla). **Non si scrive mai un CSS dei filtri per un singolo tipo di contenuto.** Il markup è descritto in testa a `CSS/filters.css` (classi `filters-wrap`, `filters`, `filters__grid`, `filters__field`, `filters__actions`, `filters-toolbar`, `filters-toggle`, `multiselect`).
-- Desktop: griglia a 12 colonne, 3 campi per riga; i due pulsanti nell'ultima colonna della loro riga.
-- Tablet/mobile (fino a 1024 px): pulsante "Filtri" affiancato all'ordinamento; pannello da sinistra con i pulsanti fissi in fondo e un'ombra sopra, che indica che i filtri continuano.
-- Un nuovo modulo carica il foglio con `add_filter( 'starter_needs_filters_css', … )` (esempio in `inc/modules/immobili/immobili.php`).
+## 3.1 Cosa sono i moduli
 
-### Pulsanti, barra annunci e avviso test
-- **Opzioni → Pulsanti**: 4 varianti (Pieno 1, Contorno 1, Pieno 2, Contorno 2), ognuna con sfondo, sfondo hover, bordo, bordo hover, testo, testo hover (colori dalla Tavolozza), più arrotondamento dei pulsanti, arrotondamento di campi e riquadri piccoli (`--radius-btn`, `--radius-button`) e maiuscole. Pieno 1 e Contorno 1 sono anche gli stili Pieno e Contorno dei pulsanti di Gutenberg; Pieno 2 e Contorno 2 sono stili in più (`is-style-fill-2`, `is-style-outline-2`; in HTML `.button--fill-2`, `.button--outline-2`). Nel CSS ogni variante riempie le variabili locali `--b-*` (vedi CSS/starter.css vicino a `.button`): non si scrivono colori nei singoli pulsanti. Carattere e dimensione del testo restano in Tipografia e Stile testi (voce Pulsanti).
-- **Opzioni → Barra annunci** (`inc/topbar.php`): fascia sopra l'header con testi che scorrono (uno per riga, etichetta in grassetto, separatore, link, velocità, pausa al passaggio, colori dalla Tavolozza). Scorre via con la pagina e l'header fisso la segue; con "riduci animazioni" il testo sta fermo.
-- **Avviso "Negozio in test"** (Opzioni → Shop): non è più in cima, ma una fascia gialla in fondo alla pagina, sotto il footer.
-- **Bordi del sito** (Opzioni → Generale, subito dopo la larghezza): un solo raggio per card, tab, immagini, riquadri e campi (nessuno, sm, md, lg, xl o un valore in px; di base md = 20 px); imposta `--radius-sm/md/lg/xl/section` e `--radius-button`. I pulsanti hanno il loro in Opzioni → Pulsanti (`--radius-btn`); se non lo scegli, seguono quello generale. Funziona anche dentro i blocchi ACF, perché cambia le variabili e non i singoli blocchi.
-- **Stile del pulsante nei blocchi ACF**: ogni link che è un pulsante (heroes, Testo affiancato, Sezione voci, Ultimi articoli, Prodotti, Instagram, Immobili in evidenza) ha sotto un menu "Stile del pulsante" (Predefinito del blocco, Pieno 1/2, Contorno 1/2, e Chiaro sopra le foto). Un nuovo blocco con un pulsante si registra in `starter_button_link_fields()` (inc/acf-blocks.php) e legge lo stile con `starter_button_class()`. Nei filtri e nelle parti non ACF il pulsante principale è Pieno 1 e il secondario (es. Azzera i filtri) è Contorno 1.
+Un **modulo** è una funzione facoltativa del tema che porta con sé tutto ciò che le serve: un **tipo di contenuto personalizzato** (CPT) con le sue categorie, i suoi campi, i suoi blocchi, la scheda di dettaglio e una pagina di elenco. Oggi i moduli sono due, **Portfolio** e **Immobili**; altri potranno aggiungersi.
 
-## 11. Portfolio
+Si accendono e si spengono da **Aspetto → Personalizza → Opzioni → Moduli (CPT)**: un interruttore per ogni modulo, con la sua descrizione. **Nei siti nuovi partono tutti spenti.**
 
-**Dove:** nel menu di WordPress a sinistra, voce **Portfolio** (icona a valigetta) per i progetti; la pagina dell'elenco la crei tu in **Pagine**; due scelte in *Aspetto → Personalizza → Opzioni → Portfolio*.
+| | Modulo **spento** | Modulo **acceso** |
+|---|---|---|
+| **Codice** | Non viene nemmeno caricato: niente tipo di contenuto, campi, blocchi, CSS, JS o richieste in più. | Carica solo ciò che serve alla pagina; CSS e JS del modulo partono solo dove sono usati. |
+| **Pagina** | Le pagine create dal tema per quel modulo tornano **in bozza** (i loro link, e quelli delle schede, danno 404). | Crea la pagina del modulo (Portfolio, Immobili) con già dentro il blocco dell'elenco, oppure la ripubblica. |
+| **Contenuti** | **Restano nel database** e tornano riaccendendo il modulo. | Compaiono i suoi blocchi nell'editor e le sue opzioni. |
 
-Il portfolio è un **modulo**: si accende e si spegne da *Opzioni → Moduli (CPT)* (vedi sopra). Spento, i progetti, le categorie e la pagina Portfolio spariscono dal sito (i contenuti restano nel database).
+Dopo aver cambiato un interruttore, **pubblica e ricarica** la pagina del Personalizza: gli indirizzi del sito si aggiornano alla richiesta successiva. Una pagina fatta a mano che usa il blocco di un modulo spento resta pubblicata, ma il blocco non stampa niente.
 
-**Non c'è un archivio automatico.** L'elenco dei progetti è una **pagina normale** (es. "Portfolio"): la crei tu, ci metti il titolo, i testi e gli altri blocchi che vuoi, e dove vuoi il blocco **Elenco progetti**. Puoi averne anche più di una (es. un elenco di soli loghi in un'altra pagina).
+> **Consiglio.** Per un sito che non userà mai un modulo, i suoi file si possono anche non caricare online: il tema non si rompe, perché controlla che il file del modulo esista prima di caricarlo.
 
-**Blocco Elenco progetti** (campi del blocco): colonne (2, 3, 4), progetti per pagina, schede delle categorie (**Tutti, Web design…**) con o senza numero di progetti, numero progressivo sulle card, categorie sulle card, e "Mostra solo queste categorie" (facoltativo). Le schede e la paginazione sono link alla stessa pagina (`?categoria=…`, `?pagina=2`): funzionano anche senza JavaScript. Le categorie non hanno pagine proprie.
+I contenuti di prova di ogni modulo acceso si creano da **Strumenti → Contenuti di prova**.
 
-**Un progetto** si compone così:
+## 3.2 Portfolio
 
-- **Titolo**, **immagine in evidenza** (è anche la copertina delle card) e **categorie** (es. Web design, Graphic design, Logo design: si creano da *Portfolio → Categorie portfolio* e servono per le schede dell'elenco).
-- **Dettagli del progetto** (campi sotto l'editor): cliente, anno, ruoli e output (separati da virgola), link al progetto online, **video di copertina** (facoltativo: sostituisce l'immagine nella copertina della scheda).
-- **Contenuto** con i blocchi: **Progetto — testo** (occhiello tipo "Contesto", titolo, paragrafi), **Progetto — media** (immagini e video in 1, 2 o 3 colonne: per ogni elemento si sceglie *Immagine* o *Video*, con proporzione e didascalia) e **Progetto — crediti** (ruolo e nome dei collaboratori). Si mescolano nell'ordine che serve; vanno bene anche i blocchi normali di Gutenberg e gli altri blocchi del tema.
-- In fondo, **"Altri progetti"** (stessa categoria, poi i più recenti) con il pulsante "Tutti i progetti" verso la pagina con l'elenco.
+**Aspetto → Personalizza → Opzioni → Moduli (CPT) → Portfolio**. Una volta acceso, nel menu di WordPress a sinistra compare la voce **Portfolio** (icona a valigetta) per i progetti.
 
-**Opzioni → Portfolio** (compare con il modulo acceso): dati del progetto nella testata (cliente, anno, ruoli, output) e "Altri progetti". Colori e font sono quelli del tema.
+### Come funziona
 
-**Contenuti di prova:** *Strumenti → Contenuti di prova* crea la pagina **Portfolio** (intestazione + blocco Elenco progetti), 3 schede complete con strutture diverse (identità visiva, sito web con video, logo e grafica) e 6 progetti brevi, con immagini segnaposto e i video di esempio del tema. "Elimina" toglie i progetti di prova (la pagina resta, come la pagina Blog).
+**Non esiste un archivio automatico.** L'elenco dei progetti è una **pagina normale** (per esempio *Portfolio*): la crei tu, ci metti titolo, testi e gli altri blocchi che vuoi, e dove vuoi il blocco **Elenco progetti**. Puoi averne anche più di una, per esempio un elenco di soli loghi in un'altra pagina. Le categorie non hanno pagine proprie.
 
-**Da fare in seguito:** filtro senza ricaricare la pagina, altri layout della griglia, grafica delle schede.
+### Il blocco Elenco progetti
 
----
+Si imposta dai campi del blocco:
 
-## 12. Pagine normali
+| Campo | Cosa fa |
+|---|---|
+| **Colonne e progetti per pagina** | 2, 3 o 4 colonne; quanti progetti mostrare per pagina. |
+| **Layout** | **Classica** (stessa altezza), **Masonry** (formato originale), **A blocchi** (2 + 1, con quarto elemento) e **Sfalsata**. |
+| **Schede delle categorie** | *Tutti, Web design…* con o senza numero di progetti; si può mostrare solo alcune categorie. |
+| **Card** | Numero progressivo, categorie sulle card, titolo e riassunto (ordine, tag, dimensione, posizione, colori anche all'hover). |
+| **Filtri** | Linea (Classica), testo grande, pillole, frase; con conteggi; nella stessa pagina o con ricarica; su telefono in una riga scorrevole. |
+| **Animazioni** | **Animazione logo**: il logo (anche SVG) si vede sempre intero, nel colore di sfondo, e al passaggio il nome scorre da destra a sinistra, sempre in maiuscolo. **Video all'hover**: il video di copertina parte al passaggio del mouse. |
 
-Le pagine (diverse dagli articoli del blog) non mostrano un titolo automatico in cima — questo per lasciare libertà di costruire l'intestazione con i blocchi che preferisci (es. una hero, o niente del tutto). Gli **articoli** invece mostrano titolo, data, autore e categoria in automatico.
+Le schede e la paginazione sono link alla stessa pagina (`?categoria=…`, `?pagina=2`): funzionano anche senza JavaScript.
 
----
+### Un progetto
 
-## 13. Blocchi personalizzati (custom block ACF)
+Un progetto si compone così:
 
-Per creare un nuovo blocco personalizzato con campi ACF:
+- **Titolo**, **immagine in evidenza** (è anche la copertina delle card) e **categorie** (Web design, Graphic design, Logo design…): si creano da **Portfolio → Categorie portfolio** e servono per le schede dell'elenco.
+- **Dettagli del progetto** (campi sotto l'editor): **logo del cliente**, **copertina a tutto schermo** (casella), **link al progetto online**, **video di copertina** (facoltativo: sostituisce l'immagine), **testo sotto il titolo** e **agenzia di comunicazione o partner** (tipo, nome e link; se ne possono aggiungere più d'uno). C'è anche una scheda **Progetti correlati**.
+- **Contenuto** con i blocchi *Progetto — testo*, *Progetto — media* e *Progetto — crediti* (vedi il capitolo 4), mescolati nell'ordine che serve. Vanno bene anche i blocchi normali di Gutenberg e gli altri blocchi del tema.
+- Nell'editor, il blocco *Progetto — testata* mostra un'**anteprima** di copertina, titolo e dati; non si salva e non appare nel sito.
+- In fondo, **Altri progetti** (stessa categoria, poi i più recenti) con il pulsante *Tutti i progetti* verso la pagina dell'elenco. Se indichi dei **progetti correlati** (fino a 3), i mancanti si prendono dagli ultimi progetti, mai il progetto stesso e mai doppioni.
 
-1. Vai nella cartella `template-parts/`.
-2. Duplica la cartella `example-block` e rinominala (es. `banner-promo`).
-3. Modifica `block.json` (nome, titolo) e `render.php` (cosa stampa il blocco).
-4. In ACF crea un gruppo di campi con posizione "Blocco → [nome del tuo blocco]".
+Nella scheda, il riassunto è l'H1 (formattato come un H5, maiuscolo) e il nome del progetto è l'H2; il nome del cliente è il titolo del progetto. I **servizi** sono le categorie: aggiungendone una compare nelle tab. Il link *Visita il progetto* mostra il dominio del sito (per esempio `artistica3.com`) nello stesso stile dei nomi delle agenzie.
 
-Il blocco viene registrato in automatico — non serve toccare `functions.php`. I campi dei blocchi del tema stanno in `inc/acf-blocks.php` (base) e `inc/acf-blocks-extra.php` (hero con slider, striscia valori, ultimi articoli, prodotti, Instagram, team, contatti).
+### I passaggi tra le pagine
 
----
+Dall'elenco alla scheda di un progetto, e da un progetto a un altro, il tema può animare il cambio pagina (si sceglie in *Opzioni → Portfolio → Passaggio tra i progetti*):
 
-## 14. Dove scrivere il CSS
+| Passaggio | Come appare |
+|---|---|
+| **Copertina a tutto schermo** | L'immagine della card si ingrandisce e atterra sulla copertina. Se la copertina è un video, il passaggio è in dissolvenza, senza scatti. |
+| **Tendina** | Un velo sale dal basso con il nome. |
+| **Dissolvenza** | Una schermata con testo o con la percentuale da 0 a 100%. |
+| **Nessuno** | Cambio pagina normale. |
 
-Attenzione: ci sono **due file CSS diversi**, con scopi diversi:
+Le stesse animazioni (nessuna, dissolvenza, tenda) si possono usare **all'apertura di ogni pagina** del sito dalla scelta *Caricamento delle pagine* in *Generale*.
 
-- `style.css` (nella cartella principale): **non toccarlo per lo stile**. Contiene solo i dati obbligatori del tema per WordPress (nome, versione, ecc.).
-- `CSS/starter.css`: **questo è il file su cui lavorare**. Tutto lo stile del sito va qui.
-- `CSS/gutenberg.css`: stili visibili *solo* dentro l'editor a blocchi di WordPress (per far vedere i blocchi come appariranno nel sito mentre li si modifica).
+### Modifica dal sito e contenuti di prova
 
-I colori e i font impostati da *Personalizza → Opzioni → Tipografia/Colori* (sezioni 4 e 5) non vengono scritti dentro questi file: sono generati automaticamente e aggiunti alla pagina solo se effettivamente configurati, senza bisogno di toccare il CSS a mano.
+Con **Starter Live** attivo, dalla testata di un progetto si modificano titolo, riassunto, testo sotto il titolo, nomi e link delle agenzie e link al progetto, e i blocchi *Progetto —* come tutti gli altri blocchi. **Strumenti → Contenuti di prova** crea la pagina **Portfolio** (intestazione e blocco Elenco progetti), 3 schede complete con strutture diverse (identità visiva, sito web con video, logo e grafica) e 6 progetti brevi, con immagini segnaposto e i video di esempio del tema. *Elimina* toglie i progetti di prova; la pagina resta.
 
----
+Da fare in seguito: filtro senza ricaricare la pagina e altri layout della griglia.
 
-## 15. Cosa manca ancora (prossimi passi)
+## 3.3 Immobili
 
-Cose pianificate ma non ancora costruite:
+**Aspetto → Personalizza → Opzioni → Moduli (CPT) → Immobili**. Il modulo ha lo stile del tema: colori, font, dimensioni e **pulsanti** sono quelli delle tue opzioni, gli stessi del resto del sito.
 
-- **Invio reale della newsletter/form di contatto**: sia il form di contatto in homepage sia il form newsletter nel footer sono solo l'elemento visivo/funzionante lato browser — non inviano ancora email o dati a un servizio esterno.
-- **Pagine "Termini di servizio" e "Credits"**: i link nel footer esistono e sono personalizzabili, ma le pagine di destinazione vanno create e collegate per ogni progetto.
-- **Mega menu**: nel menu principale, un sottomenu con più colonne/contenuti ricchi invece della semplice tendina attuale.
+### Cosa include
 
-Quando queste funzioni verranno aggiunte, questa guida verrà aggiornata di conseguenza.
+- **Tipo di contenuto Immobile** (titolo e immagine; il resto sono campi) e le categorie **Tipologia**, **Contratto**, **Zona**, **Consulente** ed **Evidenza** (quest'ultima decide chi compare nella *Hero home* e in *In evidenza*).
+- **La scheda dell'immobile**: galleria a scorrimento con ingrandimento, dati in sintesi, punti di forza, caratteristiche e altri dati, **planimetria** (con download), **tour virtuale 3D** (link o codice iframe, per esempio Matterport), video, mappa e punti di interesse, consulente e modulo *Richiedi informazioni*, sezione *Altri immobili*.
+- **Scheda in PDF** (pulsante *Scarica scheda immobile*): generata al volo con i colori e il logo del tema, poi messa in cache.
+- **La pagina Immobili** con il blocco *Immobili — Elenco*: riquadro dei filtri uguale a quello dello shop; **ricerca per parola chiave** solo sugli immobili; filtri per tipologia, contratto, zona, prezzo, superficie, locali e bagni; 9 per pagina con paginazione.
+- **I tre blocchi** (nell'editor hanno il prefisso *Immobili —*): *Elenco*, *In evidenza* e *Hero home* (immobile in evidenza con card). Vedi il capitolo 4.
 
----
+### Come si lavora
 
-## Appendice tecnica (per chi mette mano al codice)
+- **Opzioni → Immobili:** lo shortcode del modulo *Richiedi informazioni*, creato da solo con Contact Form 7 quando si accende il modulo.
+- **Modificabile dal sito con Starter Live:** nella scheda si cambiano titolo, apertura, prezzo, superficie, locali, camere, bagni, note, piano, altri dati, descrizioni, punti di forza, indirizzo, zona, punti di interesse, foto della galleria e planimetria. I numeri si scrivono "puliti" (per esempio `1500000`) e la pagina li formatta da sola.
+- **Contenuti di prova:** 3 immobili (uno in vendita, uno in affitto e uno all'asta, con locali, bagni, prezzi, tipologie e zone diverse per provare i filtri), 4 foto e una planimetria neutra, con tutti i campi compilati.
 
-Riferimenti rapidi ai punti principali in `functions.php`:
+## 3.4 I filtri degli elenchi
 
-- `starter_setup()` — supporti del tema, menu, textdomain.
-- `starter_customize_register()` — tutte le impostazioni del Customizer (Generale, Tipografia, Colori, Header, Footer).
-- `starter_get_social_links()` — calcola l'elenco delle icone social da mostrare (usata in `header.php` e nei template footer).
-- `starter_is_minimal_header()` / classe `body.header-minimal` — determina quale versione di header è attiva.
-- `starter_has_dark_logo()` — determina se mostrare il logo alternativo.
-- `starter_get_footer_contacts()` — legge il campo "Voci" della colonna contatti del footer e riconosce automaticamente email/telefono.
-- `starter_footer_style_choices()` — stili di footer disponibili; per aggiungerne uno nuovo basta un file `template-parts/footer/footer-style-N.php` + una voce qui.
-- `starter_get_active_typography_fonts()` / `starter_typography_css()` — leggono gli slot font attivi e generano il CSS corrispondente (Tipografia).
-- `starter_colors_css()` — genera il CSS per i colori impostati (Colori).
-- `starter_default_palette()` / `starter_color_field_defaults()` / `starter_color_ref()` — 5 colori di base del tema (stessi valori di `CSS/starter.css`) pronti come "Colori con nome" e collegati ai relativi campi, invece di partire vuoti.
-- `starter_extend_editor_color_palette()` — sincronizza i "Colori con nome" nella palette di `theme.json`, così il selettore colore di Gutenberg mostra sempre i colori realmente in uso sul sito.
-- `starter_login_logo()` — sostituisce il logo di WordPress nella pagina di login con quello del sito.
-- `starter_excerpt_chars()` — estratto degli articoli troncato a un numero di caratteri (attualmente 140, usato in `home.php`).
-- `starter_widgets_init()` — registra l'area widget `sidebar-blog`.
-- `starter_register_portfolio_cpt()` — registra il Custom Post Type `portfolio` e le tassonomie `portfolio_category` / `portfolio_client_type`.
-- `starter_body_class_has_hero()` — aggiunge la classe `has-hero` al `<body>` cercando `hero-section` nel contenuto della pagina corrente (non è legata alla homepage).
-- `starter_theme_register_acf_blocks()` — legge `template-parts/*/block.json` e registra ogni blocco trovato.
-- `starter_has_content_block()` — vero se la pagina usa almeno uno dei 6 blocchi riutilizzabili elencati sotto (usata da `starter_css_buckets()` per caricarne il CSS solo dove serve).
+Shop, Immobili e ogni futuro tipo di contenuto con filtri usano **lo stesso blocco di filtri**, con lo stesso aspetto e lo stesso comportamento. Così un nuovo modulo non richiede mai un CSS dei filtri a parte.
 
-### Blocchi ACF riutilizzabili (richiedono ACF Pro)
+| | Come si comporta |
+|---|---|
+| **Desktop** | Griglia a 12 colonne, 3 campi per riga; i due pulsanti (*Cerca* e *Azzera i filtri*) nell'ultima colonna della loro riga. |
+| **Tablet e mobile** (fino a 1024 px) | Un pulsante *Filtri* affiancato all'ordinamento apre un pannello da sinistra, con i pulsanti fissi in fondo e un'ombra sopra che indica che i filtri continuano. |
+| **Scelta multipla** | Le tendine con più scelte (tipologia, zona…) funzionano allo stesso modo ovunque. |
 
-In `template-parts/` ci sono 6 blocchi ACF pronti all'uso (categoria "Starter" nell'inserimento blocchi), pensati per qualunque progetto, non solo per contenuti specifici:
+## 3.5 Aggiungere un nuovo modulo
 
-- **Testo affiancato** (`testo-affiancato`) — testo + fino a 2 foto composte, lato configurabile, checklist, citazione, link, sfondo chiaro opzionale.
-- **Sezione voci** (`sezione-voci`) — titolo + elenco voci in 4 layout: Elenco numerato (con testo a fianco), Card classiche con testo, Card strette con icona, Card numerate.
-- **Elenco servizi** (`elenco-servizi`) — menu laterale che segue lo scroll (su tablet e telefono diventa una barra di icone fissa in basso) + una scheda per servizio: ancora, icona, occhiello, titolo, etichetta del menu, testo, foto, elenco con spunte, pulsante con scelta dello stile. Portato da Di Guida Real Estate. Il layout "Elenco numerato" della Sezione voci è il blocco "cinque ragioni" di Di Guida.
-- **Slider** (`slider`) — slider singolo o carosello di immagini e video (campo gallery; didascalie dalla Libreria media). Si sceglie: tipo, larghezza (nella misura del sito o a tutto schermo), quante immagini vedere su desktop / tablet (fino a 1100px) / mobile (fino a 640px), distanza tra le immagini, anteprima delle slide vicine (quanti px si intravedono), proporzione, frecce (sull'immagine ai lati, sopra o sotto) con stile a scelta tra i 4 pulsanti, paginazione (puntini con quello attivo allungato, contatore, barra) centrata, scorrimento automatico, ricomincio dall'inizio, didascalie e angoli. Scorre con frecce, puntini, tastiera, dito e trascinamento col mouse. Esempi in sei progetti del Portfolio.
-- **Recensioni** (`recensioni`) — carosello di testimonianze a 5 stelle, scorrevole con le frecce o trascinando col mouse, loop infinito.
-- **Mappa** (`mappa`) — mappa Google a tutta larghezza con pulsante indicazioni, dato solo l'indirizzo.
-- **Intestazione pagina** (`intestazione-pagina`) — occhiello + H1 + paragrafo, con briciole di pane automatiche.
-- **Due riquadri** (`missione-visione`) — 2+ riquadri affiancati, il secondo evidenziato con il colore d'accento.
+Questa parte è per chi sviluppa. Un modulo è una voce nell'elenco `starter_modules()` (file `inc/modules.php`) con il suo file, i suoi blocchi, la sua pagina e i suoi contenuti di prova: l'interruttore nelle Opzioni compare da solo. Se usa i filtri, carica il foglio condiviso con `add_filter( 'starter_needs_filters_css', … )`: un esempio è nel modulo Immobili (`inc/modules/immobili/immobili.php`).
 
-Campi di ogni blocco registrati via `acf_add_local_field_group()` in `inc/acf-blocks.php` (nessun `acf-json/` da sincronizzare: aggiungere un campo è modificare quell'array). Funzioni di supporto condivise in `inc/block-helpers.php` (`starter_field()`, `starter_link_attrs()`, `starter_flip_text()`, `starter_section_heading_tags()`, `starter_page_breadcrumb()`...) e icone SVG in `inc/icons.php`. CSS in `CSS/starter.css` (sezione "Blocchi ACF riutilizzabili"), variabili condivise (`--color-line`, `--radius-md`, `--spacing-section`...) nel blocco `:root` insieme alle altre.
+# 4 · I blocchi personalizzati
 
-**Pulsante WhatsApp**: `template-parts/footer/whatsapp-button.php`, mostrato in ogni pagina se il campo "Link WhatsApp" in *Opzioni tema* (pagina ACF, `inc/acf-options.php`) è compilato; diventa rotondo quando il footer entra in vista (`initWhatsappCompact()` in `JS/scripts.js`).
+*Le sezioni pronte da inserire nell'editor: hero, contenuti, recensioni, mappa, elenchi e i blocchi dei moduli.*
 
-**Lightbox generica**: markup in `footer.php` (`#lightbox`), comportamento in `JS/scripts.js` (`initLightbox()`). Nessun blocco la usa ancora di default — una futura galleria basta che aggiunga alle miniature `data-lightbox-index`/`data-full`/`data-alt`/`data-caption` per attivarla, senza toccare JS.
+## 4.1 Come si usano
 
-**Multiselect** (dropdown a scelta multipla) descritto nella guida precedente sul tema Di Guida non è stato portato: nessun blocco qui lo userebbe ancora. Se in un progetto serve un filtro a scelta multipla, prendi `initMultiselect()` da `JS/scripts.js` del tema Di Guida Real Estate come riferimento.
+I blocchi del tema sono **blocchi ACF** (Advanced Custom Fields): si inseriscono dall'editor di WordPress come qualsiasi altro blocco, ma sono sezioni complete con i loro campi. **Servono ACF Pro** (vedi il capitolo 1).
 
-File principali: `header.php`, `footer.php` (solo un loader, carica `template-parts/footer/footer-style-{N}.php`), `home.php` (template del blog), `sidebar-blog.php`, `page.php`, `single.php`, `404.php`, `index.php`, `CSS/starter.css`, `JS/scripts.js`, `JS/animations.js` (preloader + scroll fluido, caricato solo se attivi), `JS/customize-controls.js` (solo per il pannello admin di Personalizza — gestisce gli "Aggiungi.../Rimuovi..." di icone social, font e varianti), `theme.json` (palette per l'editor a blocchi, sincronizzata da `starter_extend_editor_color_palette()`), `inc/performance.php` (WebP automatico, eccetto il favicon che resta sempre .png; preload dei font locali dichiarati in `theme.json`; pulizia head), `inc/media-modern.php` (AVIF, `<picture>`, video WebM, favicon .ico e icone), `inc/media-optimizer.php` (pagina Media → Ottimizza immagini e comandi WP-CLI), `inc/assets-optimizer.php` (unione CSS/JS e compressione HTML), `inc/icons.php`, `inc/block-helpers.php`, `inc/acf-options.php`, `inc/acf-blocks.php` (blocchi riutilizzabili, vedi sopra).
+- **Dove si trovano.** Nel pulsante **+** dell'editor, nella categoria **Starter**. La pagina *Blocchi di prova* (dai *Contenuti di prova*) li mostra tutti.
+- **Come si compilano.** Selezionato il blocco, i campi compaiono nella colonna a destra o sotto al blocco. Le modifiche si vedono nell'anteprima del blocco.
+- **I titoli** hanno il selettore del tag HTML (H1…H6, p, span): serve alla SEO, per tenere una gerarchia corretta (un solo H1 per pagina).
+- **I testi** ammettono grassetto, corsivo e link; in molti blocchi anche il sottolineato (barra **B / I / U**).
+- **I pulsanti** dei blocchi hanno un menu **Stile del pulsante**: *Predefinito del blocco*, *Pieno 1*, *Pieno 2*, *Contorno 1*, *Contorno 2* e, sopra le foto, *Chiaro*. I colori di ogni variante si decidono in *Opzioni → Pulsanti*.
+- **Le foto** passano dalla Libreria media e diventano da sole AVIF e WebP (vedi *Prestazioni*).
+- **Con Starter Live** attivo, quasi tutti i testi, le immagini e i link dei blocchi si cambiano direttamente dal sito.
 
-Build CSS/JS (opzionale): `npm install && npm run build` (vedi `tools/build.js`) divide `CSS/starter.css` per tipo di pagina e minifica CSS/JS in `CSS/dist/` e `JS/dist/`; `starter_dist_ready()` in `functions.php` li usa in automatico solo se più recenti dei sorgenti, altrimenti carica i file normali — nessun passo obbligatorio per continuare a sviluppare senza Node.
+### Spaziature rapide
 
-GSAP e Lenis vengono caricati da CDN (cdnjs/jsdelivr) tramite `starter_enqueue_animation_assets()` in `functions.php`, con versione fissata nel codice. Gli script/CSS specifici del pannello Personalizza (`JS/customize-controls.js`) usano invece la data di modifica del file come versione, per evitare problemi di cache del browser durante lo sviluppo.
+Per regolare i margini di un blocco senza scrivere CSS, scrivi le classi nel campo **Classi CSS aggiuntive** del blocco:
 
-## Aggiornamento: header, ricerca, blog, footer, pagine standard
+| Classe | Effetto |
+|---|---|
+| `mt2`, `mb1`, `pt3`, `pb4`, `p2`… | Margine sopra (`mt`) o sotto (`mb`), spazio interno sopra (`pt`) o sotto (`pb`), o tutto attorno (`p`); il numero è la misura in rem. |
+| `-tab`, `-sma` | Varianti per tablet e per mobile: `mt4 mt2-tab mt1-sma` = 4 su desktop, 2 su tablet, 1 su telefono. |
 
-**Header (Opzioni → Header).** Versioni in ordine: *Standard* (logo a sinistra, menu e resto a destra), *Centrato*, *Ridotto*. *Flottante* e *A tutta larghezza* si combinano con tutte: flottante + tutta larghezza = card che occupa la pagina e, scrollando, si attacca in alto. *Stile delle icone*: con bordo e animazione (come i social), semplici, semplici e vicine; vale per social e icone. *Ordine*: prima i social o prima le icone, con divisore facoltativo. Col menu ridotto (sotto 1180px o versione Ridotto) i social stanno solo nel pannello. *Logo scrollando*: uguale, più piccolo, oppure un'icona caricata da te.
+### Una hero senza blocco ACF
 
-**Ricerca.** Lente nell'header (si spegne da Opzioni → Header): pannello con anteprima divisa in Prodotti (solo con WooCommerce), Pagine, Articoli. Endpoint `/wp-json/starter/v1/search`; codice in `inc/search.php` e `initSearchPanel` in `JS/scripts.js`.
+La sezione di apertura può essere anche un normale blocco **Cover** di Gutenberg con la classe `hero-section`: l'header riconosce la hero guardando il contenuto della pagina, quindi qualunque pagina che inizia con quel blocco ottiene l'header trasparente.
 
-**Blog (Opzioni → Blog).** Colonne 1–4 (1 = elenco con foto a sinistra e testo a destra), *Ultimo articolo in evidenza* (a tutta larghezza, solo prima pagina), tag sotto il testo prima di "Leggi tutto", categorie come etichette a destra della data.
+## 4.2 Aperture della pagina (hero)
 
-**Footer.** *Spazio libero* (Opzioni → Footer) uguale in tutti e 4 gli stili: titolo, sottotitolo e contenuto (shortcode o HTML); vuoto = niente. Il modulo "Newsletter" (nome, email, privacy) è un Contact Form 7 creato da Strumenti → Contenuti di prova. I link Privacy e Cookie del footer puntano alle pagine create dal tema.
+| Blocco | Cosa fa | Opzioni principali |
+|---|---|---|
+| **Hero con slider** | Foto a tutta larghezza che cambiano in dissolvenza, con titolo, testo e fino a due pulsanti. | 1–6 immagini, durata, due link |
+| **Hero con video** | Video a tutta larghezza (muto, in ciclo) con velo scuro, titolo, testo e pulsanti. | Video mp4/webm, copertina, due link |
+| **Hero testo + foto** | Prima sezione con occhiello, titolo, testo, due pulsanti e una foto a lato. | Foto a sinistra o a destra |
+| **Hero con foto e video** | Apertura con testo, foto dei clienti e, a destra, una foto e un video verticale con etichette. | Etichette e colori, video |
+| **Intestazione pagina** | Occhiello, titolo H1 e paragrafo in cima alla pagina, con briciole di pane automatiche. | Testo sotto o a destra |
 
-**WhatsApp** è in Opzioni → Generale (non più in una pagina ACF).
+> **Consiglio.** Se la pagina comincia con una hero con foto, attiva *Prestazioni → Precarica la foto di apertura*: il browser la scarica subito.
 
-**Testi.** Tutte le dimensioni sono `clamp()` in `theme.json` (con XXL), già compilate in Opzioni → Stile testi (solo Desktop); `CSS/starter.css` le applica di base a h1–h6, `.title-*`, `.txt`.
+## 4.3 Sezioni di contenuto
 
-**Pagine standard** (Strumenti → Contenuti di prova): Home, Chi siamo, Servizi, Contatti in `inc/starter-pages.php`, con i blocchi ACF (anche i nuovi *Hero testo + foto* e *Sezione affiancata*) e sezioni in blocchi Gruppo. **CookieYes in italiano**: `inc/cookieyes.php`. **Immobiliare**: vedi `docs/RICETTA-IMMOBILIARE.md`.
+| Blocco | Cosa fa | Opzioni principali |
+|---|---|---|
+| **Sezione affiancata** | Foto (1 o 2) accanto a un testo scritto con i blocchi di Gutenberg (titolo, paragrafi, pulsanti). | Formato foto, lato, sfondo |
+| **Testo affiancato** | Testo e fino a 2 foto composte, affiancati; checklist, citazione, link. | Lato, sfondo chiaro, livello del titolo |
+| **Sezione voci** | Titolo e un elenco di voci in 4 layout: elenco numerato (con testo a fianco), card con testo, card strette con icona, card numerate a passi. | 4 layout, icone, link |
+| **Striscia valori** | Riga di voci con icona e titolo (garanzia, spedizione, assistenza…). | Icona + titolo |
+| **Due riquadri** | Due (o più) riquadri affiancati su sfondo chiaro; il secondo evidenziato con il colore d'accento. | Occhiello, titolo, testo |
+| **Elenco servizi** | Un menu laterale che segue lo scroll (su tablet e telefono diventa una barra di icone fissa in basso) e una scheda per servizio: ancora, icona, occhiello, titolo, foto, elenco con spunte, pulsante. | Icona, foto, pulsante |
+| **Slider** | Slider singolo o carosello di immagini e video. | Vedi sotto |
+| **Team** | Griglia delle persone: foto quadrata, nome, ruolo e breve bio. | Foto, nome, ruolo, bio |
+| **Recensioni** | Carosello di testimonianze con 5 stelle, scorrevole con le frecce o trascinando con il mouse, in ciclo continuo. | Nome, testo, data, video |
+| **Instagram** | Foto statiche dal profilo con link (nessun collegamento esterno). | Account, foto |
 
-## Prestazioni (compressione, cache, immagini)
+### Il blocco Slider
 
-**Dove:** *Aspetto → Personalizza → Opzioni → Prestazioni*. Il sito è pensato per essere veloce e piacere ai motori di ricerca (Core Web Vitals) senza plugin.
+Il più configurabile. Si usa una **galleria** (le didascalie vengono dalla Libreria media) e si sceglie:
 
-**Sempre attivo, senza opzioni** (`inc/performance.php`):
-- **Immagini in WebP** (qualità 80): sia le misure ridotte sia l'originale caricato (il JPG/PNG viene sostituito dal WebP). Restano nel formato originale gli SVG, il favicon (qualunque file con `favicon` nel nome o l'icona del sito), il logo delle email di WooCommerce e i file con `email` o `nowebp` nel nome, in tutte le loro misure. Le immagini già presenti si sistemano da *Media → Ottimizza immagini* (vedi sotto).
-- **Script in `defer`** (script del tema, GSAP, Lenis, animazioni) e `decoding="async"` sulle immagini.
-- **Collegamento anticipato** (`preconnect`) a Google Fonts e alle librerie esterne solo se usate; font locali di `theme.json` precaricati.
-- **CSS e JS minificati e divisi per tipo di pagina** (`npm run build` → `CSS/dist`, `JS/dist`).
-- **Head pulito**: niente emoji, oEmbed, feed, shortlink, `classic-theme-styles`, `wp-embed`; CSS dei blocchi core caricato solo per i blocchi usati.
+- **Tipo** (slider singolo o carosello) e **larghezza** (nella misura del sito o a tutto schermo);
+- **quante immagini vedere** su desktop, su tablet (fino a 1100 px) e su mobile (fino a 640 px);
+- **distanza** tra le immagini, **anteprima** delle slide vicine (quanti pixel si intravedono), **proporzione** e angoli;
+- **frecce**: sull'immagine ai lati, sopra o sotto, con lo stile di uno dei quattro pulsanti;
+- **paginazione**: puntini (l'attivo si allunga), contatore o barra, centrata;
+- **scorrimento automatico**, ricomincio dall'inizio e didascalie.
 
-**Con una casella in Opzioni → Prestazioni** (tutte accese di base, ognuna con la sua descrizione):
-- **Google Fonts serviti dal tuo sito** (`inc/fonts-local.php`): i font scelti in Tipografia (Font 1 e 2, più il serif della scritta grande del footer Stile 1) vengono scaricati una volta dai server di Google in `uploads/starter-fonts` (solo "latin" e "latin-ext", WOFF2), scritti in linea con `font-display: swap` e il file latin viene precaricato. Niente richieste a Google, più veloce e più in regola con la privacy. Si aggiorna quando salvi il Personalizza (o entrando in amministrazione, un tentativo l'ora); se il download fallisce restano i Google Fonts come prima. Per i font statici (es. Ubuntu) scarica i pesi 300/400/500/700 disponibili.
-- **Compressione e cache del browser (.htaccess)**: il tema scrive da solo, tra i marcatori `STARTER_PERFORMANCE`, le regole per comprimere i file di testo (Brotli e Gzip), tipi dei file moderni (webp, avif, woff2, mp4) e cache di un anno per CSS, JS, immagini, font e video (l'HTML non viene messo in cache). Funziona su Apache e LiteSpeed (es. Hostinger); su nginx è ignorato. Non tocca le regole di WordPress né quelle di altri plugin; spegnendo la casella le toglie. Le regole si applicano al salvataggio del Personalizza, all'attivazione del tema e, una volta, entrando in amministrazione.
-- **Immagini AVIF (con ripiego WebP)** (`inc/media-modern.php`): accanto a ogni immagine (originale e misure) il tema crea un file `.avif` con lo stesso nome, a qualità 70 (regolabile 40–90), e lo tiene solo se pesa almeno il 3% meno del WebP. Nella pagina ogni `<img>` diventa `<picture><source type="image/avif"><img webp></picture>`: il browser sceglie da solo (AVIF se lo legge, altrimenti WebP). Vale per i blocchi del tema, per i blocchi immagine di Gutenberg, per WooCommerce e per i loghi; il preload della hero usa l'AVIF. Non si carica nulla a mano: si caricano JPG/PNG come sempre. Serve PHP con GD+AVIF (verifica in *Media → Ottimizza immagini*); se manca, resta il WebP. Gli .avif si cancellano insieme all'immagine.
-- **Video WebM (con ripiego mp4)**: carica in Libreria media un `.webm` con lo **stesso nome** dell'mp4 (es. `film.mp4` e `film.webm`, il WebM va esportato a mano con HandBrake/ffmpeg). Nei blocchi del tema (hero con video, hero media, slider, progetti) e nel blocco Video/Copertina di Gutenberg il tema scrive prima la sorgente WebM e poi l'mp4. Il campo del blocco resta quello dell'mp4. Se il file gemello non c'è, tutto funziona come prima.
-- **Favicon .ico e icone**: dall'icona del sito (*Identità del sito*, 512×512) il tema genera in `uploads/starter-icons` il `favicon.ico` (16, 32, 48 e 256 px), `icon-192.png` e `icon-512.png` (Google e Android), `apple-touch-icon.png` (180 px) e `site.webmanifest`, e li mette nell'`<head>` al posto delle icone di WordPress. Anche `/favicon.ico` alla radice del sito risponde con il file generato. Il file caricato resta com'è (PNG).
-- **Unisci CSS e JS in un solo file** (`inc/assets-optimizer.php`, spenta di base): nella pagina finale unisce i `<link rel="stylesheet">` e gli `<script src>` locali che stanno uno di seguito all'altro, nello stesso ordine, in un unico file compresso (in `uploads/starter-cache`, si ricrea da solo). I dati `wp_localize_script` passano prima del file; qualunque elemento in mezzo (script o stile inline, file esterni come Google Fonts, `defer` diverso) interrompe la serie, quindi l'ordine non cambia mai. Non unisce file con `@import` o che usano `document.currentScript`. Si può escludere un file con il filtro `starter_bundle_exclude` o l'attributo `data-no-bundle`. Per vedere la pagina senza compressione (da amministratore): `?starter-raw=1`.
-- **Comprimi il codice HTML** (spenta di base): toglie commenti, a capo e spazi doppi; lascia intatti `<pre>` e `<textarea>`; comprime `<style>` e JSON-LD; gli script inline li porta su una riga solo se il codice non dipende dagli a capo (lo legge davvero: stringhe, regex, commenti; ogni caso ambiguo resta com'era); il risultato è una pagina senza nemmeno un a capo. Non cambia ciò che si vede (verificato confrontando tag e testo prima/dopo).
-- **Precarica la foto di apertura (hero)**: se la pagina comincia con una hero con foto (slider, video con copertina, foto + testo), il browser la scarica subito con la misura giusta.
-- **Contact Form 7 solo dove c'è un modulo**: niente script e stile dei moduli nelle altre pagine (restano ovunque se il footer ha il form newsletter).
-- **Togli jQuery Migrate**.
+Scorre con frecce, puntini, tastiera, dito e trascinamento con il mouse.
 
-**Libreria media già esistente** — *Media → Ottimizza immagini*: crea gli AVIF mancanti (a lotti, con barra di avanzamento; "Rifai anche quelli già creati" dopo aver cambiato la qualità) e converte in WebP i JPG/PNG rimasti aggiornando gli indirizzi in articoli, campi personalizzati e opzioni (fare prima un backup di database e uploads). Stesso lavoro da riga di comando: `wp starter media status|avif [--force]|webp`.
+## 4.4 Contatti e mappa
 
-**Da fare lato server/hosting** (non dal tema): PHP aggiornato, cache di pagina del provider (su Hostinger LiteSpeed Cache o la cache integrata) e CDN se serve. Verifica con PageSpeed Insights e controllando che la risposta abbia l'header `content-encoding: br` o `gzip`.
+| Blocco | Cosa fa | Opzioni principali |
+|---|---|---|
+| **Contatti** | Elenco dei recapiti (presi dai dati del footer) e modulo di contatto con Contact Form 7. | Recapiti con icona, shortcode del modulo |
+| **Mappa** | Mappa Google a tutta larghezza con pulsante per le indicazioni stradali, dato solo l'indirizzo. | Indirizzo, pulsante |
 
+> **Nota.** Ogni modulo di Contact Form 7 ha un anti-spam invisibile (campo trappola e orario) e due campi nascosti, **pagina** e **pagina-url**, che dicono da quale pagina arriva il messaggio: li vedi in Flamingo e in fondo alla mail. Non serve toccare i form.
 
-## Tema figlio e aggiornamenti da GitHub
+## 4.5 Blog e negozio
 
-**Tema figlio** (cartella `starter-theme-child/`, accanto al tema): è il punto di partenza per ogni sito. Il padre (`starter-theme`) resta sempre com'è e si aggiorna; le modifiche del sito stanno nel figlio e gli aggiornamenti non le toccano.
+| Blocco | Cosa fa | Opzioni principali |
+|---|---|---|
+| **Ultimi articoli** | Gli articoli più recenti (anche di una sola categoria) con la card del blog. | Categoria, numero |
+| **Prodotti in evidenza** | Griglia di prodotti WooCommerce con la card del negozio (serve WooCommerce). | In evidenza, più venduti, recenti, per categoria o scelti a mano |
 
-- **Come si usa su un nuovo sito**: copia `starter-theme-child/` in `wp-content/themes/` accanto a `starter-theme/`, (facoltativo) cambia `Theme Name` e il nome della cartella, poi *Aspetto → Temi → Attiva* sul figlio. Nessun file del figlio dipende dal nome della cartella.
-- **Le opzioni** (*Aspetto → Personalizza → Opzioni*, colori, font, header, footer, moduli...) funzionano uguali con il figlio attivo. WordPress le salva per ogni tema attivo, quindi alla prima attivazione il figlio **copia quelle del padre** (dove il figlio ha già un valore, vince il suo). Da lì in poi si modificano dal figlio; il padre non viene più toccato.
-- **Il tuo CSS** va in `style.css` del figlio: si carica dopo tutti i CSS del padre (anche con "Unisci CSS e JS" acceso), quindi le sue regole vincono. Lo stesso CSS vale nell'editor dei blocchi.
-- **Modificare un template**: copia il file dal padre nel figlio con lo stesso percorso (`header.php`, `page.php`, `template-parts/content/card.php`, `woocommerce/...`) e cambialo lì; WordPress usa quello del figlio. Un blocco ACF del figlio (cartella `template-parts/nome/` con `block.json`) sostituisce quello del padre con lo stesso nome.
-- **Le funzioni `starter_*` del padre non si ridefiniscono** dal figlio: si usano gli hook (`add_action`, `add_filter`) in `functions.php` del figlio.
+## 4.6 Blocchi del Portfolio
 
-**Aggiornamenti da GitHub** (`inc/updater.php`): il tema guarda l'ultima *Release* del repository e, se la versione è più alta di quella installata, WordPress mostra la notifica classica (Bacheca → Aggiornamenti, pagina Temi) con il pulsante "Aggiorna". Si aggiorna sempre il padre.
-- **Si accende** indicando il repository (`utente/repo`) nella costante `STARTER_UPDATE_REPO` (in `inc/updater.php`, oppure in `wp-config.php` per un sito particolare). Vuota = nessun controllo.
-- **Versione**: la release ha il tag `v1.2.0`; il numero deve coincidere con `Version:` in `style.css` del padre. Pacchetto: il file `starter-theme*.zip` allegato alla release (con dentro la cartella `starter-theme/`); se manca si usa lo zip automatico di GitHub, rinominando la cartella.
-- **Controllo**: ogni 6 ore; "Controlla di nuovo" in Bacheca → Aggiornamenti interroga subito GitHub. I pacchetti si accettano solo da github.com.
-- **Repository privato**: definire in `wp-config.php` `define( 'STARTER_GITHUB_TOKEN', '...' )` con un token di sola lettura.
+Compaiono con il modulo **Portfolio** acceso (capitolo 3).
 
+| Blocco | Cosa fa | Opzioni principali |
+|---|---|---|
+| **Elenco progetti** | Griglia dei progetti con filtri per categoria e paginazione. Si mette in una pagina normale. | Layout, titolo, categorie, filtri, animazioni |
+| **Progetto — testo** | Blocco di testo della scheda: occhiello (per esempio *Contesto*), titolo e paragrafi. | Affiancato o centrato |
+| **Progetto — media** | Immagini e video della scheda in 1, 2 o 3 colonne. | Proporzione; immagine o video per elemento |
+| **Progetto — crediti** | Ruoli e nomi dei collaboratori; ogni nome può avere un link al suo sito (per esempio il fotografo). | Ruolo, nome, link |
+| **Progetto — testata** | Solo nell'editor: anteprima in sola lettura di copertina, titolo e dati del progetto. Non si salva e non appare nel sito. | — |
 
-**Installare i plugin del sistema in un colpo solo** (*Aspetto → Installa plugin*, `inc/plugins-required.php`, libreria TGM Plugin Activation in `inc/tgmpa/`): dopo aver attivato il tema WordPress mostra l'avviso "Questo tema richiede i seguenti plugin"; dalla schermata si spuntano i plugin, si sceglie *Installa* e poi *Attiva*.
-- **Richiesti** (l'avviso resta finché mancano): ACF Pro e Contact Form 7. **Consigliati**: Flamingo, Yoast SEO, WooCommerce (solo con negozio), CookieYes, LiteSpeed Cache, Starter Live, Starter Security.
-- **ACF Pro** è a pagamento e non si ridistribuisce: si scarica da ACF con la chiave di licenza. Prima di installare, in `wp-config.php` (sopra la riga "That's all, stop editing") aggiungi `define( 'ACF_PRO_LICENSE', 'la-tua-chiave' );`. Con la chiave definita ACF Pro compare nell'elenco; la stessa costante gli serve poi per attivare la licenza da solo. Senza la chiave compare un avviso e va installato a mano.
-- **Starter Live e Starter Security** si scaricano dalle release dei loro repository GitHub (`BurOrub/StarterLiveWP`, `BurOrub/StarterSecurityWP`).
-- L'elenco è in un solo punto: `starter_register_required_plugins()`.
+## 4.7 Blocchi degli Immobili
+
+Compaiono con il modulo **Immobili** acceso (capitolo 3).
+
+| Blocco | Cosa fa | Opzioni principali |
+|---|---|---|
+| **Immobili — Elenco** | Tutti gli immobili con filtri e paginazione, 9 per pagina. | Occhiello, titolo, testo |
+| **Immobili — In evidenza** | Griglia con i 3 immobili più recenti marcati *In evidenza home*. | Titolo, link |
+| **Immobili — Hero home** | Prima sezione della home: testo, pulsanti, immagine e card dell'immobile in evidenza. | Titolo, due pulsanti |
+
+## 4.8 Creare un nuovo blocco
+
+Questa parte è per chi sviluppa. Un blocco nuovo si registra da solo, senza toccare `functions.php`:
+
+1. Nella cartella `template-parts/` **duplica** la cartella `example-block` e rinominala (per esempio `banner-promo`).
+2. Modifica `block.json` (nome e titolo) e `render.php` (cosa stampa il blocco).
+3. In ACF crea un gruppo di campi con posizione **Blocco → il tuo blocco**. I campi dei blocchi del tema si trovano in `inc/acf-blocks.php` e `inc/acf-blocks-extra.php`.
+
+Il blocco compare nella categoria **Starter**. **Con il tema figlio**, la stessa struttura si mette nella cartella `template-parts/` del figlio: un blocco del figlio con lo stesso nome di uno del padre lo sostituisce.
