@@ -10,3 +10,8 @@ JS/dist/
 *.bak*
 *.orig
 *.map
+
+# Note di lavoro: restano solo sul computer, non vanno su GitHub
+docs/COMMENTI-DEL-TEMA.md
+docs/RIPRENDI-DA-QUI.md
+docs/FILE-DA-NON-CARICARE.md

@@ -74,8 +74,6 @@ In the [`docs/`](docs) folder (Italian):
 
 - [`GUIDA-TEMA.md`](docs/GUIDA-TEMA.md): how to use the theme, option by option
 - [`GUIDA-FUNZIONI-STARTER-THEME.pdf`](docs/GUIDA-FUNZIONI-STARTER-THEME.pdf): feature guide
-- [`COMMENTI-DEL-TEMA.md`](docs/COMMENTI-DEL-TEMA.md) and [`RIPRENDI-DA-QUI.md`](docs/RIPRENDI-DA-QUI.md): technical notes
-- [`FILE-DA-NON-CARICARE.md`](docs/FILE-DA-NON-CARICARE.md): what not to put online
 
 ---
 
@@ -152,5 +150,3 @@ Nella cartella [`docs/`](docs):
 
 - [`GUIDA-TEMA.md`](docs/GUIDA-TEMA.md): come usare il tema, voce per voce
 - [`GUIDA-FUNZIONI-STARTER-THEME.pdf`](docs/GUIDA-FUNZIONI-STARTER-THEME.pdf): guida alle funzioni
-- [`COMMENTI-DEL-TEMA.md`](docs/COMMENTI-DEL-TEMA.md) e [`RIPRENDI-DA-QUI.md`](docs/RIPRENDI-DA-QUI.md): note tecniche
-- [`FILE-DA-NON-CARICARE.md`](docs/FILE-DA-NON-CARICARE.md): cosa non mettere online
