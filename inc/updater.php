@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /* Repository GitHub nel formato "utente/repo". Vuoto = nessun controllo (il tema funziona normalmente, senza notifiche).
  * Si può definire anche in wp-config.php (prima di wp-settings.php) per un sito che usa un altro repository. */
 if ( ! defined( 'STARTER_UPDATE_REPO' ) ) {
-	define( 'STARTER_UPDATE_REPO', 'BurOrub/StarterOrubWP' );
+	define( 'STARTER_UPDATE_REPO', 'BurOrub/StarterThemeWP' );
 }
 
 /* Facoltativo, solo per repository privati: token GitHub di sola lettura, da definire in wp-config.php come STARTER_GITHUB_TOKEN. */
