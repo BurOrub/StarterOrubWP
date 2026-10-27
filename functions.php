@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Evita accesso diretto al file.
 }
 
-define( 'STARTER_THEME_VERSION', '1.0.1' );
+define( 'STARTER_THEME_VERSION', '1.0.2' );
 
 /* Modulo prestazioni (WebP, preload, pulizia head): un file dedicato in inc/. */
 require_once get_template_directory() . '/inc/performance.php';

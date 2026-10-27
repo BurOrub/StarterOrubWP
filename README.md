@@ -30,8 +30,10 @@ Il tema funziona con questi plugin. Dopo l'attivazione, *Aspetto → Installa pl
 
 ## Installazione
 
-1. Scarica `starter-theme.zip` dall'ultima [release](https://github.com/BurOrub/StarterOrubWP/releases/latest).
-2. In WordPress: *Aspetto → Temi → Aggiungi → Carica tema*, scegli lo zip e attiva.
+1. Dall'ultima [release](https://github.com/BurOrub/StarterOrubWP/releases/latest) scarica:
+   - `starter-pacchetto-completo.zip`: tema + tema figlio. WordPress da *Carica tema* accetta un solo tema per zip, quindi questo si decomprime in `wp-content/themes/` (File Manager o FTP);
+   - oppure, per caricare da WordPress, `starter-theme.zip` e [`starter-theme-child.zip`](https://github.com/BurOrub/StarterChildWP/releases/latest) separati, con *Aspetto → Temi → Aggiungi → Carica tema*.
+2. In *Aspetto → Temi* **attiva il tema figlio** (il padre resta installato).
 3. Aggiungi la chiave ACF in `wp-config.php`, poi vai in *Aspetto → Installa plugin*.
 4. Configura il sito da *Aspetto → Personalizza → Opzioni*.
 
@@ -39,7 +41,7 @@ Non usare il pulsante *Code → Download ZIP*: lo zip automatico di GitHub non c
 
 ## Tema figlio
 
-Per ogni sito si consiglia di lavorare in un **tema figlio**, così gli aggiornamenti del padre non toccano le personalizzazioni. Con il figlio attivo le opzioni di *Personalizza → Opzioni* funzionano come prima: alla prima attivazione il figlio copia quelle del padre, poi si modificano da lì. Il tuo CSS va in `style.css` del figlio, che si carica dopo tutti quelli del padre; i template si sostituiscono copiando il file con lo stesso percorso. Dettagli in [`docs/GUIDA-TEMA.md`](docs/GUIDA-TEMA.md).
+Per ogni sito si consiglia di lavorare in un **tema figlio** ([StarterChildWP](https://github.com/BurOrub/StarterChildWP)), così gli aggiornamenti del padre non toccano le personalizzazioni. Con il figlio attivo le opzioni di *Personalizza → Opzioni* funzionano come prima: alla prima attivazione il figlio copia quelle del padre, poi si modificano da lì. Il tuo CSS va in `style.css` del figlio, che si carica dopo tutti quelli del padre; i template si sostituiscono copiando il file con lo stesso percorso. Dettagli in [`docs/GUIDA-TEMA.md`](docs/GUIDA-TEMA.md).
 
 ## Aggiornamenti
 
