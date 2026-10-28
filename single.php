@@ -42,7 +42,7 @@ get_header();
 					<?php if ( has_post_thumbnail() ) : ?>
 						<div class="entry-thumbnail">
 							<?php starter_blog_meta( 'single', 'main' ); ?>
-							<?php the_post_thumbnail( 'large' ); ?>
+							<?php the_post_thumbnail( 'large', array( 'sizes' => '(max-width: 1100px) 100vw, 1200px' ) ); // Occupa tutta la colonna: il browser sceglie il file giusto. ?>
 						</div>
 					<?php endif; ?>
 

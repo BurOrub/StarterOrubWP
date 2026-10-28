@@ -1429,6 +1429,9 @@ body.header-minimal .site-header__inner {
 }
 
 .entry-thumbnail img {
+	display: block;
+	width: 100%; /* sempre a tutta la larghezza della colonna, con o senza aside */
+	height: auto;
 	border-radius: var(--radius-button);
 }
 
