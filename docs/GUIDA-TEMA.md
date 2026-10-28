@@ -576,7 +576,7 @@ Si imposta dai campi del blocco:
 | Campo | Cosa fa |
 |---|---|
 | **Colonne e progetti per pagina** | 2, 3 o 4 colonne; quanti progetti mostrare per pagina. |
-| **Layout** | **Classica** (stessa altezza), **Masonry** (formato originale), **A blocchi** (2 + 1, con quarto elemento) e **Sfalsata**. |
+| **Layout** | **Classica** (stessa altezza), **Masonry** (formato originale), **A blocchi** (2 + 1, con quarto elemento), **Sfalsata** ed **Elenco** (righe una sotto l'altra: categoria, nome e un dato a scelta; al passaggio del mouse la riga si colora e compare la copertina o il video; versioni *nome al centro* o *nome a sinistra*, quest'ultima con la copertina grande e inclinata che esce dalla riga). |
 | **Schede delle categorie** | *Tutti, Web design…* con o senza numero di progetti; si può mostrare solo alcune categorie. |
 | **Card** | Numero progressivo, categorie sulle card, titolo e riassunto (ordine, tag, dimensione, posizione, colori anche all'hover). |
 | **Filtri** | Linea (Classica), testo grande, pillole, frase; con conteggi; nella stessa pagina o con ricarica; su telefono in una riga scorrevole. |

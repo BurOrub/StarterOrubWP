@@ -7160,6 +7160,215 @@ body.header-minimal .main-navigation .sub-menu a {
 	opacity: 1;
 }
 
+/* Elenco progetti (visualizzazione "Elenco"): righe una sotto l'altra con categoria, nome e un dato; al passaggio la riga si colora (--row-bg, --row-fg)
+   e compare la copertina (o il video). "centro": nome al centro, copertina piccola accanto al nome. "sinistra": nome a sinistra, categoria a destra,
+   copertina grande che esce dalla riga (inclinata con .project-rows--tilt). */
+.project-rows {
+	margin: 0;
+}
+
+/* A tutta la larghezza dello schermo (i filtri restano nella larghezza della pagina): stessa tecnica di .alignfull */
+.project-rows--full {
+	max-width: 100vw;
+	margin-right: calc(50% - 50vw);
+	margin-left: calc(50% - 50vw);
+}
+
+.project-rows--full .project-row__link {
+	padding-right: max(var(--gutter, 16px), 2.4vw);
+	padding-left: max(var(--gutter, 16px), 2.4vw);
+}
+
+.project-row {
+	position: relative;
+	margin: 0;
+}
+
+.project-row:hover,
+.project-row:focus-within {
+	z-index: 5;
+}
+
+.project-row__link {
+	position: relative;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+	align-items: center;
+	gap: 24px;
+	padding: clamp(18px, 2.4vw, 34px) clamp(16px, 2.4vw, 40px);
+	border-bottom: 1px solid var(--color-border);
+	color: inherit;
+	text-decoration: none;
+	transition: background-color 0.45s var(--ease-soft), color 0.45s var(--ease-soft);
+}
+
+.project-rows:not(.project-rows--nolines) .project-row:first-child .project-row__link {
+	border-top: 1px solid var(--color-border);
+}
+
+.project-rows--nolines .project-row__link {
+	border-bottom-color: transparent;
+}
+
+.project-row__link:hover,
+.project-row__link:focus-visible {
+	background: var(--row-bg, var(--color-primary));
+	color: var(--row-fg, #fff);
+}
+
+.project-row .project-row__title {
+	margin: 0;
+	color: inherit;
+	text-align: center;
+	text-wrap: balance;
+}
+
+.project-row__name {
+	position: relative;
+	display: block;
+	text-align: center;
+}
+
+.project-row__cats,
+.project-row__side {
+	font-size: var(--wp--preset--font-size--small);
+	line-height: 1.3;
+}
+
+.project-row__cats {
+	justify-self: start;
+	text-align: left;
+}
+
+.project-row__side {
+	justify-self: end;
+	max-width: 30ch;
+	overflow: hidden;
+	text-align: right;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.project-row__side .icon {
+	display: block;
+}
+
+.project-row .project-row__preview {
+	position: absolute;
+	z-index: 4;
+	top: 50%;
+	left: calc(100% + 1.5rem);
+	width: clamp(120px, 13vw, 210px);
+	aspect-ratio: 4 / 3;
+	opacity: 0;
+	pointer-events: none;
+	transform: translateY(-50%) scale(0.88);
+	transition: opacity 0.4s var(--ease-soft), transform 0.55s var(--ease-soft);
+}
+
+.project-row__link:hover .project-row__preview,
+.project-row__link:focus-visible .project-row__preview {
+	opacity: 1;
+	transform: translateY(-50%) scale(1);
+}
+
+/* Versione "sinistra": nome a sinistra, categoria a destra, copertina grande che esce dalla riga */
+.project-rows--sinistra .project-row__link {
+	grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.project-rows--sinistra .project-row .project-row__title,
+.project-rows--sinistra .project-row__name {
+	text-align: left;
+}
+
+.project-rows--sinistra .project-row__name {
+	position: static;
+}
+
+.project-rows--sinistra .project-row .project-row__preview {
+	right: 24%;
+	left: auto;
+	z-index: 6;
+	width: clamp(220px, 28vw, 440px);
+	box-shadow: 0 22px 60px rgb(0 0 0 / 0.28);
+	transform: translateY(-50%) scale(0.9);
+}
+
+.project-rows--sinistra .project-row__cats {
+	justify-self: end;
+	text-align: right;
+}
+
+.project-rows--sinistra .project-row__link:hover .project-row__preview,
+.project-rows--sinistra .project-row__link:focus-visible .project-row__preview {
+	transform: translateY(-50%) scale(1);
+}
+
+.project-rows--sinistra.project-rows--tilt .project-row__link:hover .project-row__preview,
+.project-rows--sinistra.project-rows--tilt .project-row__link:focus-visible .project-row__preview {
+	transform: translateY(-50%) scale(1) rotate(-5deg);
+}
+
+/* Versione "centro": con i nomi lunghi le tre colonne si stringono prima, quindi sotto i 1100px diventa a una colonna e resta centrata
+   (categoria sopra, nome, poi il dato a destra che va a capo e si legge tutto, senza tagli) */
+@media (max-width: 1100px) {
+	.project-rows--centro .project-row__link {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 6px;
+		justify-items: center;
+		text-align: center;
+	}
+
+	.project-rows--centro .project-row .project-row__title,
+	.project-rows--centro .project-row__name,
+	.project-rows--centro .project-row__cats,
+	.project-rows--centro .project-row__side {
+		text-align: center;
+	}
+
+	.project-rows--centro .project-row__cats {
+		order: -1;
+		justify-self: center;
+	}
+
+	.project-rows--centro .project-row__side {
+		justify-self: center;
+		max-width: 46ch;
+		overflow: visible;
+		text-overflow: clip;
+		white-space: normal;
+	}
+
+	.project-rows--centro .project-row .project-row__preview {
+		display: none;
+	}
+}
+
+/* Tablet e telefono: una colonna, niente copertina che compare (non c'è il passaggio del mouse) */
+@media (max-width: 900px) {
+	.project-row__link,
+	.project-rows--sinistra .project-row__link {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 6px;
+	}
+
+	.project-rows--sinistra .project-row .project-row__title,
+	.project-rows--sinistra .project-row__name {
+		text-align: left;
+	}
+
+	.project-rows--sinistra .project-row__cats {
+		order: -1;
+		justify-self: start;
+		text-align: left;
+	}
+
+	.project-row .project-row__preview {
+		display: none;
+	}
+}
+
 /* Animazione logo (blocco → Titolo): logo al centro dell'immagine; al passaggio del mouse sparisce e il nome del cliente scorre da destra a sinistra (senso di lettura).
    Dimensioni in cqw (larghezza della card), colore: quello scelto per il cliente o il colore di sfondo del sito. */
 .project-card__media:has(.project-card__reveal) {

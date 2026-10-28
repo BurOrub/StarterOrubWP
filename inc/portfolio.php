@@ -414,6 +414,22 @@ function starter_portfolio_grid_html( $cards, $layout, $s ) {
 		str_replace( '-', ' / ', $s['ratio'] )
 	);
 
+	// Elenco: righe una sotto l'altra (categoria, nome, dato); colori e versione (centro|sinistra) dal blocco.
+	if ( 'elenco' === $layout ) {
+		$row   = isset( $s['row'] ) ? (array) $s['row'] : array();
+		$style = '';
+
+		if ( ! empty( $row['bg'] ) ) {
+			$style .= '--row-bg:' . $row['bg'] . ';';
+		}
+
+		if ( ! empty( $row['fg'] ) ) {
+			$style .= '--row-fg:' . $row['fg'] . ';';
+		}
+
+		return '<div class="project-rows project-rows--' . ( 'sinistra' === ( $row['align'] ?? '' ) ? 'sinistra' : 'centro' ) . ( empty( $row['lines'] ) ? ' project-rows--nolines' : '' ) . ( ! empty( $row['tilt'] ) ? ' project-rows--tilt' : '' ) . ( ! empty( $row['full'] ) ? ' project-rows--full' : '' ) . '" style="' . esc_attr( $style ) . '">' . implode( '', $cards ) . '</div>';
+	}
+
 	if ( 'blocchi' === $layout ) {
 		$keys   = $s['fourth'] ? array( 'h1', 'h2', 'v', 'f' ) : array( 'h1', 'h2', 'v' );
 		$html   = '<div class="project-blocks" style="' . esc_attr( $vars ) . '">';
