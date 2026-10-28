@@ -126,11 +126,6 @@ function starter_breadcrumb_bar() {
 		return;
 	}
 
-	// Il blocco "Intestazione pagina" ha già le sue briciole: niente doppione.
-	if ( is_singular() && str_contains( (string) get_post_field( 'post_content', get_queried_object_id() ), 'wp:starter-theme/intestazione-pagina' ) ) {
-		return;
-	}
-
 	// Nelle pagine dello shop senza Yoast: le briciole di WooCommerce, che conoscono categorie e prodotti.
 	if ( ! function_exists( 'YoastSEO' ) && starter_has_woocommerce() && is_woocommerce() && function_exists( 'woocommerce_breadcrumb' ) ) {
 		echo '<div class="crumbs-bar"><div class="starter-container">';
