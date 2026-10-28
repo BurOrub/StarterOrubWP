@@ -23,8 +23,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php starter_blog_filters(); ?>
 
 			<?php
-			// Pagina Blog: l'articolo in evidenza si sceglie con starter_blog_featured_post() e sta fuori dal ciclo; negli archivi è il primo del ciclo.
-			$starter_home_featured = is_home() && starter_blog_featured_active() ? starter_blog_featured_post() : null;
+			// Pagina Blog e categorie: l'articolo in evidenza si sceglie con starter_blog_featured_post() e sta fuori dal ciclo; negli altri archivi è il primo del ciclo.
+			$starter_home_featured = starter_blog_is_filter_page() && starter_blog_featured_active() ? starter_blog_featured_post() : null;
 			?>
 
 			<?php if ( have_posts() || $starter_home_featured ) : ?>
@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						wp_reset_postdata();
 					}
 
-					$starter_first = ! is_home() && starter_blog_featured_active();
+					$starter_first = ! starter_blog_is_filter_page() && starter_blog_featured_active();
 
 					while ( have_posts() ) :
 						the_post();

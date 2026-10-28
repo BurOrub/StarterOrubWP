@@ -608,7 +608,7 @@ function starter_customize_register_extra( $wp_customize ) {
 	starter_customizer_checkbox( $wp_customize, 'starter_blog_aside_list', $blog, __( 'Aside (filtri e ricerca) nella pagina Blog, nelle categorie e nella ricerca', 'slug-theme' ), $def['aside_list'], __( 'Colonna a destra: ricerca, categorie, ultimi articoli, tag.', 'slug-theme' ), 2 );
 	starter_customizer_checkbox( $wp_customize, 'starter_blog_aside_single', $blog, __( 'Aside negli articoli', 'slug-theme' ), $def['aside_single'], '', 3 );
 
-	starter_customizer_checkbox( $wp_customize, 'starter_blog_filters', $blog, __( 'Filtri per categoria sopra l\'elenco', 'slug-theme' ), $def['filters'], __( 'Solo nella pagina Blog: categorie con il numero di articoli, tra il testo di apertura e gli articoli.', 'slug-theme' ), 3.2 );
+	starter_customizer_checkbox( $wp_customize, 'starter_blog_filters', $blog, __( 'Filtri per categoria sopra l\'elenco', 'slug-theme' ), $def['filters'], __( 'Nella pagina Blog e nelle pagine delle categorie: categorie con il numero di articoli, tra il testo di apertura e gli articoli. Ogni voce porta alla pagina della categoria.', 'slug-theme' ), 3.2 );
 
 	starter_customizer_checkbox( $wp_customize, 'starter_blog_aside_sticky', $blog, __( 'Aside fissa', 'slug-theme' ), $def['aside_sticky'], __( 'Resta in vista mentre scorri (a 20px dall\'alto). Solo desktop.', 'slug-theme' ), 3.5 );
 
@@ -670,7 +670,7 @@ function starter_customize_register_extra( $wp_customize ) {
 		$blog,
 		__( 'Ultimo articolo in evidenza', 'slug-theme' ),
 		$def['featured'],
-		__( 'A tutta larghezza, con foto a sinistra. Solo prima pagina, non nella ricerca. Pagina Blog: si sceglie l\'articolo qui sotto; se non ne scegli uno vale il più recente con categoria o tag "In evidenza" (slug in-evidenza), altrimenti l\'ultimo articolo.', 'slug-theme' ),
+		__( 'A tutta larghezza, con foto a sinistra. Solo prima pagina, non nella ricerca. Pagina Blog e categorie: si sceglie l\'articolo qui sotto; se non ne scegli uno vale il più recente con categoria o tag "In evidenza" (slug in-evidenza), altrimenti l\'ultimo articolo.', 'slug-theme' ),
 		5
 	);
 
