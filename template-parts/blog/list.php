@@ -20,11 +20,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<?php starter_blog_aside_toggle(); ?>
 
-			<?php if ( have_posts() ) : ?>
+			<?php starter_blog_filters(); ?>
+
+			<?php
+			// Pagina Blog: l'articolo in evidenza si sceglie con starter_blog_featured_post() e sta fuori dal ciclo; negli archivi è il primo del ciclo.
+			$starter_home_featured = is_home() && starter_blog_featured_active() ? starter_blog_featured_post() : null;
+			?>
+
+			<?php if ( have_posts() || $starter_home_featured ) : ?>
 
 				<div class="blog-grid">
 					<?php
-					$starter_first = starter_blog_featured_active();
+					if ( $starter_home_featured ) {
+						global $post;
+
+						$post = $starter_home_featured; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+						setup_postdata( $post );
+						get_template_part( 'template-parts/content/card', null, array( 'featured' => true ) );
+						wp_reset_postdata();
+					}
+
+					$starter_first = ! is_home() && starter_blog_featured_active();
 
 					while ( have_posts() ) :
 						the_post();

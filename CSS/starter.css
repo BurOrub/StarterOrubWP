@@ -1903,6 +1903,84 @@ body.blog-cols-1 .blog-card__body,
 	padding: clamp(1.25rem, 3.4vw, 2.75rem);
 }
 
+/* Filtri per categoria sopra l'elenco del blog (Opzioni → Blog): linea sotto, voce attiva colorata, numero degli articoli in un cerchio. Su telefono scorrono di lato. */
+.blog-tabs {
+	margin-bottom: clamp(24px, 3vw, 40px);
+}
+
+.blog-tabs__list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 28px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	border-bottom: 1px solid var(--color-border);
+}
+
+.blog-tabs__link {
+	display: inline-flex;
+	align-items: baseline;
+	gap: 0.4em;
+	margin-bottom: -1px;
+	padding: 0.6rem 0;
+	border-bottom: 2px solid transparent;
+	color: inherit;
+	font-weight: 600;
+	text-decoration: none;
+	transition: border-color 0.6s var(--ease-soft), color 0.6s var(--ease-soft);
+}
+
+.blog-tabs__link:hover,
+.blog-tabs__link.is-active {
+	border-bottom-color: var(--color-text);
+}
+
+.blog-tabs__link.is-active {
+	color: var(--color-primary);
+}
+
+.blog-tabs__count {
+	position: relative;
+	top: -2px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 1.7em;
+	height: 1.7em;
+	padding: 0 0.35em;
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--color-text) 12%, transparent);
+	color: var(--color-text);
+	font-size: 0.6em;
+	font-weight: 600;
+	line-height: 1;
+}
+
+@media (max-width: 782px) {
+	.blog-tabs__list {
+		flex-wrap: nowrap;
+		overflow-x: auto;
+		white-space: nowrap;
+		scrollbar-width: none;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.blog-tabs__list::-webkit-scrollbar {
+		display: none;
+	}
+
+	.blog-tabs__list li {
+		flex: none;
+	}
+}
+
+/* Senza aside l'articolo in evidenza è largo quanto la pagina: l'immagine resta 4:3 (più alta) invece di allungarsi */
+body.blog-no-aside .blog-card--featured .blog-card__thumbnail {
+	aspect-ratio: 4 / 3;
+	min-height: 0;
+}
+
 /* "Continua a leggere" in fondo all'articolo: sempre 3 colonne (2 su tablet, 1 su mobile) con schede in colonna, qualunque sia la griglia dell'elenco */
 body .blog-related .blog-grid {
 	--blog-cols: 3;

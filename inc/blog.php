@@ -19,6 +19,8 @@ function starter_blog_defaults() {
 		'aside_single'   => true,  // Aside negli articoli.
 		'columns'        => 3,     // Colonne della griglia (1 = elenco: immagine a sinistra, testo a destra).
 		'featured'       => false, // Primo articolo in evidenza (a tutta larghezza) sulla prima pagina di Blog e archivi.
+		'featured_post'  => 0,     // Articolo scelto a mano per l'evidenza della pagina Blog (0 = automatico).
+		'filters'        => false, // Filtri per categoria (con il numero degli articoli) sopra l'elenco, solo nella pagina Blog.
 		'list_date'      => true,  // Nelle card: data, autore, categorie, tag.
 		'list_author'    => false,
 		'author_link'    => false, // Nome dell'autore cliccabile (archivio dei suoi articoli), in card e articolo.
@@ -137,6 +139,146 @@ function starter_blog_card_tags() {
 /* Vero se in questa pagina il primo articolo va in evidenza: opzione attiva, elenco (Blog o archivi, non la ricerca), prima pagina. */
 function starter_blog_featured_active() {
 	return starter_blog_opt( 'featured' ) && ( is_home() || is_archive() ) && ! is_search() && ! is_paged();
+}
+
+/* Categoria scelta con i filtri della pagina Blog (?categoria=slug): id del termine, oppure 0. */
+function starter_blog_filter_category() {
+	if ( ! is_home() || empty( $_GET['categoria'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- sola lettura di un filtro pubblico.
+		return 0;
+	}
+
+	$term = get_category_by_slug( sanitize_title( wp_unslash( $_GET['categoria'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+	return $term ? (int) $term->term_id : 0;
+}
+
+/**
+ * Articolo in evidenza della pagina Blog, nell'ordine: (1) quello scelto in Opzioni → Blog; (2) il più recente con categoria o tag
+ * "in-evidenza"; (3) l'ultimo articolo. Se è attivo un filtro per categoria vale solo ciò che appartiene a quella categoria.
+ *
+ * @return WP_Post|null
+ */
+function starter_blog_featured_post() {
+	static $cache = array();
+
+	$cat = starter_blog_filter_category();
+
+	if ( array_key_exists( $cat, $cache ) ) {
+		return $cache[ $cat ];
+	}
+
+	$base = array(
+		'post_type'           => 'post',
+		'post_status'         => 'publish',
+		'posts_per_page'      => 1,
+		'ignore_sticky_posts' => true,
+		'no_found_rows'       => true,
+	);
+
+	if ( $cat ) {
+		$base['cat'] = $cat;
+	}
+
+	$found  = null;
+	$chosen = (int) starter_blog_opt( 'featured_post' );
+
+	if ( $chosen ) {
+		$posts = get_posts( array_merge( $base, array( 'p' => $chosen ) ) );
+		$found = $posts ? $posts[0] : null;
+	}
+
+	if ( ! $found ) {
+		$posts = get_posts(
+			array_merge(
+				$base,
+				array(
+					'tax_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+						'relation' => 'OR',
+						array( 'taxonomy' => 'category', 'field' => 'slug', 'terms' => 'in-evidenza' ),
+						array( 'taxonomy' => 'post_tag', 'field' => 'slug', 'terms' => 'in-evidenza' ),
+					),
+				)
+			)
+		);
+		$found = $posts ? $posts[0] : null;
+	}
+
+	if ( ! $found ) {
+		$posts = get_posts( $base );
+		$found = $posts ? $posts[0] : null;
+	}
+
+	$cache[ $cat ] = $found;
+
+	return $found;
+}
+
+/* Pagina Blog: filtro per categoria; con l'evidenza attiva l'articolo in evidenza esce dalla griglia (si vede sopra, una volta sola). */
+add_action(
+	'pre_get_posts',
+	function ( $query ) {
+		if ( is_admin() || ! $query->is_main_query() || ! $query->is_home() ) {
+			return;
+		}
+
+		$cat = starter_blog_filter_category();
+
+		if ( $cat ) {
+			$query->set( 'cat', $cat );
+		}
+
+		if ( starter_blog_opt( 'featured' ) ) {
+			$featured = starter_blog_featured_post();
+
+			if ( $featured ) {
+				$query->set( 'post__not_in', array( (int) $featured->ID ) );
+			}
+		}
+	}
+);
+
+/* Indirizzo della pagina Blog (senza filtri). */
+function starter_blog_page_url() {
+	$page = (int) get_option( 'page_for_posts' );
+
+	return $page ? get_permalink( $page ) : home_url( '/' );
+}
+
+/* Filtri per categoria sopra l'elenco: stesso aspetto dei filtri "classici" del Portfolio, con il numero degli articoli in un cerchio. Solo pagina Blog. */
+function starter_blog_filters() {
+	if ( ! is_home() || ! starter_blog_opt( 'filters' ) ) {
+		return;
+	}
+
+	$terms = get_categories( array( 'hide_empty' => true ) );
+
+	if ( ! $terms ) {
+		return;
+	}
+
+	$base   = starter_blog_page_url();
+	$active = starter_blog_filter_category();
+	$total  = (int) wp_count_posts( 'post' )->publish;
+	$items  = array( array( $base, __( 'Tutti', 'slug-theme' ), $total, ! $active ) );
+
+	foreach ( $terms as $term ) {
+		$items[] = array( add_query_arg( 'categoria', $term->slug, $base ), $term->name, (int) $term->count, (int) $term->term_id === $active );
+	}
+
+	echo '<nav class="blog-tabs" aria-label="' . esc_attr__( 'Categorie del blog', 'slug-theme' ) . '"><ul class="blog-tabs__list">';
+
+	foreach ( $items as $item ) {
+		printf(
+			'<li><a class="blog-tabs__link%1$s" href="%2$s"%3$s>%4$s <span class="blog-tabs__count">%5$d</span></a></li>',
+			$item[3] ? ' is-active' : '',
+			esc_url( $item[0] ),
+			$item[3] ? ' aria-current="page"' : '',
+			esc_html( $item[1] ),
+			(int) $item[2]
+		);
+	}
+
+	echo '</ul></nav>';
 }
 
 /**

@@ -462,7 +462,9 @@ Le stesse regole valgono per la pagina Blog, le categorie, i tag, gli autori, gl
 | **Aside** (filtri e ricerca) | La colonna a destra con ricerca, categorie con il numero di articoli, ultimi articoli e tag. Si accende **separatamente** per elenco/archivi/ricerca e per gli articoli, e può essere **fissa**. Se l'area *Sidebar Blog* ha widget in **Aspetto → Widget**, si usano quelli. Su tablet e mobile diventa un pannello che entra da destra. |
 | **Colonne della griglia** | 1, 2, 3 o 4 (3 di base). Con *1 colonna* la foto sta a sinistra e il testo a destra. Su tablet e mobile scendono da sole. |
 | **Articoli per pagina** | Quanti articoli per pagina nell'elenco. |
-| **Ultimo articolo in evidenza** | Il primo articolo a tutta larghezza, solo nella prima pagina. |
+| **Filtri per categoria sopra l'elenco** | Solo nella pagina Blog: le categorie con il numero degli articoli in un cerchio, tra il testo di apertura e gli articoli (stesso aspetto dei filtri classici del Portfolio). Scegliendone una la pagina mostra solo quegli articoli. |
+| **Ultimo articolo in evidenza** | Un articolo a tutta larghezza, solo nella prima pagina. Nella pagina Blog lo sceglie, in quest'ordine: l'**articolo scelto a mano** (menu sotto), il più recente con categoria o tag **In evidenza** (slug `in-evidenza`), l'ultimo articolo. Senza aside la sua immagine è 4:3, più alta. |
+| **Articolo in evidenza scelto a mano** | Un articolo a piacere tra gli ultimi 100; ha la precedenza su tutto. |
 | **Card dell'elenco** | Mostra o nasconde data, autore (anche cliccabile), categorie, tag. |
 | **Articolo** | Data, autore, categorie, **sommario**, tag (a fine articolo), **riquadro autore** (avatar, nome e biografia dal profilo utente), **articoli correlati** ("Continua a leggere", stessa categoria), pulsanti **Condividi**. |
 

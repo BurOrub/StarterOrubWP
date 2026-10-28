@@ -608,6 +608,8 @@ function starter_customize_register_extra( $wp_customize ) {
 	starter_customizer_checkbox( $wp_customize, 'starter_blog_aside_list', $blog, __( 'Aside (filtri e ricerca) nella pagina Blog, nelle categorie e nella ricerca', 'slug-theme' ), $def['aside_list'], __( 'Colonna a destra: ricerca, categorie, ultimi articoli, tag.', 'slug-theme' ), 2 );
 	starter_customizer_checkbox( $wp_customize, 'starter_blog_aside_single', $blog, __( 'Aside negli articoli', 'slug-theme' ), $def['aside_single'], '', 3 );
 
+	starter_customizer_checkbox( $wp_customize, 'starter_blog_filters', $blog, __( 'Filtri per categoria sopra l\'elenco', 'slug-theme' ), $def['filters'], __( 'Solo nella pagina Blog: categorie con il numero di articoli, tra il testo di apertura e gli articoli.', 'slug-theme' ), 3.2 );
+
 	starter_customizer_checkbox( $wp_customize, 'starter_blog_aside_sticky', $blog, __( 'Aside fissa', 'slug-theme' ), $def['aside_sticky'], __( 'Resta in vista mentre scorri (a 20px dall\'alto). Solo desktop.', 'slug-theme' ), 3.5 );
 
 	$wp_customize->add_setting(
@@ -668,8 +670,35 @@ function starter_customize_register_extra( $wp_customize ) {
 		$blog,
 		__( 'Ultimo articolo in evidenza', 'slug-theme' ),
 		$def['featured'],
-		__( 'Il più recente a tutta larghezza, con foto a sinistra. Solo prima pagina, non nella ricerca.', 'slug-theme' ),
+		__( 'A tutta larghezza, con foto a sinistra. Solo prima pagina, non nella ricerca. Pagina Blog: si sceglie l\'articolo qui sotto; se non ne scegli uno vale il più recente con categoria o tag "In evidenza" (slug in-evidenza), altrimenti l\'ultimo articolo.', 'slug-theme' ),
 		5
+	);
+
+	// Articolo scelto a mano per l'evidenza della pagina Blog.
+	$featured_choices = array( 0 => __( 'Automatico (tag/categoria "In evidenza", altrimenti l\'ultimo)', 'slug-theme' ) );
+
+	foreach ( get_posts( array( 'post_type' => 'post', 'post_status' => 'publish', 'numberposts' => 100, 'orderby' => 'date', 'order' => 'DESC', 'suppress_filters' => true ) ) as $featured_post ) {
+		$featured_choices[ $featured_post->ID ] = wp_html_excerpt( get_the_title( $featured_post ), 70, '…' );
+	}
+
+	$wp_customize->add_setting(
+		'starter_blog_featured_post',
+		array(
+			'default'           => 0,
+			'sanitize_callback' => 'absint',
+		)
+	);
+
+	$wp_customize->add_control(
+		'starter_blog_featured_post',
+		array(
+			'type'        => 'select',
+			'section'     => $blog,
+			'label'       => __( 'Articolo in evidenza scelto a mano', 'slug-theme' ),
+			'description' => __( 'Ha la precedenza su tutto il resto. Gli ultimi 100 articoli.', 'slug-theme' ),
+			'choices'     => $featured_choices,
+			'priority'    => 5.5,
+		)
 	);
 
 	starter_customizer_heading( $wp_customize, 'starter_heading_blog_list', $blog, __( 'Card dell\'elenco', 'slug-theme' ), 10 );
