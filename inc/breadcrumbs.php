@@ -128,7 +128,7 @@ function starter_breadcrumb_bar() {
 
 	// Nelle pagine dello shop senza Yoast: le briciole di WooCommerce, che conoscono categorie e prodotti.
 	if ( ! function_exists( 'YoastSEO' ) && starter_has_woocommerce() && is_woocommerce() && function_exists( 'woocommerce_breadcrumb' ) ) {
-		echo '<div class="crumbs-bar"><div class="starter-container">';
+		echo '<div class="crumbs-bar mb2"><div class="starter-container">';
 		woocommerce_breadcrumb();
 		echo '</div></div>';
 
@@ -141,7 +141,7 @@ function starter_breadcrumb_bar() {
 		return;
 	}
 
-	echo '<div class="crumbs-bar"><div class="starter-container"><nav class="woocommerce-breadcrumb" aria-label="' . esc_attr__( 'Briciole di pane', 'slug-theme' ) . '">';
+	echo '<div class="crumbs-bar mb2"><div class="starter-container"><nav class="woocommerce-breadcrumb" aria-label="' . esc_attr__( 'Briciole di pane', 'slug-theme' ) . '">';
 
 	foreach ( $items as $i => $item ) {
 		if ( $i ) {

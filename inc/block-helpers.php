@@ -213,7 +213,7 @@ function starter_section_heading_tags( $has_eyebrow, $eyebrow_level = 2 ) {
 
 /* Briciole di pane: $items = [ [ etichetta, url ], ... ], l'ultima senza url. */
 function starter_breadcrumb( $items ) {
-	echo '<nav class="breadcrumb" aria-label="' . esc_attr__( 'Percorso', 'slug-theme' ) . '">';
+	echo '<nav class="breadcrumb mb05" aria-label="' . esc_attr__( 'Percorso', 'slug-theme' ) . '">'; // mb05: 0,5 rem sotto (vince sui 30px di ".page-header__main > .breadcrumb").
 
 	foreach ( $items as $i => $item ) {
 		if ( $i ) {
