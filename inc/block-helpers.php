@@ -83,7 +83,7 @@ function starter_link_title( $link, $fallback = '' ) {
 	return ( is_array( $link ) && ! empty( $link['title'] ) ) ? $link['title'] : $fallback;
 }
 
-/* Id di allegati da un valore ACF salvato: un id, un elenco di id, o (vecchi contenuti) array con 'ID'. */
+/* Id di allegati da un valore salvato: un id, un elenco di id, o (vecchi contenuti) array con 'ID'. */
 function starter_attachment_ids( $value ) {
 	$ids = array();
 

@@ -36,7 +36,7 @@
 	margin-inline: calc(-1 * var(--gutter, 24px));
 }
 
-/* Blocchi con testo in Gutenberg dentro (Sezione affiancata): il contenitore di ACF si comporta come ".split__text--free" sul sito */
+/* Blocchi con testo in Gutenberg dentro (Sezione affiancata): il contenitore dei blocchi interni si comporta come ".split__text--free" sul sito */
 .editor-styles-wrapper .split__text--free .starter-inner {
 	display: grid;
 	gap: 20px;
@@ -51,7 +51,7 @@
 	padding-inline: var(--gutter, 24px);
 }
 
-/* Blocchi ACF: l'anteprima non deve mai essere più larga della colonna dell'editor */
+/* Blocchi: l'anteprima non deve mai essere più larga della colonna dell'editor */
 .editor-styles-wrapper .hero-split__grid,
 .editor-styles-wrapper .split__grid {
 	max-width: 100%;

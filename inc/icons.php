@@ -242,7 +242,7 @@ function starter_icon( $name, $size = 16, $stroke = 1.75 ) {
 }
 
 /**
- * Tutta la libreria per i selettori (backend ACF e plugin Starter Live): { icons: { nome: markup }, keywords: { nome: "parole" } }.
+ * Tutta la libreria per i selettori (editor dei blocchi e plugin Starter Live): { icons: { nome: markup }, keywords: { nome: "parole" } }.
  * Le icone personalizzate del tema sostituiscono quelle omonime della libreria.
  */
 function starter_icon_library() {

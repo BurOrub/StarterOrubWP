@@ -4531,7 +4531,7 @@ function starter_dist_ready() {
 		&& filemtime( get_theme_file_path( 'JS/dist/scripts.min.js' ) ) >= filemtime( get_theme_file_path( 'JS/scripts.js' ) );
 }
 
-/* Vero se in pagina c'è almeno uno dei blocchi in template-parts/ (vedi inc/acf-blocks.php). */
+/* Vero se in pagina c'è almeno uno dei blocchi in template-parts/ (vedi inc/block-options.php). */
 function starter_has_content_block() {
 	if ( ! is_singular() ) {
 		return false;

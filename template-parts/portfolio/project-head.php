@@ -73,7 +73,7 @@ $starter_media      = static function () use ( $starter_id, $starter_video, $sta
 				<h1<?php echo $starter_live; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> class="page-header__title text-balance"><?php echo esc_html( $starter_title ); ?></h1>
 			<?php endif; ?>
 			<?php if ( $starter_text ) : ?>
-				<div class="project-intro txt"<?php echo $starter_preview ? '' : starter_live_attrs( array( 'src' => 'acfnum', 'key' => 'progetto_testo' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo esc_html( $starter_text ); ?></div>
+				<div class="project-intro txt"<?php echo $starter_preview ? '' : starter_live_attrs( array( 'src' => 'fieldnum', 'key' => 'progetto_testo' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo esc_html( $starter_text ); ?></div>
 			<?php endif; ?>
 		</div>
 

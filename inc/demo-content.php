@@ -278,7 +278,7 @@ function starter_demo_cookie_content() {
 
 /*
  * Scrive un blocco nel contenuto di una pagina, con testi e immagini segnaposto.
- * $data: nome campo => valore; $keys: nome campo => chiave ACF (serve a ACF per leggere i valori dal blocco).
+ * $data: nome campo => valore; $keys: nome campo => chiave del campo (serve al plugin Starter Blocks per leggere i valori dal blocco).
  */
 function starter_demo_block( $name, $data, $keys ) {
 	$payload = array(
@@ -288,7 +288,7 @@ function starter_demo_block( $name, $data, $keys ) {
 	);
 
 	foreach ( $data as $field => $value ) {
-		// Repeater: $keys[campo] = array( chiave del repeater, array( sottocampo => chiave ) ); ACF vuole i valori "appiattiti" (campo_0_sottocampo).
+		// Repeater: $keys[campo] = array( chiave del repeater, array( sottocampo => chiave ) ); i valori vanno "appiattiti" (campo_0_sottocampo).
 		if ( is_array( $keys[ $field ] ) ) {
 			$payload['data'][ $field ]        = count( $value );
 			$payload['data'][ '_' . $field ] = $keys[ $field ][0];

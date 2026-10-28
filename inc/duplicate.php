@@ -1,7 +1,7 @@
 <?php
 /**
  * Clona: voce "Clona" negli elenchi di pagine, articoli e CPT (Portfolio, Immobili…).
- * Crea una copia in bozza con stesso titolo, contenuto, campi (ACF compresi),
+ * Crea una copia in bozza con stesso titolo, contenuto, campi personalizzati,
  * immagine in evidenza, categorie e genitore. Lo slug non si copia: in bozza non c'è.
  */
 
@@ -56,7 +56,7 @@ function starter_clone_post( $post_id ) {
 		return 0;
 	}
 
-	// Campi personalizzati (ACF, immagine in evidenza, modello di pagina, SEO…).
+	// Campi personalizzati (immagine in evidenza, modello di pagina, SEO…).
 	$skip = array( '_edit_lock', '_edit_last', '_wp_old_slug', '_wp_trash_meta_status', '_wp_trash_meta_time', '_wp_desired_post_slug' );
 	foreach ( get_post_meta( $post->ID ) as $key => $values ) {
 		if ( in_array( $key, $skip, true ) ) {

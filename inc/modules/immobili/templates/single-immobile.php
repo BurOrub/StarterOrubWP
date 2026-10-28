@@ -101,7 +101,7 @@ while ( have_posts() ) :
 						);
 						// L'indirizzo è un elemento a sé (modificabile con Starter Live, cambia anche la mappa); la zona resta accanto.
 						if ( '' !== $starter_address ) {
-							echo '<span' . starter_live_attrs( array( 'src' => 'acfnum', 'key' => 'indirizzo' ) ) . '>' . esc_html( $starter_address ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							echo '<span' . starter_live_attrs( array( 'src' => 'fieldnum', 'key' => 'indirizzo' ) ) . '>' . esc_html( $starter_address ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						}
 						echo esc_html( ( '' !== $starter_address && $starter_zone_parts ? ' · ' : '' ) . implode( ' · ', array_filter( $starter_zone_parts ) ) ); ?>
 					</span>
@@ -114,7 +114,7 @@ while ( have_posts() ) :
 
 			<div class="immobile-head__price" data-reveal>
 				<span class="immobile-eyebrow"><?php esc_html_e( 'Prezzo', 'slug-theme' ); ?></span>
-				<span class="immobile-price"<?php echo starter_live_attrs( array( 'src' => 'acfnum', 'key' => 'prezzo' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo esc_html( starter_imm_get_price_label( $starter_id ) ); ?></span>
+				<span class="immobile-price"<?php echo starter_live_attrs( array( 'src' => 'fieldnum', 'key' => 'prezzo' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo esc_html( starter_imm_get_price_label( $starter_id ) ); ?></span>
 			</div>
 		</div>
 	</section>
@@ -196,7 +196,7 @@ while ( have_posts() ) :
 						<?php foreach ( $starter_facts as $starter_fact ) : ?>
 							<div class="immobile-fact">
 								<span class="icon-circle"><?php echo starter_icon( $starter_fact[0], 22, 1.9 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
-								<p class="immobile-fact__value"<?php echo ! empty( $starter_fact[3] ) ? starter_live_attrs( array( 'src' => 'acfnum', 'key' => $starter_fact[3] ) ) : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo esc_html( $starter_fact[1] ); ?></p>
+								<p class="immobile-fact__value"<?php echo ! empty( $starter_fact[3] ) ? starter_live_attrs( array( 'src' => 'fieldnum', 'key' => $starter_fact[3] ) ) : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo esc_html( $starter_fact[1] ); ?></p>
 								<?php if ( $starter_fact[2] ) : ?>
 									<p><?php echo esc_html( $starter_fact[2] ); ?></p>
 								<?php endif; ?>
@@ -254,7 +254,7 @@ while ( have_posts() ) :
 							<?php foreach ( $starter_rows as $starter_row ) : ?>
 								<div>
 									<dt><?php echo esc_html( $starter_row[0] ); ?></dt>
-									<dd<?php echo ! empty( $starter_row[2] ) ? starter_live_attrs( array( 'src' => 'acfnum', 'key' => $starter_row[2] ) ) : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo esc_html( $starter_row[1] ); ?></dd>
+									<dd<?php echo ! empty( $starter_row[2] ) ? starter_live_attrs( array( 'src' => 'fieldnum', 'key' => $starter_row[2] ) ) : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>><?php echo esc_html( $starter_row[1] ); ?></dd>
 								</div>
 							<?php endforeach; ?>
 						</dl>

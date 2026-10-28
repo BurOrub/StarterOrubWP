@@ -115,7 +115,7 @@ function starter_pg_group( $inner, $class = '', $bg = '', $text = '' ) {
 	return '<!-- wp:group ' . wp_json_encode( $attrs ) . " -->\n<section class=\"" . implode( ' ', $classes ) . "\">" . trim( $inner ) . "</section>\n<!-- /wp:group -->\n\n";
 }
 
-/* Link nel formato dei campi "Link" di ACF. */
+/* Link nel formato dei campi "Link" dei blocchi (titolo, url, target). */
 function starter_pg_link( $title, $path ) {
 	return array(
 		'title'  => $title,
@@ -124,14 +124,14 @@ function starter_pg_link( $title, $path ) {
 	);
 }
 
-/* Blocco ACF con dei blocchi di Gutenberg dentro (es. "Sezione affiancata"). */
+/* Blocco con dei blocchi di Gutenberg dentro (es. "Sezione affiancata"). */
 function starter_pg_block_inner( $name, $data, $keys, $inner ) {
 	$block = starter_demo_block( $name, $data, $keys );
 
 	return str_replace( ' /-->', ' -->', rtrim( $block ) ) . "\n" . $inner . '<!-- /wp:starter-theme/' . $name . " -->\n\n";
 }
 
-/* Chiavi dei campi dei blocchi, per scrivere i valori nei blocchi (vedi inc/acf-blocks*.php). */
+/* Chiavi dei campi dei blocchi, per scrivere i valori nei blocchi (vedi blocks/<nome>/fields.json del plugin Starter Blocks). */
 function starter_pg_keys( $block ) {
 	$all = array(
 		'hero-media'           => array(
@@ -228,7 +228,7 @@ function starter_pg_keys( $block ) {
 	return $all[ $block ];
 }
 
-/* Blocco ACF "semplice" (senza blocchi dentro) con le sue chiavi. */
+/* Blocco "semplice" (senza blocchi dentro) con le sue chiavi. */
 function starter_pg_block( $name, $data ) {
 	return starter_demo_block( $name, $data, starter_pg_keys( $name ) );
 }

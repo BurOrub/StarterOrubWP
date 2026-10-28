@@ -135,7 +135,7 @@ add_action(
 	11
 );
 
-/* Starter Live: i campi della scheda dell'immobile (ACF, non blocchi) si modificano dal frontend come quelli dei blocchi. */
+/* Starter Live: i campi della scheda dell'immobile (campi, non blocchi) si modificano dal frontend come quelli dei blocchi. */
 add_filter(
 	'starter_live_meta_post_types',
 	static function ( $types ) {
