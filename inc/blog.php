@@ -59,7 +59,7 @@ add_action(
 		$width = (int) starter_blog_opt( 'single_width' );
 
 		if ( $width >= 320 ) {
-			wp_add_inline_style( 'starter-theme-style', 'body.single-post .blog-header,body.single-post .blog-layout{max-width:' . $width . "px;margin-left:auto;margin-right:auto}\n" );
+			wp_add_inline_style( 'starter-theme-style', 'body.single-post .blog-header,body.single-post .blog-layout,body.single-post .page-header--crumbs .block-wrap{max-width:' . $width . "px;margin-left:auto;margin-right:auto}\n" );
 		}
 	},
 	30
