@@ -9,6 +9,7 @@
 		initStickyHeader();
 		initHamburgerMenu();
 		initBlogSidebarToggle();
+		initBlogToc();
 		initFooterSocialMagnetic();
 		initReveal();
 		initScrollTracks();
@@ -531,6 +532,44 @@
 			item.addEventListener( 'mouseleave', function () {
 				moveBy( 0, 0 );
 			} );
+		} );
+	}
+
+	/** Sommario dell'articolo: da chiuso resta largo come da aperto (niente scatto): si misura la larghezza da aperto e la si usa come minima. */
+	function initBlogToc() {
+		var tocs = document.querySelectorAll( '.blog-toc' );
+
+		if ( ! tocs.length ) {
+			return;
+		}
+
+		function lock( toc ) {
+			var details = toc.querySelector( 'details' );
+
+			if ( ! details ) {
+				return;
+			}
+
+			var wasOpen = details.open;
+
+			toc.style.minWidth = '';
+			details.open = true; // Si apre un istante, senza disegnare, solo per misurare.
+
+			var width = Math.ceil( toc.getBoundingClientRect().width );
+
+			details.open = wasOpen;
+			toc.style.minWidth = width + 'px';
+		}
+
+		tocs.forEach( lock );
+
+		var timer;
+
+		window.addEventListener( 'resize', function () {
+			clearTimeout( timer );
+			timer = setTimeout( function () {
+				tocs.forEach( lock );
+			}, 150 );
 		} );
 	}
 
