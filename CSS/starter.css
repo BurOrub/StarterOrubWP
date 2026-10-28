@@ -3339,7 +3339,7 @@ a.footer-social__icon {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 10px;
-	margin-bottom: 8px;
+	margin-bottom: 0; /* briciole nel titolo: nessuno spazio sotto (lo spazio con la fascia è su .crumbs-bar) */
 	color: var(--color-text);
 	opacity: 0.65;
 	font-size: var(--wp--preset--font-size--small);
@@ -4205,6 +4205,7 @@ body.lightbox-open {
 
 /* Barra delle briciole: fascia sotto l'header, testo nella larghezza dei contenuti (Opzioni → Generale) */
 .crumbs-bar {
+	margin-bottom: 2rem; /* come la classe mb2: spazio tra la fascia e l'inizio della pagina */
 	border-bottom: 1px solid var(--color-border);
 	background: var(--color-background);
 }
@@ -6121,11 +6122,11 @@ body.search-open {
 }
 
 .breadcrumb-wrap {
-	margin-bottom: 20px;
+	margin-bottom: 0;
 }
 
 .blog-header .breadcrumb {
-	margin-bottom: 14px;
+	margin-bottom: 0;
 }
 
 /* Briciole sopra pagine senza il blocco "Intestazione pagina" (pagine normali, articolo, scheda prodotto): stessa posizione e distanze del titolo di pagina */
