@@ -610,6 +610,35 @@ function starter_customize_register_extra( $wp_customize ) {
 
 	starter_customizer_checkbox( $wp_customize, 'starter_blog_filters', $blog, __( 'Filtri per categoria sopra l\'elenco', 'slug-theme' ), $def['filters'], __( 'Nella pagina Blog e nelle pagine delle categorie: categorie con il numero di articoli, tra il testo di apertura e gli articoli. Ogni voce porta alla pagina della categoria.', 'slug-theme' ), 3.2 );
 
+	$wp_customize->add_setting(
+		'starter_blog_single_width',
+		array(
+			'default'           => 0,
+			'sanitize_callback' => function ( $value ) {
+				$value = (int) $value;
+
+				return $value >= 320 ? min( 2400, $value ) : 0;
+			},
+		)
+	);
+
+	$wp_customize->add_control(
+		'starter_blog_single_width',
+		array(
+			'type'            => 'number',
+			'section'         => $blog,
+			'label'           => __( 'Larghezza massima dell\'articolo (px)', 'slug-theme' ),
+			'description'     => __( 'Solo quando l\'aside degli articoli è spenta: titolo, immagine e testo non superano questa larghezza e stanno al centro. Vuoto o 0 = tutta la larghezza disponibile.', 'slug-theme' ),
+			'input_attrs'     => array( 'min' => 0, 'max' => 2400, 'step' => 10, 'placeholder' => '0' ),
+			'priority'        => 3.1,
+			'active_callback' => function () use ( $wp_customize ) {
+				$setting = $wp_customize->get_setting( 'starter_blog_aside_single' );
+
+				return ! ( $setting ? $setting->value() : starter_blog_defaults()['aside_single'] );
+			},
+		)
+	);
+
 	starter_customizer_checkbox( $wp_customize, 'starter_blog_aside_sticky', $blog, __( 'Aside fissa', 'slug-theme' ), $def['aside_sticky'], __( 'Resta in vista mentre scorri (a 20px dall\'alto). Solo desktop.', 'slug-theme' ), 3.5 );
 
 	$wp_customize->add_setting(

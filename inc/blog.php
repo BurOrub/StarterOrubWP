@@ -33,6 +33,7 @@ function starter_blog_defaults() {
 		'author_box'     => true,  // Riquadro autore a fine articolo.
 		'related'        => true,  // "Continua a leggere" a fine articolo.
 		'share'          => false, // Pulsanti Condividi.
+		'single_width'   => 0,     // Larghezza massima dell'articolo in px (solo senza aside); 0 = tutta la larghezza disponibile.
 		'aside_sticky'   => false, // Aside che resta ferma mentre si scorre (top 20px).
 		'toc'            => false, // Sommario (indice dei titoli) a inizio articolo.
 	);
@@ -46,6 +47,23 @@ function starter_blog_opt( $key ) {
 
 	return is_bool( $default ) ? (bool) $value : $value;
 }
+
+/* Larghezza massima (px) del singolo articolo: vale solo senza aside; 0 = nessun limite. */
+add_action(
+	'wp_enqueue_scripts',
+	function () {
+		if ( ! is_singular( 'post' ) || starter_blog_has_aside() ) {
+			return;
+		}
+
+		$width = (int) starter_blog_opt( 'single_width' );
+
+		if ( $width >= 320 ) {
+			wp_add_inline_style( 'starter-theme-style', 'body.single-post .blog-header,body.single-post .blog-layout{max-width:' . $width . "px;margin-left:auto;margin-right:auto}\n" );
+		}
+	},
+	30
+);
 
 /* Vero se l'aside va mostrato in questa pagina (articolo oppure elenco). */
 function starter_blog_has_aside() {
