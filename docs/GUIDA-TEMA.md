@@ -528,7 +528,7 @@ Le immagini diventano **WebP** in automatico; gli script del tema non bloccano i
 | **Passaggio tra i progetti** | L'animazione quando si passa dalla scheda a un altro progetto: nessuna, **copertina a tutto schermo**, **tendina** o **dissolvenza**; scritta del caricamento o percentuale da 0 a 100%; colori di sfondo e testo. |
 | **Altri progetti: categorie** | Stile delle categorie sulle card: testo con simbolo, tab sotto o sopra l'immagine, tab piene o vuote, simbolo e colori, posizione rispetto al titolo, maiuscolo. |
 | **Altri progetti: riassunto e cliente** | Ordine, mostra o nascondi, tag HTML, dimensione, posizione e colori (anche all'hover). |
-| **Altri progetti: immagine** | Proporzione delle immagini (16:9, 3:2, 4:3, 1:1, 4:5), **animazione logo** (al passaggio il nome del cliente scorre sull'immagine), logo con il colore di sfondo, **video al passaggio del mouse**. |
+| **Altri progetti: immagine** | Proporzione delle immagini (16:9, 3:2, 4:3, 1:1, 4:5), **stile delle card** (*Logo*: al passaggio il nome del cliente scorre sull'immagine; *Classica*: titolo e nome del cliente scritti sotto l'immagine, con ordine, tag HTML e dimensione del testo a scelta in "Altri progetti: riassunto e cliente"), logo con il colore di sfondo, **video al passaggio del mouse**. |
 
 ### Immobili
 

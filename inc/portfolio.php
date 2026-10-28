@@ -1020,7 +1020,7 @@ function starter_portfolio_related_defaults() {
 		'cliente_colore'          => '',
 		'cliente_colore_hover'    => '',
 		'proporzione'             => '4-3',
-		'animazione_logo'         => false,
+		'stile_card'              => 'classica',
 		'logo_tinta'              => true,
 		'video_hover'             => true,
 	);
@@ -1029,6 +1029,13 @@ function starter_portfolio_related_defaults() {
 /* Legge un'opzione delle card degli "Altri progetti" (stessa firma di get_field, da passare a starter_portfolio_card_config()). */
 function starter_portfolio_related_get( $name ) {
 	$defaults = starter_portfolio_related_defaults();
+
+	// "Animazione logo" è ora la scelta "Stile delle card"; chi aveva già acceso la vecchia opzione la ritrova.
+	if ( 'animazione_logo' === $name ) {
+		$style = get_theme_mod( 'starter_portfolio_rel_stile_card', null );
+
+		return null === $style ? (bool) get_theme_mod( 'starter_portfolio_rel_animazione_logo', false ) : 'logo' === $style;
+	}
 
 	return get_theme_mod( 'starter_portfolio_rel_' . $name, array_key_exists( $name, $defaults ) ? $defaults[ $name ] : null );
 }
@@ -1047,10 +1054,14 @@ add_action(
 			$sizes = array_merge( $sizes, $group );
 		}
 
+		$def['stile_card'] = get_theme_mod( 'starter_portfolio_rel_animazione_logo', false ) ? 'logo' : 'classica'; // Chi aveva acceso la vecchia opzione parte da "logo".
 		$val = static function ( $name ) use ( $wp_customize, $def ) {
 			$setting = $wp_customize->get_setting( 'starter_portfolio_rel_' . $name );
 
 			return $setting ? $setting->value() : $def[ $name ];
+		};
+		$logo_mode = static function () use ( $val ) {
+			return 'logo' === $val( 'stile_card' );
 		};
 		$sel = static function ( $name, $label, $choices, $priority ) use ( $wp_customize, $section, $def ) {
 			starter_customizer_select( $wp_customize, 'starter_portfolio_rel_' . $name, $section, $label, $choices, $def[ $name ], '', $priority );
@@ -1118,27 +1129,35 @@ add_action(
 		$sel( 'cliente_colore_hover', __( 'Cliente: colore hover', 'slug-theme' ), $hover, 63 );
 
 		$sum_on = static function () use ( $val, $related_on ) { return $related_on() && $val( 'riassunto_mostra' ); };
-		$cli_on = static function () use ( $val, $related_on ) { return $related_on() && $val( 'cliente_mostra' ) && ! $val( 'animazione_logo' ); };
+		$cli_on = static function () use ( $val, $related_on, $logo_mode ) { return $related_on() && $val( 'cliente_mostra' ) && ! $logo_mode(); };
 		$when( 'ordine_titoli', $related_on );
 		$when( 'riassunto_mostra', $related_on );
 		foreach ( array( 'riassunto_tag', 'riassunto_dimensione', 'riassunto_colore', 'riassunto_colore_hover' ) as $name ) {
 			$when( $name, $sum_on );
 		}
-		$when( 'cliente_mostra', static function () use ( $val, $related_on ) { return $related_on() && ! $val( 'animazione_logo' ); } );
+		$when( 'cliente_mostra', static function () use ( $val, $related_on, $logo_mode ) { return $related_on() && ! $logo_mode(); } );
 		foreach ( array( 'cliente_tag', 'cliente_dimensione', 'cliente_posizione', 'cliente_colore_hover' ) as $name ) {
 			$when( $name, $cli_on );
 		}
-		$when( 'cliente_colore', static function () use ( $val, $related_on ) { return $related_on() && ( $val( 'animazione_logo' ) || $val( 'cliente_mostra' ) ); } );
+		$when( 'cliente_colore', static function () use ( $val, $related_on, $logo_mode ) { return $related_on() && ( $logo_mode() || $val( 'cliente_mostra' ) ); } );
 
 		// Immagine.
 		starter_customizer_heading( $wp_customize, 'starter_heading_portfolio_rel_media', $section, __( 'Altri progetti: immagine', 'slug-theme' ), 70 );
 		$sel( 'proporzione', __( 'Proporzione delle immagini', 'slug-theme' ), array( '16-9' => '16:9', '3-2' => '3:2', '4-3' => '4:3', '1-1' => '1:1', '4-5' => __( '4:5 (verticale)', 'slug-theme' ) ), 71 );
-		$chk( 'animazione_logo', __( 'Animazione logo (al passaggio il nome del cliente scorre sull\'immagine)', 'slug-theme' ), 72 );
+		$sel(
+			'stile_card',
+			__( 'Stile delle card', 'slug-theme' ),
+			array(
+				'logo'     => __( 'Logo: al passaggio il nome del cliente scorre sull\'immagine', 'slug-theme' ),
+				'classica' => __( 'Classica: titolo e nome del cliente scritti sotto l\'immagine', 'slug-theme' ),
+			),
+			72
+		);
 		$chk( 'logo_tinta', __( 'Logo colore sfondo', 'slug-theme' ), 73 );
 		$chk( 'video_hover', __( 'Video al passaggio del mouse', 'slug-theme' ), 74 );
 		$when( 'proporzione', $related_on );
-		$when( 'animazione_logo', $related_on );
-		$when( 'logo_tinta', static function () use ( $val, $related_on ) { return $related_on() && $val( 'animazione_logo' ); } );
+		$when( 'stile_card', $related_on );
+		$when( 'logo_tinta', static function () use ( $val, $related_on, $logo_mode ) { return $related_on() && $logo_mode(); } );
 		$when( 'video_hover', $related_on );
 	},
 	21
