@@ -278,6 +278,8 @@ function starter_portfolio_card_config( $get ) {
 		'sum_col'  => (string) $get( 'riassunto_colore' ),
 		'sum_hov'  => (string) $get( 'riassunto_colore_hover' ),
 		'sum_pos'  => 'sopra' === $get( 'riassunto_posizione' ) ? 'sopra' : 'sotto',
+		'sum_mb'   => (string) $get( 'riassunto_margine_sotto' ),
+		'cli_mb'   => (string) $get( 'cliente_margine_sotto' ),
 		'cli_show' => $flag( 'cliente_mostra' ),
 		'cli_tag'  => (string) $get( 'cliente_tag' ) ?: 'p',
 		'cli_size' => (string) $get( 'cliente_dimensione' ) ?: 'small',
@@ -319,6 +321,7 @@ function starter_portfolio_card_config( $get ) {
 		'video'     => $flag( 'video_hover' ),
 		'reveal'    => $reveal,
 		'style'     => $style,
+		'img_mb'    => (string) $get( 'immagine_margine_sotto' ),
 	);
 }
 
@@ -684,6 +687,8 @@ function starter_portfolio_titles_html( $opts = array(), $post_id = 0, $where = 
 			'sum_col'  => '',
 			'sum_hov'  => '',
 			'sum_pos'  => 'sotto',
+			'sum_mb'   => '',
+			'cli_mb'   => '',
 			'cli_show' => true,
 			'cli_tag'  => 'p',
 			'cli_size' => 'small',
@@ -694,8 +699,10 @@ function starter_portfolio_titles_html( $opts = array(), $post_id = 0, $where = 
 	);
 
 	$parts = array();
-	$item  = static function ( $class, $tag, $allowed, $default, $size, $color, $hover, $text ) {
+	$margins = array_keys( starter_portfolio_margin_choices( 'mb' ) );
+	$item  = static function ( $class, $tag, $allowed, $default, $size, $color, $hover, $text, $mb = '' ) use ( $margins ) {
 		$tag    = in_array( $tag, $allowed, true ) ? $tag : $default;
+		$class .= $mb && in_array( $mb, $margins, true ) ? ' ' . $mb : ''; // Margine sotto scelto nelle opzioni (mb05, mb1, mb2…).
 		$hex    = $color ? starter_resolve_named_color( $color ) : '';
 		$hex_h  = $hover ? starter_resolve_named_color( $hover ) : '';
 		$style  = ( $hex ? '--text-c:' . $hex . ';' : '' ) . ( $hex_h ? '--text-h:' . $hex_h . ';' : '' );
@@ -709,11 +716,11 @@ function starter_portfolio_titles_html( $opts = array(), $post_id = 0, $where = 
 	$client  = get_the_title( $post_id );
 
 	if ( $opts['sum_show'] && '' !== $summary ) {
-		$parts['riassunto'] = $item( 'project-card__summary', $opts['sum_tag'], array_keys( starter_portfolio_tag_choices() ), 'h2', $opts['sum_size'], $opts['sum_col'], $opts['sum_hov'], $summary );
+		$parts['riassunto'] = $item( 'project-card__summary', $opts['sum_tag'], array_keys( starter_portfolio_tag_choices() ), 'h2', $opts['sum_size'], $opts['sum_col'], $opts['sum_hov'], $summary, $opts['sum_mb'] );
 	}
 
 	if ( $opts['cli_show'] && '' !== $client ) {
-		$parts['cliente'] = $item( 'project-card__client', $opts['cli_tag'], array_keys( starter_portfolio_tag_choices() ), 'p', $opts['cli_size'], $opts['cli_col'], $opts['cli_hov'], $client );
+		$parts['cliente'] = $item( 'project-card__client', $opts['cli_tag'], array_keys( starter_portfolio_tag_choices() ), 'p', $opts['cli_size'], $opts['cli_col'], $opts['cli_hov'], $client, $opts['cli_mb'] );
 	}
 
 	if ( ! $parts ) {
@@ -922,6 +929,7 @@ function starter_portfolio_related( $count = 3 ) {
 							'titles'    => $starter_card['titles'],
 							'video'     => $starter_card['video'],
 							'reveal'    => $starter_card['reveal'],
+							'img_mb'    => $starter_card['img_mb'],
 						)
 					);
 				}
@@ -1020,6 +1028,10 @@ function starter_portfolio_related_defaults() {
 		'cliente_colore'          => '',
 		'cliente_colore_hover'    => '',
 		'proporzione'             => '4-3',
+		'margine_sotto_categorie' => '',
+		'riassunto_margine_sotto' => '',
+		'cliente_margine_sotto'   => '',
+		'immagine_margine_sotto'  => '',
 		'stile_card'              => 'classica',
 		'logo_tinta'              => true,
 		'video_hover'             => true,
@@ -1080,8 +1092,60 @@ add_action(
 			return (bool) starter_portfolio_opt( 'related' );
 		};
 
+		// Immagine (per prima: scelto lo stile della card, si decide il resto).
+		starter_customizer_heading( $wp_customize, 'starter_heading_portfolio_rel_media', $section, __( 'Altri progetti: immagine', 'slug-theme' ), 40 );
+		$sel( 'proporzione', __( 'Proporzione delle immagini', 'slug-theme' ), array( '16-9' => '16:9', '3-2' => '3:2', '4-3' => '4:3', '1-1' => '1:1', '4-5' => __( '4:5 (verticale)', 'slug-theme' ) ), 42 );
+		$sel( 'immagine_margine_sotto', __( 'Immagine: spazio sotto', 'slug-theme' ), starter_portfolio_margin_choices( 'mb' ), 43 );
+		$chk( 'logo_tinta', __( 'Logo colore sfondo', 'slug-theme' ), 44 );
+		$chk( 'video_hover', __( 'Video al passaggio del mouse', 'slug-theme' ), 45 );
+		$when( 'proporzione', $related_on );
+		$when( 'immagine_margine_sotto', $related_on );
+		$when( 'logo_tinta', static function () use ( $val, $related_on, $logo_mode ) { return $related_on() && $logo_mode(); } );
+		$when( 'video_hover', $related_on );
+		// Riassunto e cliente.
+		starter_customizer_heading( $wp_customize, 'starter_heading_portfolio_rel_titles', $section, __( 'Altri progetti: riassunto e cliente', 'slug-theme' ), 50 );
+		$sel(
+			'stile_card',
+			__( 'Stile delle card', 'slug-theme' ),
+			array(
+				'logo'     => __( 'Logo: al passaggio il nome del cliente scorre sull\'immagine', 'slug-theme' ),
+				'classica' => __( 'Classica: titolo e nome del cliente scritti sotto l\'immagine', 'slug-theme' ),
+			),
+			50
+		);
+		$sel( 'ordine_titoli', __( 'Ordine', 'slug-theme' ), array( 'riassunto' => __( 'Prima il riassunto, poi il cliente', 'slug-theme' ), 'cliente' => __( 'Prima il cliente, poi il riassunto', 'slug-theme' ) ), 51 );
+		$chk( 'riassunto_mostra', __( 'Mostra il riassunto', 'slug-theme' ), 52 );
+		$sel( 'riassunto_tag', __( 'Riassunto: tag HTML', 'slug-theme' ), $tags, 53 );
+		$sel( 'riassunto_dimensione', __( 'Riassunto: dimensione', 'slug-theme' ), $sizes, 54 );
+		$sel( 'riassunto_margine_sotto', __( 'Riassunto: spazio sotto', 'slug-theme' ), starter_portfolio_margin_choices( 'mb' ), 55 );
+		$sel( 'riassunto_colore', __( 'Riassunto: colore', 'slug-theme' ), $colors, 56 );
+		$sel( 'riassunto_colore_hover', __( 'Riassunto: colore hover', 'slug-theme' ), $hover, 57 );
+		$chk( 'cliente_mostra', __( 'Mostra il nome del cliente', 'slug-theme' ), 58 );
+		$sel( 'cliente_tag', __( 'Cliente: tag HTML', 'slug-theme' ), $tags, 59 );
+		$sel( 'cliente_dimensione', __( 'Cliente: dimensione', 'slug-theme' ), $sizes, 60 );
+		$sel( 'cliente_posizione', __( 'Cliente: posizione', 'slug-theme' ), array( 'sotto' => __( 'Sotto l\'immagine', 'slug-theme' ), 'sopra' => __( 'Sopra l\'immagine', 'slug-theme' ) ), 61 );
+		$sel( 'cliente_margine_sotto', __( 'Cliente: spazio sotto', 'slug-theme' ), starter_portfolio_margin_choices( 'mb' ), 61 );
+		$sel( 'cliente_colore', __( 'Cliente: colore', 'slug-theme' ), $colors, 62 );
+		$sel( 'cliente_colore_hover', __( 'Cliente: colore hover', 'slug-theme' ), $hover, 63 );
+
+		$sum_on = static function () use ( $val, $related_on ) { return $related_on() && $val( 'riassunto_mostra' ); };
+		$cli_on = static function () use ( $val, $related_on, $logo_mode ) { return $related_on() && $val( 'cliente_mostra' ) && ! $logo_mode(); };
+		$when( 'stile_card', $related_on );
+		$when( 'ordine_titoli', $related_on );
+		$when( 'riassunto_mostra', $related_on );
+		foreach ( array( 'riassunto_tag', 'riassunto_dimensione', 'riassunto_colore', 'riassunto_colore_hover' ) as $name ) {
+			$when( $name, $sum_on );
+		}
+		$when( 'cliente_mostra', static function () use ( $val, $related_on, $logo_mode ) { return $related_on() && ! $logo_mode(); } );
+		foreach ( array( 'cliente_tag', 'cliente_dimensione', 'cliente_posizione', 'cliente_colore_hover' ) as $name ) {
+			$when( $name, $cli_on );
+		}
+		$when( 'riassunto_margine_sotto', $sum_on );
+		$when( 'cliente_margine_sotto', $cli_on );
+		$when( 'cliente_colore', static function () use ( $val, $related_on, $logo_mode ) { return $related_on() && ( $logo_mode() || $val( 'cliente_mostra' ) ); } );
+
 		// Categorie.
-		starter_customizer_heading( $wp_customize, 'starter_heading_portfolio_rel_cats', $section, __( 'Altri progetti: categorie', 'slug-theme' ), 40 );
+		starter_customizer_heading( $wp_customize, 'starter_heading_portfolio_rel_cats', $section, __( 'Altri progetti: categorie', 'slug-theme' ), 70 );
 		$sel(
 			'stile_categorie',
 			__( 'Categorie sulle card', 'slug-theme' ),
@@ -1091,15 +1155,16 @@ add_action(
 				'tab_sopra' => __( 'Tab sopra l\'immagine', 'slug-theme' ),
 				'nessuna'   => __( 'Nessuna', 'slug-theme' ),
 			),
-			41
+			71
 		);
-		$sel( 'forma_categorie', __( 'Tab sopra l\'immagine', 'slug-theme' ), array( 'singole' => __( 'Una tab per categoria', 'slug-theme' ), 'unica' => __( 'Un\'unica tab con il simbolo tra le categorie', 'slug-theme' ) ), 42 );
-		$sel( 'riempimento_categorie', __( 'Tab piene o vuote', 'slug-theme' ), array( 'piene' => __( 'Piene', 'slug-theme' ), 'vuote' => __( 'Vuote (solo contorno)', 'slug-theme' ) ), 43 );
-		$sel( 'separatore_categorie', __( 'Simbolo tra le categorie', 'slug-theme' ), starter_portfolio_separator_choices(), 44 );
-		$sel( 'colore_simbolo_categorie', __( 'Colore del simbolo', 'slug-theme' ), $colors, 45 );
-		$sel( 'posizione_categorie', __( 'Posizione rispetto al titolo', 'slug-theme' ), array( 'dopo' => __( 'Dopo il titolo', 'slug-theme' ), 'prima' => __( 'Prima del titolo', 'slug-theme' ) ), 46 );
-		$chk( 'maiuscole_categorie', __( 'Categorie in maiuscolo', 'slug-theme' ), 47 );
-		$sel( 'colore_categorie', __( 'Colore delle categorie', 'slug-theme' ), $colors, 48 );
+		$sel( 'forma_categorie', __( 'Tab sopra l\'immagine', 'slug-theme' ), array( 'singole' => __( 'Una tab per categoria', 'slug-theme' ), 'unica' => __( 'Un\'unica tab con il simbolo tra le categorie', 'slug-theme' ) ), 72 );
+		$sel( 'riempimento_categorie', __( 'Tab piene o vuote', 'slug-theme' ), array( 'piene' => __( 'Piene', 'slug-theme' ), 'vuote' => __( 'Vuote (solo contorno)', 'slug-theme' ) ), 73 );
+		$sel( 'separatore_categorie', __( 'Simbolo tra le categorie', 'slug-theme' ), starter_portfolio_separator_choices(), 74 );
+		$sel( 'colore_simbolo_categorie', __( 'Colore del simbolo', 'slug-theme' ), $colors, 75 );
+		$sel( 'posizione_categorie', __( 'Posizione rispetto al titolo', 'slug-theme' ), array( 'dopo' => __( 'Dopo il titolo', 'slug-theme' ), 'prima' => __( 'Prima del titolo', 'slug-theme' ) ), 76 );
+		$chk( 'maiuscole_categorie', __( 'Categorie in maiuscolo', 'slug-theme' ), 77 );
+		$sel( 'colore_categorie', __( 'Colore delle categorie', 'slug-theme' ), $colors, 78 );
+		$sel( 'margine_sotto_categorie', __( 'Spazio sotto le categorie', 'slug-theme' ), starter_portfolio_margin_choices( 'mb' ), 79 );
 
 		$when( 'stile_categorie', $related_on );
 		$when( 'forma_categorie', static function () use ( $val, $related_on ) { return $related_on() && 'tab_sopra' === $val( 'stile_categorie' ); } );
@@ -1111,54 +1176,9 @@ add_action(
 		$when( 'colore_simbolo_categorie', $sep_on );
 		$when( 'posizione_categorie', static function () use ( $val, $related_on ) { return $related_on() && in_array( $val( 'stile_categorie' ), array( 'testo', 'tab_sotto' ), true ); } );
 		$when( 'maiuscole_categorie', static function () use ( $val, $related_on ) { return $related_on() && 'nessuna' !== $val( 'stile_categorie' ); } );
+		$when( 'margine_sotto_categorie', static function () use ( $val, $related_on ) { return $related_on() && 'nessuna' !== $val( 'stile_categorie' ); } );
 		$when( 'colore_categorie', static function () use ( $val, $related_on ) { return $related_on() && 'nessuna' !== $val( 'stile_categorie' ); } );
 
-		// Riassunto e cliente.
-		starter_customizer_heading( $wp_customize, 'starter_heading_portfolio_rel_titles', $section, __( 'Altri progetti: riassunto e cliente', 'slug-theme' ), 50 );
-		$sel( 'ordine_titoli', __( 'Ordine', 'slug-theme' ), array( 'riassunto' => __( 'Prima il riassunto, poi il cliente', 'slug-theme' ), 'cliente' => __( 'Prima il cliente, poi il riassunto', 'slug-theme' ) ), 51 );
-		$chk( 'riassunto_mostra', __( 'Mostra il riassunto', 'slug-theme' ), 52 );
-		$sel( 'riassunto_tag', __( 'Riassunto: tag HTML', 'slug-theme' ), $tags, 53 );
-		$sel( 'riassunto_dimensione', __( 'Riassunto: dimensione', 'slug-theme' ), $sizes, 54 );
-		$sel( 'riassunto_colore', __( 'Riassunto: colore', 'slug-theme' ), $colors, 56 );
-		$sel( 'riassunto_colore_hover', __( 'Riassunto: colore hover', 'slug-theme' ), $hover, 57 );
-		$chk( 'cliente_mostra', __( 'Mostra il nome del cliente', 'slug-theme' ), 58 );
-		$sel( 'cliente_tag', __( 'Cliente: tag HTML', 'slug-theme' ), $tags, 59 );
-		$sel( 'cliente_dimensione', __( 'Cliente: dimensione', 'slug-theme' ), $sizes, 60 );
-		$sel( 'cliente_posizione', __( 'Cliente: posizione', 'slug-theme' ), array( 'sotto' => __( 'Sotto l\'immagine', 'slug-theme' ), 'sopra' => __( 'Sopra l\'immagine', 'slug-theme' ) ), 61 );
-		$sel( 'cliente_colore', __( 'Cliente: colore', 'slug-theme' ), $colors, 62 );
-		$sel( 'cliente_colore_hover', __( 'Cliente: colore hover', 'slug-theme' ), $hover, 63 );
-
-		$sum_on = static function () use ( $val, $related_on ) { return $related_on() && $val( 'riassunto_mostra' ); };
-		$cli_on = static function () use ( $val, $related_on, $logo_mode ) { return $related_on() && $val( 'cliente_mostra' ) && ! $logo_mode(); };
-		$when( 'ordine_titoli', $related_on );
-		$when( 'riassunto_mostra', $related_on );
-		foreach ( array( 'riassunto_tag', 'riassunto_dimensione', 'riassunto_colore', 'riassunto_colore_hover' ) as $name ) {
-			$when( $name, $sum_on );
-		}
-		$when( 'cliente_mostra', static function () use ( $val, $related_on, $logo_mode ) { return $related_on() && ! $logo_mode(); } );
-		foreach ( array( 'cliente_tag', 'cliente_dimensione', 'cliente_posizione', 'cliente_colore_hover' ) as $name ) {
-			$when( $name, $cli_on );
-		}
-		$when( 'cliente_colore', static function () use ( $val, $related_on, $logo_mode ) { return $related_on() && ( $logo_mode() || $val( 'cliente_mostra' ) ); } );
-
-		// Immagine.
-		starter_customizer_heading( $wp_customize, 'starter_heading_portfolio_rel_media', $section, __( 'Altri progetti: immagine', 'slug-theme' ), 70 );
-		$sel( 'proporzione', __( 'Proporzione delle immagini', 'slug-theme' ), array( '16-9' => '16:9', '3-2' => '3:2', '4-3' => '4:3', '1-1' => '1:1', '4-5' => __( '4:5 (verticale)', 'slug-theme' ) ), 71 );
-		$sel(
-			'stile_card',
-			__( 'Stile delle card', 'slug-theme' ),
-			array(
-				'logo'     => __( 'Logo: al passaggio il nome del cliente scorre sull\'immagine', 'slug-theme' ),
-				'classica' => __( 'Classica: titolo e nome del cliente scritti sotto l\'immagine', 'slug-theme' ),
-			),
-			72
-		);
-		$chk( 'logo_tinta', __( 'Logo colore sfondo', 'slug-theme' ), 73 );
-		$chk( 'video_hover', __( 'Video al passaggio del mouse', 'slug-theme' ), 74 );
-		$when( 'proporzione', $related_on );
-		$when( 'stile_card', $related_on );
-		$when( 'logo_tinta', static function () use ( $val, $related_on, $logo_mode ) { return $related_on() && $logo_mode(); } );
-		$when( 'video_hover', $related_on );
 	},
 	21
 );

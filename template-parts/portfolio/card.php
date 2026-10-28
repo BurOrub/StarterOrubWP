@@ -2,7 +2,7 @@
 /**
  * Card di un progetto: immagine, titolo e categorie. Usata dal blocco "Elenco progetti" e da "Altri progetti".
  * $args['cats']: stile delle categorie (testo | tab_sotto | tab_sopra | nessuna, predefinito testo);
- * $args['reveal']: animazione logo (vedi starter_portfolio_reveal_html()); $args['video']: video al passaggio del mouse (predefinito sì); $args['titles']: riassunto e cliente (ordine, tag, misura, colore), vedi starter_portfolio_titles_html(); $args['cats_opts']: simbolo, tab piene/vuote, forma, maiuscole e posizione (prima/dopo il titolo), vedi starter_portfolio_cats_html(). Si sceglie nel blocco "Elenco progetti".
+ * $args['reveal']: animazione logo (vedi starter_portfolio_reveal_html()); $args['video']: video al passaggio del mouse (predefinito sì); $args['titles']: riassunto e cliente (ordine, tag, misura, colore), vedi starter_portfolio_titles_html(); $args['cats_opts']: simbolo, tab piene/vuote, forma, maiuscole e posizione (prima/dopo il titolo), vedi starter_portfolio_cats_html(). Si sceglie nel blocco "Elenco progetti". $args['img_mb']: margine sotto l'immagine.
  *
  * @package Starter_Theme
  */
@@ -20,11 +20,12 @@ $starter_titles_under = starter_portfolio_titles_html( $starter_titles, 0, 'sott
 $starter_title_hidden = false !== strpos( $starter_titles_under, 'screen-reader-text' ); // Voci spente: resta solo il titolo per gli screen reader.
 $starter_cats_below   = $starter_cats && 'tab_sopra' !== $starter_style;
 $starter_has_info     = $starter_cats_below || ( $starter_titles_under && ! $starter_title_hidden );
+$starter_img_mb = isset( $args['img_mb'] ) && in_array( $args['img_mb'], array_keys( starter_portfolio_margin_choices( 'mb' ) ), true ) ? (string) $args['img_mb'] : ''; // Margine sotto l'immagine (mb05, mb1, mb2…).
 $starter_cats_first = 'tab_sopra' !== $starter_style && isset( $args['cats_opts']['position'] ) && 'prima' === $args['cats_opts']['position'];
 ?>
 <article <?php post_class( 'project-card' ); ?> id="post-<?php the_ID(); ?>">
 	<a class="project-card__link" href="<?php the_permalink(); ?>" data-name="<?php echo esc_attr( starter_portfolio_client_name() ); ?>">
-		<span class="project-card__media">
+		<span class="project-card__media<?php echo $starter_img_mb ? ' ' . esc_attr( $starter_img_mb ) : ''; ?>">
 			<?php if ( has_post_thumbnail() ) : ?>
 				<?php the_post_thumbnail( 'large', array( 'sizes' => '(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 33vw' ) ); ?>
 			<?php else : ?>
