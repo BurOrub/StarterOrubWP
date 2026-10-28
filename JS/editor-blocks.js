@@ -1,6 +1,6 @@
 /**
- * Editor di blocchi: mostra sui blocchi ACF del tema lo "Sfondo della sezione" e le "Classi CSS personalizzate" (scheda Avanzate),
- * come sul sito. Il frontend le applica in PHP (inc/acf-blocks.php, filtro render_block); qui si replica sul contenitore del blocco.
+ * Editor di blocchi: mostra sui blocchi del tema lo "Sfondo della sezione" e le "Classi CSS personalizzate" (scheda Avanzate),
+ * come sul sito. Il frontend le applica in PHP (inc/block-options.php, filtro render_block); qui si replica sul contenitore del blocco.
  * window.starterEditorBg = { slots: { slot_N: { value, dark } }, legacy: { vecchiaChiave: 'slot_N' } }.
  */
 ( function ( wp, config ) {

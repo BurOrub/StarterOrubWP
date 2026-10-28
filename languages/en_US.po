@@ -1,0 +1,1224 @@
+# Traduzione inglese del tema Starter (text domain slug-theme).
+# Le stringhe senza traduzione restano nell'italiano originale.
+msgid ""
+msgstr ""
+"Project-Id-Version: Starter theme\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: inc/demo-content.php
+msgid "%d articoli"
+msgstr "%d items"
+
+#: inc/demo-content.php
+msgid "%d prodotti"
+msgstr "%d products"
+
+#: inc/modules/immobili/immobili-filters.php
+msgid "%d selezionate"
+msgstr "%d selected"
+
+#: inc/shop-filters.php
+msgid "%d selezionati"
+msgstr "%d selected"
+
+#: inc/modules/immobili/immobili-filters.php
+msgid "%s: massimo"
+msgstr "%s: maximum"
+
+#: inc/modules/immobili/immobili-filters.php
+msgid "%s: minimo"
+msgstr "%s: minimum"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "/mese"
+msgstr "/month"
+
+#: template-parts/recensioni/render.php
+msgid "5 stelle su 5"
+msgstr "5 stars out of 5"
+
+#: inc/modules/immobili/immobili-filters.php inc/shop-filters.php
+msgid "A"
+msgstr "To"
+
+#: inc/blog.php
+msgid "A cura di"
+msgstr "Edited by"
+
+msgid "A gas"
+msgstr "Gas"
+
+msgid "A gasolio"
+msgstr "Oil"
+
+msgid "A metano"
+msgstr "Natural gas"
+
+msgid "A pavimento"
+msgstr "Underfloor"
+
+msgid "A radiatori"
+msgstr "Radiators"
+
+msgid "A vista"
+msgstr "Open-plan"
+
+msgid "Abitabile"
+msgstr "Eat-in"
+
+#: header.php
+msgid "Accedi o registrati"
+msgstr "Log in or sign up"
+
+#: inc/portfolio.php
+msgid "Agenzia"
+msgstr "Agency"
+
+#: inc/wishlist.php template-parts/content/card-product.php
+msgid "Aggiungi %s ai preferiti"
+msgstr "Add %s to favorites"
+
+#: inc/modules/immobili/templates/single-immobile.php
+msgid "Altri immobili in evidenza"
+msgstr "More featured properties"
+
+#: inc/portfolio.php
+msgid "Altri progetti"
+msgstr "More projects"
+
+msgid "Angolo cottura"
+msgstr "Kitchenette"
+
+#: functions.php inc/portfolio.php
+msgid "Animazioni"
+msgstr "Animations"
+
+msgid "Anno di costruzione"
+msgstr "Year built"
+
+#: inc/topbar.php
+msgid "Annunci"
+msgstr "Listings"
+
+msgid "Aperta"
+msgstr "Open"
+
+#: inc/blog.php
+msgid "Apri"
+msgstr "Open"
+
+#: header.php
+msgid "Apri il menu"
+msgstr "Open menu"
+
+#: inc/blog.php
+msgid "Archivio"
+msgstr "Archive"
+
+msgid "Arredamento"
+msgstr "Furnishings"
+
+msgid "Arredato"
+msgstr "Furnished"
+
+#: inc/search.php
+msgid "Articoli"
+msgstr "Posts"
+
+msgid "Ascensore"
+msgstr "Lift"
+
+#: inc/woocommerce.php
+msgid "Aumenta la quantità"
+msgstr "Increase quantity"
+
+msgid "Autonoma"
+msgstr "Independent"
+
+msgid "Autonomo"
+msgstr "Independent"
+
+#: inc/blog.php
+msgid "Autore"
+msgstr "Author"
+
+#: inc/modules/immobili/immobili-filters.php inc/shop-filters.php template-parts/elenco-immobili/render.php
+msgid "Azzera i filtri"
+msgstr "Reset filters"
+
+#: inc/modules/immobili/immobili-filters.php inc/modules/immobili/immobili-helpers.php
+msgid "Bagni"
+msgstr "Bathrooms"
+
+msgid "Balcone"
+msgstr "Balcony"
+
+#: inc/blog.php inc/breadcrumbs.php inc/customizer-extra.php
+msgid "Blog"
+msgstr "Blog"
+
+#: inc/blog.php
+msgid "Blog: guide, consigli e novità"
+msgstr "Blog: guides, tips and news"
+
+msgid "Box auto"
+msgstr "Garage"
+
+msgid "Box incluso"
+msgstr "Garage included"
+
+#: inc/breadcrumbs.php inc/customizer-extra.php inc/woocommerce.php
+msgid "Briciole di pane"
+msgstr "Breadcrumb"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "Bus e tram"
+msgstr "Bus and tram"
+
+msgid "Caldo"
+msgstr "Heating"
+
+msgid "Cambia lingua"
+msgstr "Change language"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "Camere da letto"
+msgstr "Bedrooms"
+
+#: inc/search.php
+msgid "Cancella"
+msgstr "Clear"
+
+msgid "Cantina"
+msgstr "Cellar"
+
+#: inc/modules/immobili/immobili-pdf.php inc/modules/immobili/templates/single-immobile.php
+msgid "Caratteristiche"
+msgstr "Features"
+
+#: inc/portfolio.php
+msgid "Caricamento"
+msgstr "Loading"
+
+#: functions.php inc/acf-field-icon.php
+msgid "Caricamento…"
+msgstr "Loading…"
+
+#: inc/menu.php
+msgid "Carrello"
+msgstr "Cart"
+
+#: inc/acf-blocks-extra.php inc/blog.php inc/shop-filters.php
+msgid "Categoria"
+msgstr "Category"
+
+#: inc/portfolio.php
+msgid "Categoria portfolio"
+msgstr "Portfolio category"
+
+#: inc/portfolio.php sidebar-blog.php
+msgid "Categorie"
+msgstr "Categories"
+
+#: inc/portfolio.php
+msgid "Categorie del portfolio"
+msgstr "Portfolio categories"
+
+#: inc/portfolio.php
+msgid "Categorie portfolio"
+msgstr "Portfolio categories"
+
+msgid "Cauzione"
+msgstr "Deposit"
+
+msgid "Centralizzata"
+msgstr "Central"
+
+msgid "Centralizzato"
+msgstr "Central"
+
+#: inc/modules/immobili/immobili-filters.php inc/shop-filters.php sidebar-blog.php
+msgid "Cerca"
+msgstr "Search"
+
+#: inc/modules/immobili/immobili-cpt.php inc/modules/immobili/immobili-filters.php
+msgid "Cerca immobili"
+msgstr "Search properties"
+
+#: header.php inc/search.php
+msgid "Cerca nel sito"
+msgstr "Search the site"
+
+#: inc/portfolio.php
+msgid "Cerca progetti"
+msgstr "Search projects"
+
+#: inc/search.php
+msgid "Cerca un prodotto, una pagina o un articolo"
+msgstr "Search for a product, a page or a post"
+
+#: inc/search.php
+msgid "Cerca una pagina o un articolo"
+msgstr "Search for a page or a post"
+
+#: footer.php inc/acf-field-icon.php inc/blog.php
+msgid "Chiudi"
+msgstr "Close"
+
+#: inc/modules/immobili/immobili-filters.php inc/shop-filters.php
+msgid "Chiudi i filtri"
+msgstr "Close filters"
+
+#: inc/search.php
+msgid "Chiudi la ricerca"
+msgstr "Close search"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "Classe %s"
+msgstr "Class %s"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "Classe energetica"
+msgstr "Energy class"
+
+msgid "Classe signorile"
+msgstr "Upscale building"
+
+msgid "Climatizzazione"
+msgstr "Air conditioning"
+
+#: inc/woocommerce.php
+msgid "Codice SDI"
+msgstr "SDI code"
+
+#: inc/woocommerce.php
+msgid "Codice fiscale"
+msgstr "Tax code"
+
+#: inc/portfolio.php
+msgid "Collaboratori"
+msgstr "Collaborators"
+
+#: functions.php inc/portfolio.php
+msgid "Colore"
+msgstr "Colour"
+
+#: functions.php
+msgid "Colore %d"
+msgstr "Colour %d"
+
+msgid "Con balcone"
+msgstr "With balcony"
+
+#: template-parts/blog/share.php
+msgid "Condividi"
+msgstr "Share"
+
+#: inc/modules/immobili/immobili-taxonomies.php
+msgid "Consulente"
+msgstr "Consultant"
+
+#: template-parts/sezione-voci/render.php
+msgid "Contattaci"
+msgstr "Contact us"
+
+#: functions.php header.php
+msgid "Contattami"
+msgstr "Contact me"
+
+#: functions.php inc/acf-blocks-extra.php inc/demo-content.php
+msgid "Contatti"
+msgstr "Contact"
+
+#: inc/blog.php
+msgid "Continua a leggere"
+msgstr "Continue reading"
+
+#: inc/modules/immobili/immobili-cpt.php inc/modules/immobili/immobili-filters.php inc/modules/immobili/immobili-helpers.php
+msgid "Contratto"
+msgstr "Contract"
+
+#: inc/portfolio.php
+msgid "Crediti"
+msgstr "Credits"
+
+msgid "Cucina"
+msgstr "Kitchen"
+
+msgid "Cucinotto"
+msgstr "Small kitchen"
+
+#: inc/modules/immobili/immobili-filters.php inc/shop-filters.php
+msgid "Da"
+msgstr "From"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "Da letto"
+msgstr "Bedrooms"
+
+#: inc/modules/immobili/immobili-pdf.php inc/modules/immobili/templates/single-immobile.php
+msgid "Descrizione"
+msgstr "Description"
+
+#: inc/woocommerce.php
+msgid "Diminuisci la quantità"
+msgstr "Decrease quantity"
+
+msgid "Disponibile da subito"
+msgstr "Available immediately"
+
+msgid "Disponibilità"
+msgstr "Availability"
+
+msgid "Doppio ascensore"
+msgstr "Two lifts"
+
+#: 404.php
+msgid "Errore 404"
+msgstr "Error 404"
+
+msgid "Esclusiva"
+msgstr "Exclusive"
+
+msgid "Esposizione"
+msgstr "Exposure"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "Farmacia"
+msgstr "Pharmacy"
+
+msgid "Fibra ottica"
+msgstr "Fibre optic"
+
+#: inc/modules/immobili/immobili-filters.php
+msgid "Filtra gli immobili"
+msgstr "Filter properties"
+
+#: inc/shop-filters.php
+msgid "Filtra i prodotti"
+msgstr "Filter products"
+
+#: inc/shop-filters.php
+msgid "Filtra prodotti"
+msgstr "Filter products"
+
+#: inc/customizer-extra.php inc/modules/immobili/immobili-filters.php inc/portfolio.php
+msgid "Filtri"
+msgstr "Filters"
+
+#: inc/blog.php sidebar-blog.php
+msgid "Filtri e ricerca"
+msgstr "Filters and search"
+
+#: inc/acf-blocks-extra.php
+msgid "Foto"
+msgstr "Photos"
+
+#: inc/modules/immobili/templates/single-immobile.php
+msgid "Foto dell'immobile"
+msgstr "Property photos"
+
+#: inc/modules/immobili/templates/single-immobile.php
+msgid "Foto precedenti"
+msgstr "Previous photos"
+
+#: inc/modules/immobili/templates/single-immobile.php
+msgid "Foto successive"
+msgstr "Next photos"
+
+msgid "Freddo"
+msgstr "Cooling"
+
+#: footer.php
+msgid "Galleria immagini"
+msgstr "Image gallery"
+
+msgid "Giardino"
+msgstr "Garden"
+
+#: inc/block-helpers.php inc/breadcrumbs.php inc/starter-pages.php
+msgid "Home"
+msgstr "Home"
+
+#: inc/woocommerce.php
+msgid "Il carrello è vuoto."
+msgstr "Your cart is empty."
+
+#: inc/woocommerce.php
+msgid "Il codice SDI deve avere 7 caratteri."
+msgstr "The SDI code must have 7 characters."
+
+#: inc/woocommerce.php
+msgid "Il codice fiscale deve avere 16 caratteri (11 cifre per le società)."
+msgstr "The tax code must have 16 characters (11 digits for companies)."
+
+#: header.php inc/menu.php
+msgid "Il mio account"
+msgstr "My account"
+
+#: inc/modules/immobili/immobili-pdf.php inc/modules/immobili/templates/single-immobile.php
+msgid "Il tuo consulente"
+msgstr "Your consultant"
+
+#: inc/modules/immobili/immobili-cpt.php inc/modules/immobili/immobili-helpers.php
+msgid "Immobile"
+msgstr "Property"
+
+#: inc/modules/immobili/immobili-cpt.php inc/modules/immobili/immobili.php
+msgid "Immobili"
+msgstr "Real estate"
+
+#: inc/modules/immobili/immobili.php
+msgid "Immobili in evidenza"
+msgstr "Featured properties"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "In %s"
+msgstr "For %s"
+
+#: template-parts/immobili-hero-home/render.php
+msgid "In evidenza"
+msgstr "Featured"
+
+#: template-parts/immobili-hero-home/render.php
+msgid "In evidenza · %s"
+msgstr "Featured · %s"
+
+#: inc/modules/immobili/immobili-pdf.php inc/modules/immobili/templates/single-immobile.php
+msgid "In sintesi"
+msgstr "At a glance"
+
+#: inc/acf-blocks.php template-parts/mappa/render.php
+msgid "Indicazioni stradali"
+msgstr "Get directions"
+
+msgid "Indipendente"
+msgstr "Separate"
+
+msgid "Infissi"
+msgstr "Windows"
+
+#: inc/modules/immobili/templates/single-immobile.php
+msgid "Ingrandisci: %s"
+msgstr "Enlarge: %s"
+
+#: inc/search.php
+msgid "Inizia a digitare…"
+msgstr "Start typing…"
+
+#: inc/woocommerce.php
+msgid "Inserisci un indirizzo PEC valido."
+msgstr "Enter a valid PEC address."
+
+#: inc/acf-blocks-extra.php
+msgid "Instagram"
+msgstr "Instagram"
+
+#: 404.php
+msgid "La pagina che stai cercando non esiste o è stata spostata. Prova a cercare quello che ti serve."
+msgstr "The page you are looking for does not exist or has been moved. Try searching for what you need."
+
+#: inc/woocommerce.php
+msgid "La partita IVA deve avere 11 cifre."
+msgstr "The VAT number must have 11 digits."
+
+#: inc/search.php
+msgid "La ricerca non è disponibile in questo momento. Premi Invio per cercare nella pagina dei risultati."
+msgstr "Search is not available right now. Press Enter to search on the results page."
+
+#: inc/modules/immobili/immobili-pdf.php inc/modules/immobili/templates/single-immobile.php
+msgid "La zona"
+msgstr "The area"
+
+#: inc/cf7.php
+msgid "Lascia questo campo vuoto"
+msgstr "Leave this field empty"
+
+#: template-parts/content/card.php
+msgid "Leggi tutto"
+msgstr "Read more"
+
+#: inc/header.php
+msgid "Lingua: %s"
+msgstr "Language: %s"
+
+#: inc/acf-blocks.php inc/portfolio.php template-parts/footer/footer-style-4.php
+msgid "Link"
+msgstr "Link"
+
+#: template-parts/footer/footer-style-1.php template-parts/footer/footer-style-2.php template-parts/footer/footer-style-3.php
+msgid "Link legali"
+msgstr "Legal links"
+
+#: inc/modules/immobili/immobili-filters.php inc/modules/immobili/immobili-helpers.php
+msgid "Locali"
+msgstr "Rooms"
+
+#: inc/acf-blocks.php
+msgid "Mappa"
+msgstr "Map"
+
+#: inc/modules/immobili/templates/single-immobile.php template-parts/mappa/render.php
+msgid "Mappa: %s"
+msgstr "Map: %s"
+
+#: header.php
+msgid "Menu"
+msgstr "Menu"
+
+#: template-parts/footer/footer-style-2.php template-parts/footer/footer-style-3.php
+msgid "Menu del footer"
+msgstr "Footer menu"
+
+#: header.php
+msgid "Menu principale"
+msgstr "Main menu"
+
+#: header.php
+msgid "Menu principale (mobile)"
+msgstr "Main menu (mobile)"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "Metropolitana"
+msgstr "Underground"
+
+#: inc/menu.php
+msgid "Negozio"
+msgstr "Shop"
+
+#: inc/shop-setup.php
+msgid "Negozio in modalità test."
+msgstr "Shop in test mode."
+
+#: inc/shop-setup.php
+msgid "Negozio in modalità test: gli ordini non vengono evasi e nessun pagamento è reale."
+msgstr "Shop in test mode: orders are not fulfilled and no payment is real."
+
+#: woocommerce/archive-product.php
+msgid "Negozio online: prodotti selezionati"
+msgstr "Online shop: selected products"
+
+#: inc/modules/immobili/templates/single-immobile.php
+msgid "Nelle vicinanze"
+msgstr "Nearby"
+
+#: index.php template-parts/blog/list.php
+msgid "Nessun contenuto trovato."
+msgstr "No content found."
+
+#: template-parts/elenco-immobili/render.php
+msgid "Nessun immobile corrisponde alla tua ricerca"
+msgstr "No property matches your search"
+
+#: woocommerce/archive-product.php
+msgid "Nessun prodotto corrisponde ai filtri scelti."
+msgstr "No product matches the selected filters."
+
+#: template-parts/progetti/render.php
+msgid "Nessun progetto da mostrare."
+msgstr "No projects to show."
+
+#: inc/portfolio.php
+msgid "Nessun progetto trovato"
+msgstr "No projects found"
+
+#: inc/search.php
+msgid "Nessun risultato per"
+msgstr "No results for"
+
+#: template-parts/blog/list.php
+msgid "Nessun risultato per questa ricerca. Prova con altre parole."
+msgstr "No results for this search. Try different words."
+
+msgid "Nessuna spesa condominiale"
+msgstr "No condominium fees"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "No"
+msgstr "No"
+
+#: inc/acf-blocks.php inc/portfolio.php
+msgid "Nome"
+msgstr "Name"
+
+#: inc/shop-filters.php
+msgid "Nome del prodotto…"
+msgstr "Product name…"
+
+#: inc/acf-blocks-extra.php
+msgid "Nome e cognome"
+msgstr "Full name"
+
+#: inc/wishlist.php
+msgid "Non hai ancora prodotti tra i preferiti."
+msgstr "You have no favourite products yet."
+
+#: inc/modules/immobili/immobili-pdf.php
+msgid "Non è stato possibile creare la scheda in PDF. Riprova tra qualche istante."
+msgstr "The PDF sheet could not be created. Please try again in a moment."
+
+#: inc/shop-filters.php
+msgid "Ordina per"
+msgstr "Sort by"
+
+#: inc/modules/immobili/immobili-cpt.php inc/portfolio.php
+msgid "Ordine"
+msgstr "Order"
+
+#: inc/shop-filters.php
+msgid "Ordine predefinito"
+msgstr "Default sorting"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "Ospedale"
+msgstr "Hospital"
+
+#: inc/woocommerce.php
+msgid "PEC"
+msgstr "PEC"
+
+#: 404.php inc/breadcrumbs.php
+msgid "Pagina non trovata"
+msgstr "Page not found"
+
+#: functions.php inc/acf-blocks-extra.php template-parts/progetti/render.php
+msgid "Paginazione"
+msgstr "Pagination"
+
+#: template-parts/elenco-immobili/render.php
+msgid "Paginazione immobili"
+msgstr "Property pagination"
+
+#: inc/search.php
+msgid "Pagine"
+msgstr "Pages"
+
+#: page.php single.php
+msgid "Pagine:"
+msgstr "Pages:"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "Parco"
+msgstr "Park"
+
+#: inc/woocommerce.php
+msgid "Partita IVA"
+msgstr "VAT number"
+
+#: inc/portfolio.php template-parts/portfolio/project-head.php
+msgid "Partner"
+msgstr "Partner"
+
+msgid "Parziale"
+msgstr "Partial"
+
+msgid "Parzialmente arredato"
+msgstr "Partially furnished"
+
+#: inc/block-helpers.php
+msgid "Percorso"
+msgstr "Breadcrumb"
+
+msgid "Piani edificio"
+msgstr "Building floors"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "Piano"
+msgstr "Floor"
+
+msgid "Piscina"
+msgstr "Swimming pool"
+
+#: inc/acf-blocks-extra.php inc/shop-filters.php
+msgid "Più recenti"
+msgstr "Latest"
+
+#: inc/acf-blocks-extra.php inc/shop-filters.php
+msgid "Più venduti"
+msgstr "Best selling"
+
+#: inc/shop-filters.php
+msgid "Più votati"
+msgstr "Top rated"
+
+#: inc/modules/immobili/immobili-pdf.php inc/modules/immobili/templates/single-immobile.php
+msgid "Planimetria"
+msgstr "Floor plan"
+
+#: inc/modules/immobili/templates/single-immobile.php
+msgid "Planimetria precedente"
+msgstr "Previous floor plan"
+
+#: inc/modules/immobili/templates/single-immobile.php
+msgid "Planimetria successiva"
+msgstr "Next floor plan"
+
+msgid "Pompa di calore"
+msgstr "Heat pump"
+
+msgid "Porta blindata"
+msgstr "Security door"
+
+msgid "Portineria"
+msgstr "Concierge"
+
+#: inc/modules/immobili/templates/single-immobile.php
+msgid "Potrebbero interessarti"
+msgstr "You may also like"
+
+#: footer.php template-parts/slider/render.php
+msgid "Precedente"
+msgstr "Previous"
+
+#: index.php
+msgid "Precedenti"
+msgstr "Previous"
+
+msgid "Predisposizione"
+msgstr "Pre-installed"
+
+#: header.php inc/menu.php inc/starter-pages.php
+msgid "Preferiti"
+msgstr "Favorites"
+
+#: inc/modules/immobili/immobili-cpt.php inc/modules/immobili/immobili-helpers.php inc/modules/immobili/immobili-pdf.php
+msgid "Prezzo"
+msgstr "Price"
+
+#: inc/shop-filters.php
+msgid "Prezzo (%s)"
+msgstr "Price (%s)"
+
+#: inc/modules/immobili/immobili-filters.php
+msgid "Prezzo (€)"
+msgstr "Price (€)"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "Prezzo al m²"
+msgstr "Price per m²"
+
+#: inc/shop-filters.php
+msgid "Prezzo massimo"
+msgstr "Maximum price"
+
+#: inc/shop-filters.php
+msgid "Prezzo minimo"
+msgstr "Minimum price"
+
+#: inc/shop-filters.php
+msgid "Prezzo: dal più alto"
+msgstr "Price: high to low"
+
+#: inc/shop-filters.php
+msgid "Prezzo: dal più basso"
+msgstr "Price: low to high"
+
+#: functions.php
+msgid "Privacy"
+msgstr "Privacy"
+
+#: inc/acf-blocks-extra.php inc/search.php woocommerce/archive-product.php
+msgid "Prodotti"
+msgstr "Products"
+
+#: inc/portfolio.php
+msgid "Progetti correlati"
+msgstr "Related projects"
+
+#: template-parts/elenco-immobili/render.php
+msgid "Prova a modificare o togliere qualche filtro."
+msgstr "Try changing or removing some filters."
+
+#: inc/modules/immobili/immobili-pdf.php inc/modules/immobili/templates/single-immobile.php
+msgid "Punti di forza"
+msgstr "Strengths"
+
+#: inc/modules/immobili/immobili-filters.php inc/shop-filters.php
+msgid "Qualsiasi"
+msgstr "Any"
+
+#: template-parts/progetti/render.php
+msgid "Realizziamo progetti di"
+msgstr "We create projects in"
+
+#: template-parts/recensioni/render.php
+msgid "Recensione precedente"
+msgstr "Previous review"
+
+#: template-parts/recensioni/render.php
+msgid "Recensione successiva"
+msgstr "Next review"
+
+#: inc/acf-blocks.php
+msgid "Recensioni"
+msgstr "Reviews"
+
+#: inc/woocommerce.php
+msgid "Recensioni (%d)"
+msgstr "Reviews (%d)"
+
+#: template-parts/recensioni/render.php
+msgid "Recensioni dei clienti"
+msgstr "Customer reviews"
+
+#: template-parts/portfolio/project-head.php
+msgid "Riassunto"
+msgstr "Summary"
+
+#: inc/modules/immobili/templates/single-immobile.php
+msgid "Richiedi informazioni"
+msgstr "Request information"
+
+#: template-parts/footer/footer-style-4.php
+msgid "Riferimenti"
+msgstr "References"
+
+msgid "Riscaldamento"
+msgstr "Heating"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "Ristoranti"
+msgstr "Restaurants"
+
+msgid "Ristrutturato"
+msgstr "Renovated"
+
+msgid "Ristrutturato a nuovo"
+msgstr "Newly renovated"
+
+#: inc/blog.php
+msgid "Risultati di ricerca"
+msgstr "Search results"
+
+#: inc/breadcrumbs.php
+msgid "Risultati per “%s”"
+msgstr "Results for “%s”"
+
+#: inc/acf-blocks-extra.php inc/portfolio.php
+msgid "Ruolo"
+msgstr "Role"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "Salute e servizi"
+msgstr "Health and services"
+
+#: inc/modules/immobili/templates/single-immobile.php
+msgid "Scarica la planimetria"
+msgstr "Download the floor plan"
+
+#: inc/modules/immobili/templates/single-immobile.php
+msgid "Scarica le planimetrie"
+msgstr "Download the floor plans"
+
+#: inc/modules/immobili/templates/single-immobile.php
+msgid "Scarica scheda immobile"
+msgstr "Download property sheet"
+
+#: inc/modules/immobili/templates/single-immobile.php template-parts/immobili-in-evidenza/render.php
+msgid "Scopri gli immobili"
+msgstr "Discover the properties"
+
+#: inc/wishlist.php
+msgid "Scopri i prodotti"
+msgstr "Discover the products"
+
+#: 404.php
+msgid "Scopri il negozio"
+msgstr "Discover the shop"
+
+#: template-parts/footer/whatsapp-button.php
+msgid "Scrivici su WhatsApp"
+msgstr "Write to us on WhatsApp"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "Scuola"
+msgstr "School"
+
+#: template-parts/footer/footer-style-1.php
+msgid "Seguici su %s"
+msgstr "Follow us on %s"
+
+msgid "Semi abitabile"
+msgstr "Semi eat-in"
+
+#: inc/acf-blocks-extra.php inc/starter-pages.php template-parts/elenco-servizi/render.php
+msgid "Servizi"
+msgstr "Services"
+
+#: functions.php inc/acf-blocks-extra.php inc/acf-blocks.php
+msgid "Sfondo"
+msgstr "Background"
+
+#: inc/customizer-extra.php inc/demo-content.php template-parts/footer/footer-style-4.php
+msgid "Shop"
+msgstr "Shop"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "Shopping"
+msgstr "Shopping"
+
+#: inc/blog.php inc/customizer-extra.php
+msgid "Sommario"
+msgstr "Contents"
+
+#: inc/shop-filters.php
+msgid "Sottocategoria"
+msgstr "Subcategory"
+
+#: inc/shop-setup.php
+msgid "Spedizione gratuita"
+msgstr "Free shipping"
+
+#: inc/shop-setup.php
+msgid "Spedizione in Italia"
+msgstr "Shipping in Italy"
+
+msgid "Spese condominio"
+msgstr "Condominium fees"
+
+msgid "Stato"
+msgstr "Condition"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "Stazione ferroviaria"
+msgstr "Railway station"
+
+#: inc/woocommerce.php
+msgid "Subtotale"
+msgstr "Subtotal"
+
+#: footer.php template-parts/slider/render.php
+msgid "Successiva"
+msgstr "Next"
+
+#: index.php
+msgid "Successivi"
+msgstr "Next"
+
+#: inc/blog.php template-parts/elenco-immobili/render.php template-parts/progetti/render.php
+msgid "Successivi →"
+msgstr "Next →"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "Superficie"
+msgstr "Area"
+
+#: inc/modules/immobili/immobili-filters.php
+msgid "Superficie (mq)"
+msgstr "Area (sq m)"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "Supermercati"
+msgstr "Supermarkets"
+
+#: inc/media-optimizer.php inc/modules/immobili/immobili-helpers.php
+msgid "Sì"
+msgstr "Yes"
+
+#: inc/blog.php sidebar-blog.php
+msgid "Tag"
+msgstr "Tags"
+
+msgid "Teleriscaldamento"
+msgstr "District heating"
+
+#: inc/compatibility.php
+msgid "Tema"
+msgstr "Theme"
+
+#: functions.php template-parts/footer/footer-style-1.php
+msgid "Tema base di lavoro"
+msgstr "Base working theme"
+
+msgid "Terrazza panoramica"
+msgstr "Panoramic terrace"
+
+msgid "Terrazzo"
+msgstr "Terrace"
+
+#: functions.php inc/acf-blocks-extra.php inc/acf-blocks.php
+msgid "Testo"
+msgstr "Text"
+
+#: inc/modules/immobili/templates/single-immobile.php
+msgid "Ti interessa questo immobile?"
+msgstr "Interested in this property?"
+
+#: inc/acf-blocks-extra.php inc/portfolio.php
+msgid "Tipo"
+msgstr "Type"
+
+#: inc/portfolio.php
+msgid "Tipo di cliente"
+msgstr "Client type"
+
+msgid "Tipo di contratto"
+msgstr "Contract type"
+
+msgid "Tipo proprietà"
+msgstr "Property type"
+
+#: inc/modules/immobili/immobili-filters.php inc/modules/immobili/immobili-helpers.php inc/modules/immobili/immobili-taxonomies.php
+msgid "Tipologia"
+msgstr "Type"
+
+#: inc/wishlist.php
+msgid "Tocca il cuore su un prodotto per salvarlo qui e ritrovarlo quando vuoi."
+msgstr "Tap the heart on a product to save it here and find it again whenever you want."
+
+#: 404.php
+msgid "Torna alla home"
+msgstr "Back to home"
+
+#: inc/modules/immobili/immobili-helpers.php inc/modules/immobili/templates/single-immobile.php
+msgid "Tour virtuale 3D"
+msgstr "3D virtual tour"
+
+#: inc/modules/immobili/templates/single-immobile.php
+msgid "Tour virtuale 3D: %s"
+msgstr "3D virtual tour: %s"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "Trattativa riservata"
+msgstr "Price on request"
+
+#: inc/acf-field-icon.php inc/modules/immobili/immobili-filters.php inc/shop-filters.php
+msgid "Tutte"
+msgstr "All"
+
+#: inc/modules/immobili/immobili-filters.php inc/portfolio.php
+msgid "Tutti"
+msgstr "All"
+
+#: inc/portfolio.php
+msgid "Tutti i progetti"
+msgstr "All projects"
+
+#: inc/acf-blocks-extra.php sidebar-blog.php
+msgid "Ultimi articoli"
+msgstr "Latest posts"
+
+msgid "Un tema WordPress classico e leggero, pensato come base pronta da personalizzare: header e footer configurabili…"
+msgstr "A classic, lightweight WordPress theme, designed as a ready-made base to customise."
+
+#: inc/modules/immobili/immobili.php
+msgid "Una selezione attenta, di gusto e di valore"
+msgstr "A careful selection, of taste and value"
+
+#: 404.php
+msgid "Vai al blog"
+msgstr "Go to the blog"
+
+#: header.php
+msgid "Vai al contenuto"
+msgstr "Skip to content"
+
+#: inc/search.php
+msgid "Vedi tutti i risultati"
+msgstr "See all results"
+
+#: inc/acf-blocks-extra.php inc/modules/immobili/templates/single-immobile.php inc/portfolio.php
+msgid "Video"
+msgstr "Video"
+
+#: inc/modules/immobili/templates/single-immobile.php
+msgid "Video: %s"
+msgstr "Video: %s"
+
+#: inc/modules/immobili/templates/single-immobile.php
+msgid "Virtual tour"
+msgstr "Virtual tour"
+
+#: template-parts/portfolio/project-head.php
+msgid "Visita il progetto"
+msgstr "Visit the project"
+
+#: inc/modules/immobili/immobili-cpt.php inc/modules/immobili/immobili-filters.php inc/modules/immobili/immobili-taxonomies.php
+msgid "Zona"
+msgstr "Area"
+
+#: inc/modules/immobili/immobili-filters.php
+msgid "Zona, via, caratteristica…"
+msgstr "Area, street, feature…"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "a %s"
+msgstr "in %s"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "bagni"
+msgstr "bathrooms"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "bagno"
+msgstr "bathroom"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "camera"
+msgstr "bedroom"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "camere"
+msgstr "bedrooms"
+
+#: inc/blog.php
+msgid "di %s"
+msgstr "of %s"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "in %s"
+msgstr "for %s"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "locale"
+msgstr "room"
+
+#: inc/modules/immobili/immobili-helpers.php
+msgid "locali"
+msgstr "rooms"
+
+#: functions.php template-parts/footer/footer-style-1.php template-parts/footer/footer-style-2.php
+msgid "© {anno} {sito}. Tutti i diritti riservati."
+msgstr "© {anno} {sito}. All rights reserved."
+
+#: inc/blog.php
+msgid "“%s”"
+msgstr "“%s”"
+
+#: inc/blog.php template-parts/elenco-immobili/render.php template-parts/progetti/render.php
+msgid "← Precedenti"
+msgstr "← Previous"
+
+msgid "%d immobile trovato"
+msgid_plural "%d immobili trovati"
+msgstr[0] "%d property found"
+msgstr[1] "%d properties found"
+
+msgid "%d prodotto"
+msgid_plural "%d prodotti"
+msgstr[0] "%d product"
+msgstr[1] "%d products"
+
+msgid "Agenzia"
+msgid_plural "Agenzie"
+msgstr[0] "Agency"
+msgstr[1] "Agencies"
+
+msgid "Carrello, %d articolo"
+msgid_plural "Carrello, %d articoli"
+msgstr[0] "Cart, %d item"
+msgstr[1] "Cart, %d items"
+
+msgid "Vedi la foto"
+msgid_plural "Vedi tutte le %d foto"
+msgstr[0] "See the photo"
+msgstr[1] "See all %d photos"
+
+msgid "e altro %d prodotto"
+msgid_plural "e altri %d prodotti"
+msgstr[0] "and %d more product"
+msgstr[1] "and %d more products"

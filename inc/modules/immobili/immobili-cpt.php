@@ -26,7 +26,7 @@ function starter_imm_register_immobile_cpt() {
 				'set_featured_image' => __( 'Imposta immagine', 'slug-theme' ),
 			),
 			'public'        => true,
-			'show_in_rest'  => false, // Niente editor a blocchi: si usano solo i campi ACF.
+			'show_in_rest'  => false, // L'editor a blocchi serve solo al riquadro dei campi: il contenuto è fatto di campi, non di blocchi.
 			'menu_icon'     => 'dashicons-building',
 			'menu_position' => 20,
 			'has_archive'   => false,
@@ -64,7 +64,7 @@ function starter_imm_immobile_admin_column_content( $column, $post_id ) {
 			break;
 
 		case 'starter_imm_prezzo':
-			$prezzo = function_exists( 'get_field' ) ? get_field( 'prezzo', $post_id ) : get_post_meta( $post_id, 'prezzo', true );
+			$prezzo = starter_field( 'prezzo', $post_id );
 			echo '' !== (string) $prezzo ? esc_html( starter_imm_format_price( $prezzo ) ) : '&mdash;';
 			break;
 

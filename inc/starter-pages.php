@@ -2,7 +2,7 @@
 /**
  * Pagine standard di partenza: Home, Chi siamo, Servizi, Contatti.
  *
- * Costruite con i blocchi ACF del tema (template-parts/) e con blocchi di Gutenberg: ogni sezione è un blocco ACF
+ * Costruite con i blocchi del tema (template-parts/) e con blocchi di Gutenberg: ogni sezione è un blocco
  * oppure un Gruppo (blocco "Gruppo", tag "section"), così la pagina si legge e si riordina per sezioni. I testi e le
  * foto sono segnaposto da sostituire. Si creano da Strumenti → Contenuti di prova → "Crea le pagine standard" e non
  * si cancellano con "Elimina i contenuti di prova" (sono pagine vere, da riscrivere).
@@ -131,7 +131,7 @@ function starter_pg_block_inner( $name, $data, $keys, $inner ) {
 	return str_replace( ' /-->', ' -->', rtrim( $block ) ) . "\n" . $inner . '<!-- /wp:starter-theme/' . $name . " -->\n\n";
 }
 
-/* Chiavi dei campi ACF dei blocchi, per scrivere i valori nei blocchi (vedi inc/acf-blocks*.php). */
+/* Chiavi dei campi dei blocchi, per scrivere i valori nei blocchi (vedi inc/acf-blocks*.php). */
 function starter_pg_keys( $block ) {
 	$all = array(
 		'hero-media'           => array(

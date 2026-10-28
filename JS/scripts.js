@@ -534,7 +534,7 @@
 		} );
 	}
 
-	/** Comparsa allo scroll di qualunque elemento con attributo data-reveal (blocchi ACF in template-parts/). */
+	/** Comparsa allo scroll di qualunque elemento con attributo data-reveal (blocchi in template-parts/). */
 	function initReveal() {
 		var items = document.querySelectorAll( '[data-reveal]' );
 

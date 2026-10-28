@@ -144,7 +144,7 @@ h6,
 	/* Bordo hover segue lo sfondo, o resta fisso se "mantieni colore bordo" è spuntato */
 	--color-tag-hover-border: var(--color-tag-hover);
 
-	/* Usate dai blocchi ACF in template-parts/ (pannelli, pulsanti a pillola, card...) */
+	/* Usate dai blocchi in template-parts/ (pannelli, pulsanti a pillola, card...) */
 	--color-line: color-mix(in srgb, var(--color-primary) 22%, transparent);
 	--color-on-accent-line: color-mix(in srgb, var(--color-background) 12%, transparent);
 	--color-on-accent: color-mix(in srgb, var(--color-background) 80%, transparent);
@@ -3023,7 +3023,7 @@ a.footer-social__icon {
 	padding-inline: 0;
 }
 
-/* "Sfondo della sezione" (scheda Avanzate dei blocchi ACF): fascia a tutta larghezza. Il colore (un colore della palette) arriva da style inline; la classe dice se è scuro (testi chiari) o chiaro (testi del tema) */
+/* "Sfondo della sezione" (scheda Avanzate dei blocchi): fascia a tutta larghezza. Il colore (un colore della palette) arriva da style inline; la classe dice se è scuro (testi chiari) o chiaro (testi del tema) */
 .bg-sezione--chiaro {
 	background-color: var(--color-surface-muted);
 }
@@ -5046,7 +5046,7 @@ body.icons-boxed .header-wish__count {
 	margin-bottom: 0;
 }
 
-.split__text--free > .eyebrow + .acf-innerblocks-container {
+.split__text--free > .eyebrow + .starter-inner {
 	margin-top: -20px;
 }
 
@@ -5100,32 +5100,40 @@ body.icons-boxed .header-wish__count {
 	object-fit: cover;
 }
 
-/* Striscia valori (come Symbolikamente): 4 colonne con una linea tra l'una e l'altra; sotto i 1024px 2 colonne, anche sul telefono,
-   con la linea tra sinistra e destra e tra le righe */
+/* Striscia valori: righe di voci con una linea tra l'una e l'altra (verticale e orizzontale). Colonne scelte nel blocco: --vs-cols desktop,
+   --vs-cols-tab tablet (sotto i 1024px), --vs-cols-sma mobile (sotto i 640px); di base 4 / 2 / 2.
+   Le voci dell'ultima riga, se meno delle colonne, si allargano e dividono la riga in parti uguali (con 5 voci su 4 colonne l'ultima è larga
+   tutta la riga; con 2 voci su 3 colonne ognuna è larga 1,5 colonne). Le linee sono ombre di 1px a sinistra e sopra ogni voce: il contenitore
+   ritaglia quelle sul bordo esterno, quindi servono con qualunque numero di voci e colonne. */
 .values-strip {
 	border-block: 1px solid var(--color-border);
 	background: var(--color-background);
 }
 
 .values-strip__list {
-	display: grid;
-	grid-template-columns: repeat(4, minmax(0, 1fr));
+	display: flex;
+	flex-wrap: wrap;
 	margin-block: 0;
 	padding: 0;
+	overflow: hidden;
 	list-style: none;
 }
 
 .values-strip__item {
 	display: flex;
+	flex: 1 0 calc(100% / var(--vs-cols, 4) - 1px);
 	flex-direction: column;
 	align-items: center;
+	box-sizing: border-box;
 	gap: 12px;
 	padding: 28px 20px;
 	text-align: center;
+	box-shadow: -1px 0 0 0 var(--color-border), 0 -1px 0 0 var(--color-border);
 }
 
-.values-strip__item + .values-strip__item {
-	border-left: 1px solid var(--color-border);
+/* Full width: le voci occupano tutto lo schermo (senza la colonna del contenuto). */
+.values-strip--full .values-strip__list {
+	width: 100%;
 }
 
 .values-strip__title {
@@ -5246,16 +5254,8 @@ body.icons-boxed .header-wish__count {
 }
 
 @media (max-width: 1024px) {
-	.values-strip__list {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-	}
-
-	.values-strip__item:nth-child(odd) {
-		border-left: 0;
-	}
-
-	.values-strip__item:nth-child(n + 3) {
-		border-top: 1px solid var(--color-border);
+	.values-strip__item {
+		flex-basis: calc(100% / var(--vs-cols-tab, 2) - 1px);
 	}
 
 	.team-grid__list {
@@ -5278,6 +5278,10 @@ body.icons-boxed .header-wish__count {
 
 	.values-strip__item {
 		padding: 22px 12px;
+	}
+
+	.values-strip__item {
+		flex-basis: calc(100% / var(--vs-cols-sma, 2) - 1px);
 	}
 }
 
@@ -5908,8 +5912,8 @@ body.search-open {
 
 .header-tip__panel--lang {
 	width: max-content;
-	min-width: 170px;
-	padding: 8px;
+	min-width: 0;
+	padding: 6px;
 }
 
 .header-tip--lang.is-open .header-tip__panel {
@@ -7836,7 +7840,7 @@ body.header-minimal .main-navigation .sub-menu a {
 	}
 }
 
-/* Slider / carosello (blocco ACF "Slider"). Variabili impostate dal blocco: --sld-d/t/m (immagini visibili su desktop/tablet/mobile), --sld-gap, --sld-peek (px delle vicine che si intravedono), --sld-ratio */
+/* Slider / carosello (blocco "Slider"). Variabili impostate dal blocco: --sld-d/t/m (immagini visibili su desktop/tablet/mobile), --sld-gap, --sld-peek (px delle vicine che si intravedono), --sld-ratio */
 .slider-block {
 	--sld-cols: var(--sld-d, 3);
 }

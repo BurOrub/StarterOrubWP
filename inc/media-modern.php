@@ -220,7 +220,7 @@ function starter_picture_skip() {
 		return true;
 	}
 
-	return is_admin() && ( ! wp_doing_ajax() || 0 === strpos( (string) ( $_REQUEST['action'] ?? '' ), 'acf/' ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- sola lettura del nome dell'azione.
+	return is_admin() && ( ! wp_doing_ajax() ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- sola lettura del nome dell'azione.
 }
 
 /**
@@ -276,7 +276,7 @@ function starter_picturefy( $html ) {
 }
 add_filter( 'wp_get_attachment_image', 'starter_picturefy', 20 );
 add_filter( 'the_content', 'starter_picturefy', 20 );
-add_filter( 'acf_the_content', 'starter_picturefy', 20 );
+add_filter( 'starter_field_content', 'starter_picturefy', 20 );
 add_filter( 'widget_block_content', 'starter_picturefy', 20 );
 
 /* ============================================================ Video WebM */

@@ -140,64 +140,84 @@ function starter_header_icon_btn( $args ) {
  * @return array[] code, name, active, url.
  */
 function starter_wpml_languages() {
-	if ( ! defined( 'ICL_SITEPRESS_VERSION' ) && ! has_filter( 'wpml_active_languages' ) ) {
+	global $sitepress;
+
+	if ( ! is_object( $sitepress ) || ! method_exists( $sitepress, 'get_active_languages' ) ) {
 		return array();
 	}
 
-	$langs = apply_filters( 'wpml_active_languages', null, array( 'skip_missing' => 0, 'orderby' => 'code' ) );
+	// Elenco delle lingue attive (non "wpml_active_languages": quello nasconde le lingue senza traduzione della pagina corrente).
+	$langs = $sitepress->get_active_languages();
 
 	if ( ! is_array( $langs ) || count( $langs ) < 2 ) {
 		return array();
 	}
 
-	$out = array();
+	$current = (string) apply_filters( 'wpml_current_language', null );
+	$out     = array();
 
 	foreach ( $langs as $code => $lang ) {
-		$home  = apply_filters( 'wpml_home_url', '', $code );
 		$out[] = array(
 			'code'   => (string) $code,
-			'name'   => isset( $lang['native_name'] ) ? $lang['native_name'] : strtoupper( $code ),
-			'active' => ! empty( $lang['active'] ),
-			'url'    => $home ? $home : ( isset( $lang['url'] ) ? $lang['url'] : home_url( '/' ) ),
+			'name'   => ! empty( $lang['native_name'] ) ? $lang['native_name'] : strtoupper( $code ),
+			'active' => (string) $code === $current,
+			'url'    => (string) apply_filters( 'wpml_permalink', home_url( '/' ), $code ), // La home nella lingua $code ("wpml_home_url" non accetta la lingua: darebbe sempre quella corrente).
 		);
 	}
 
 	return $out;
 }
 
-/* Selettore di lingua: pulsante col codice della lingua attiva e tooltip con l'elenco. */
+/**
+ * Selettore di lingua: mostra solo le ALTRE lingue (mai quella in cui si è).
+ * - una sola altra lingua: link diretto col suo codice (es. "EN");
+ * - più lingue: icona che apre la tendina con i codici (es. "EN", "FR").
+ * Senza WPML o con una sola lingua non stampa nulla.
+ */
 function starter_header_lang_html() {
-	$langs = starter_wpml_languages();
+	$others = array_values(
+		array_filter(
+			starter_wpml_languages(),
+			static function ( $lang ) {
+				return empty( $lang['active'] );
+			}
+		)
+	);
 
-	if ( ! $langs ) {
+	if ( ! $others ) {
 		return '';
 	}
 
-	$current = $langs[0];
-
-	foreach ( $langs as $lang ) {
-		if ( $lang['active'] ) {
-			$current = $lang;
-		}
+	if ( 1 === count( $others ) ) {
+		return '<div class="header-tip header-tip--lang header-tip--single">' .
+			starter_header_icon_btn( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				array(
+					'text'  => strtoupper( $others[0]['code'] ),
+					'href'  => $others[0]['url'],
+					'label' => $others[0]['name'],
+					'class' => 'icon-btn--lang',
+					'attrs' => 'hreflang="' . esc_attr( $others[0]['code'] ) . '" lang="' . esc_attr( $others[0]['code'] ) . '"',
+				)
+			) .
+			'</div>';
 	}
 
 	$items = '';
 
-	foreach ( $langs as $lang ) {
+	foreach ( $others as $lang ) {
 		$items .= sprintf(
-			'<li><a href="%1$s" hreflang="%2$s" lang="%2$s"%3$s><span class="lang-list__code">%2$s</span>%4$s</a></li>',
+			'<li><a href="%1$s" hreflang="%2$s" lang="%2$s" title="%3$s"><span class="lang-list__code">%2$s</span></a></li>',
 			esc_url( $lang['url'] ),
 			esc_attr( $lang['code'] ),
-			$lang['active'] ? ' aria-current="true"' : '',
-			esc_html( $lang['name'] )
+			esc_attr( $lang['name'] )
 		);
 	}
 
 	return '<div class="header-tip header-tip--lang">' .
 		starter_header_icon_btn( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			array(
-				'text'  => $current['code'],
-				'label' => sprintf( /* translators: %s: nome della lingua. */ __( 'Lingua: %s', 'slug-theme' ), $current['name'] ),
+				'icon'  => 'languages',
+				'label' => __( 'Cambia lingua', 'slug-theme' ),
 				'class' => 'icon-btn--lang',
 				'attrs' => 'aria-haspopup="true" aria-expanded="false"',
 			)

@@ -2,7 +2,7 @@
 
 **English** · [Italiano](#italiano)
 
-Classic (non-block) WordPress theme built as a base for new sites: lightweight, written for Gutenberg and ACF, with an **Options** panel in *Appearance → Customize* to set up header, footer, colors, fonts, blog, shop and performance without touching code.
+Classic (non-block) WordPress theme built as a base for new sites: lightweight, written for Gutenberg, with an **Options** panel in *Appearance → Customize* to set up header, footer, colors, fonts, blog, shop and performance without touching code.
 
 - Author: Denis Burani · License: GPL v2 or later
 - Requires WordPress 6.4+ and PHP 7.4+
@@ -13,7 +13,7 @@ Classic (non-block) WordPress theme built as a base for new sites: lightweight, 
 | Area | Content |
 |---|---|
 | Options | *Customize → Options* panel: general, typography, colors, header, footer (5 styles), buttons, announcement bar, blog, shop, performance, modules |
-| Blocks | ACF blocks in `template-parts/` (hero, slider, side-by-side sections, reviews, team, map, blog, products...) |
+| Blocks | Gutenberg blocks of the Starter Blocks plugin (hero, slider, side-by-side sections, reviews, team, map, blog, products...) |
 | Modules | **Portfolio** and **Real estate** ("Immobili"): switched on from *Options → Moduli*; when off they are not loaded |
 | Shop | WooCommerce templates, wishlist and shared filters |
 | Performance | AVIF/WebP images, local fonts, compiled CSS and JS, optional CSS/JS merging and HTML minification |
@@ -25,7 +25,7 @@ The theme works with the plugins below. After activating the theme, *Appearance 
 
 | Plugin | Role |
 |---|---|
-| **ACF Pro** | Required (block fields). Paid: it is downloaded with your license key, defined in `wp-config.php` as `define( 'ACF_PRO_LICENSE', '...' );` |
+| **Starter Blocks** | Required: the theme's blocks and the Portfolio / Property fields (free, no license) |
 | **Contact Form 7** | Required (forms) |
 | Flamingo, Yoast SEO, CookieYes, LiteSpeed Cache, WooCommerce | Recommended |
 | [Starter Live](https://github.com/BurOrub/StarterLiveWP) | Edit texts, images and links straight from the frontend |
@@ -37,7 +37,7 @@ The theme works with the plugins below. After activating the theme, *Appearance 
    - `starter-pacchetto-completo.zip`: theme + child theme. WordPress's *Upload Theme* accepts only one theme per zip, so this one is unzipped into `wp-content/themes/` (File Manager or FTP);
    - or, to upload from WordPress, `starter-theme.zip` and [`starter-theme-child.zip`](https://github.com/BurOrub/StarterChildWP/releases/latest) separately, with *Appearance → Themes → Add New → Upload Theme*.
 2. In *Appearance → Themes* **activate the child theme** (the parent stays installed).
-3. Add the ACF license key to `wp-config.php`, then go to *Appearance → Installa plugin*.
+3. Go to *Appearance → Installa plugin* and install Starter Blocks.
 4. Configure the site in *Appearance → Customize → Options*.
 
 Do not use the *Code → Download ZIP* button: GitHub's automatic zip has no compiled CSS/JS (the theme would still work, only slower) and the folder has a different name.
@@ -77,7 +77,7 @@ In the [`docs/`](docs) folder (Italian):
 
 ## Italiano
 
-Tema WordPress classico (non a blocchi) pensato come base per nuovi siti: leggero, scritto per Gutenberg e ACF, con un pannello **Opzioni** in *Aspetto → Personalizza* che permette di configurare header, footer, colori, font, blog, shop e prestazioni senza toccare il codice.
+Tema WordPress classico (non a blocchi) pensato come base per nuovi siti: leggero, scritto per Gutenberg, con un pannello **Opzioni** in *Aspetto → Personalizza* che permette di configurare header, footer, colori, font, blog, shop e prestazioni senza toccare il codice.
 
 - Autore: Denis Burani · Licenza: GPL v2 o successiva
 - Richiede WordPress 6.4+ e PHP 7.4+
@@ -87,7 +87,7 @@ Tema WordPress classico (non a blocchi) pensato come base per nuovi siti: legger
 | Area | Contenuto |
 |---|---|
 | Opzioni | Pannello *Personalizza → Opzioni*: generale, tipografia, colori, header, footer (5 stili), pulsanti, barra annunci, blog, shop, prestazioni, moduli |
-| Blocchi | Blocchi ACF in `template-parts/` (hero, slider, sezioni affiancate, recensioni, team, mappa, blog, prodotti...) |
+| Blocchi | Blocchi Gutenberg del plugin Starter Blocks (hero, slider, sezioni affiancate, recensioni, team, mappa, blog, prodotti...) |
 | Moduli | **Portfolio** e **Immobili**: si accendono da *Opzioni → Moduli*; da spenti non vengono caricati |
 | Shop | Template WooCommerce, preferiti e filtri unificati |
 | Prestazioni | Immagini AVIF/WebP, font in locale, CSS e JS compilati, unione di CSS/JS e HTML compresso (facoltativi) |
@@ -99,7 +99,7 @@ Il tema funziona con questi plugin. Dopo l'attivazione, *Aspetto → Installa pl
 
 | Plugin | Ruolo |
 |---|---|
-| **ACF Pro** | Obbligatorio (campi dei blocchi). A pagamento: si scarica con la tua chiave, da definire in `wp-config.php` come `define( 'ACF_PRO_LICENSE', '...' );` |
+| **Starter Blocks** | Obbligatorio: i blocchi del tema e i campi di Portfolio e Immobili (gratuito, senza licenze) |
 | **Contact Form 7** | Obbligatorio (moduli) |
 | Flamingo, Yoast SEO, CookieYes, LiteSpeed Cache, WooCommerce | Consigliati |
 | [Starter Live](https://github.com/BurOrub/StarterLiveWP) | Modifica di testi, immagini e link direttamente dal frontend |
@@ -111,7 +111,7 @@ Il tema funziona con questi plugin. Dopo l'attivazione, *Aspetto → Installa pl
    - `starter-pacchetto-completo.zip`: tema + tema figlio. WordPress da *Carica tema* accetta un solo tema per zip, quindi questo si decomprime in `wp-content/themes/` (File Manager o FTP);
    - oppure, per caricare da WordPress, `starter-theme.zip` e [`starter-theme-child.zip`](https://github.com/BurOrub/StarterChildWP/releases/latest) separati, con *Aspetto → Temi → Aggiungi → Carica tema*.
 2. In *Aspetto → Temi* **attiva il tema figlio** (il padre resta installato).
-3. Aggiungi la chiave ACF in `wp-config.php`, poi vai in *Aspetto → Installa plugin*.
+3. Vai in *Aspetto → Installa plugin* e installa Starter Blocks.
 4. Configura il sito da *Aspetto → Personalizza → Opzioni*.
 
 Non usare il pulsante *Code → Download ZIP*: lo zip automatico di GitHub non contiene CSS e JS compilati (il tema funzionerebbe, ma più lento) e ha la cartella con un altro nome.

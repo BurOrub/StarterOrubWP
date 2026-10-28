@@ -1,22 +1,31 @@
 <?php
-/** Funzioni di supporto condivise dai blocchi ACF del tema (in template-parts/). */
+/** Funzioni di supporto condivise dai blocchi del tema. */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/* Legge un campo ACF; se ACF non è attivo ripiega sul meta grezzo, così il tema non va in errore. */
+/* Legge un campo di un contenuto (articolo o termine) o delle opzioni; senza il plugin Starter Blocks ripiega sul meta grezzo. */
 function starter_field( $name, $post_id = null, $option = false ) {
 	$target = $option ? 'option' : ( $post_id ? $post_id : get_the_ID() );
 
-	if ( function_exists( 'get_field' ) ) {
-		return get_field( $name, $target );
+	if ( function_exists( 'starter_meta_get' ) ) {
+		return starter_meta_get( $name, $target );
 	}
 
-	return $option ? get_option( 'options_' . $name, '' ) : get_post_meta( $target, $name, true );
+	if ( $option ) {
+		return get_option( 'options_' . $name, '' );
+	}
+
+	return is_string( $target ) && 0 === strpos( $target, 'term_' ) ? get_term_meta( (int) substr( $target, 5 ), $name, true ) : get_post_meta( (int) $target, $name, true );
 }
 
-/* Attributi HTML di un campo ACF "Link" (array url/title/target). */
+/* Campo del blocco che si sta disegnando (plugin Starter Blocks). $raw = valore grezzo salvato. */
+function starter_block_field( $name, $raw = false ) {
+	return function_exists( 'starter_bf' ) ? starter_bf( $name, $raw ) : '';
+}
+
+/* Attributi HTML di un campo "Link" (array url/title/target). */
 function starter_link_attrs( $link, $class = '' ) {
 	if ( ! is_array( $link ) || empty( $link['url'] ) ) {
 		return '';
@@ -69,7 +78,7 @@ function starter_button_class( $style, $default_class, $extra = '' ) {
 	return trim( $map[ $style ] . ' ' . $extra );
 }
 
-/* Testo di un campo ACF "Link", o un valore di ripiego se il titolo è vuoto. */
+/* Testo di un campo "Link", o un valore di ripiego se il titolo è vuoto. */
 function starter_link_title( $link, $fallback = '' ) {
 	return ( is_array( $link ) && ! empty( $link['title'] ) ) ? $link['title'] : $fallback;
 }
@@ -99,12 +108,12 @@ function starter_attachment_ids( $value ) {
  */
 function starter_photo_pair( $main, $second, $legacy = '' ) {
 	$ids = array_merge(
-		starter_attachment_ids( get_field( $main, false, false ) ),
-		starter_attachment_ids( get_field( $second, false, false ) )
+		starter_attachment_ids( starter_block_field( $main, true ) ),
+		starter_attachment_ids( starter_block_field( $second, true ) )
 	);
 
 	if ( ! $ids && $legacy ) {
-		$ids = starter_attachment_ids( get_field( $legacy, false, false ) );
+		$ids = starter_attachment_ids( starter_block_field( $legacy, true ) );
 	}
 
 	return array_slice( array_values( array_unique( $ids ) ), 0, 2 );
@@ -174,14 +183,13 @@ function starter_pick_tag( $value, $auto ) {
  * Dentro una riga di un repeater legge la riga, altrimenti il campo del blocco; fuori da un blocco restituisce sempre $auto.
  */
 function starter_heading_tag( $part, $auto ) {
-	if ( ! function_exists( 'get_field' ) ) {
-		return $auto;
+	$name = $part . '_tag';
+
+	if ( function_exists( 'starter_bf_active' ) && starter_bf_active() ) {
+		return starter_pick_tag( starter_bf( $name ), $auto );
 	}
 
-	$name  = $part . '_tag';
-	$value = ( function_exists( 'acf_get_loop' ) && acf_get_loop( 'active' ) ) ? get_sub_field( $name ) : get_field( $name );
-
-	return starter_pick_tag( $value, $auto );
+	return $auto;
 }
 
 /* Tag heading di una sezione: occhiello (h1/h2) → titolo (un livello sotto) → eventuale figlio (un altro livello sotto). Il modulo può sostituire occhiello e titolo con il tag scelto. */
@@ -269,7 +277,7 @@ function starter_block_head( $title, $text, $eyebrow = '' ) {
 	<?php
 }
 
-/* Pulsante centrato sotto una griglia (campo ACF "Link"). */
+/* Pulsante centrato sotto una griglia (campo "Link"). */
 function starter_block_center_link( $link, $class = 'button button--outline', $style = '' ) {
 	if ( ! is_array( $link ) || empty( $link['url'] ) ) {
 		return;

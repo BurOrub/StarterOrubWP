@@ -6,7 +6,7 @@
  * opzioni del tema, nessun colore o font del sito di origine.
  *
  * Contiene:
- * - il tipo di contenuto Immobile (solo titolo e immagine; il resto sono campi ACF) e le sue tassonomie (Tipologia, Contratto, Zona, Consulente, Evidenza);
+ * - il tipo di contenuto Immobile (solo titolo e immagine; il resto sono campi) e le sue tassonomie (Tipologia, Contratto, Zona, Consulente, Evidenza);
  * - la scheda dell'immobile (templates/single-immobile.php): galleria con lightbox, dati, planimetria, tour virtuale 3D, video, mappa, consulente e modulo;
  * - la scheda in PDF (immobili-pdf.php + libreria Dompdf in dompdf/, caricata solo quando si crea un PDF);
  * - i filtri dell'elenco (immobili-filters.php) e i blocchi Elenco immobili, Immobili in evidenza e Hero home (template-parts/);
@@ -77,166 +77,6 @@ add_action(
 	11
 );
 
-/* ------------------------------------------------------------------ Campi ACF */
-
-add_action(
-	'acf/init',
-	static function () {
-		if ( ! function_exists( 'acf_add_local_field_group' ) ) {
-			return;
-		}
-
-		// Scheda immobile e dati del consulente: stessi campi (stesse chiavi) di Di Guida, così i contenuti si possono importare.
-		foreach ( (array) glob( __DIR__ . '/acf-json/*.json' ) as $file ) {
-			$group = json_decode( (string) file_get_contents( $file ), true ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-
-			if ( is_array( $group ) && ! empty( $group['key'] ) ) {
-				acf_add_local_field_group( $group );
-			}
-		}
-
-		starter_add_block_group(
-			array(
-				'key'      => 'group_starter_elenco_immobili',
-				'title'    => __( 'Immobili — Elenco', 'slug-theme' ),
-				'fields'   => array(
-					array(
-						'key'       => 'field_ei_info',
-						'label'     => __( 'Come funziona', 'slug-theme' ),
-						'name'      => 'info',
-						'type'      => 'message',
-						'message'   => __( 'Mostra tutti gli immobili pubblicati con i filtri sopra la griglia (9 per pagina). L\'intestazione ha lo stesso aspetto delle altre pagine.', 'slug-theme' ),
-						'new_lines' => 'wpautop',
-					),
-					array(
-						'key'          => 'field_ei_occhiello',
-						'label'        => __( 'Occhiello (titolo SEO)', 'slug-theme' ),
-						'name'         => 'occhiello',
-						'type'         => 'text',
-						'instructions' => __( 'Con l\'occhiello è lui il titolo SEO (H1) della pagina, come nella pagina Blog.', 'slug-theme' ),
-					),
-					array(
-						'key'   => 'field_ei_titolo',
-						'label' => __( 'Titolo grande', 'slug-theme' ),
-						'name'  => 'titolo',
-						'type'  => 'text',
-					),
-					array(
-						'key'          => 'field_ei_testo',
-						'label'        => __( 'Testo introduttivo', 'slug-theme' ),
-						'name'         => 'testo',
-						'type'         => 'textarea',
-						'rows'         => 3,
-						'instructions' => __( 'Facoltativo: mostrato sotto il titolo.', 'slug-theme' ),
-					),
-				),
-				'location' => starter_extra_block_location( 'elenco-immobili' ),
-			)
-		);
-
-		starter_add_block_group(
-			array(
-				'key'      => 'group_starter_immobili_in_evidenza',
-				'title'    => __( 'Immobili — In evidenza', 'slug-theme' ),
-				'fields'   => array(
-					array(
-						'key'       => 'field_ie_info',
-						'label'     => __( 'Quali immobili', 'slug-theme' ),
-						'name'      => 'info',
-						'type'      => 'message',
-						'message'   => __( 'Mostra i 3 immobili più recenti con Evidenza = “In evidenza home”, anche se ne sono selezionati di più.', 'slug-theme' ),
-						'new_lines' => 'wpautop',
-					),
-					array(
-						'key'           => 'field_ie_occhiello',
-						'label'         => __( 'Occhiello', 'slug-theme' ),
-						'name'          => 'occhiello',
-						'type'          => 'text',
-						'default_value' => __( 'Immobili in evidenza', 'slug-theme' ),
-					),
-					array(
-						'key'           => 'field_ie_titolo',
-						'label'         => __( 'Titolo grande', 'slug-theme' ),
-						'name'          => 'titolo',
-						'type'          => 'text',
-						'default_value' => __( 'Una selezione attenta, di gusto e di valore', 'slug-theme' ),
-					),
-					array(
-						'key'          => 'field_ie_testo',
-						'label'        => __( 'Testo', 'slug-theme' ),
-						'name'         => 'testo',
-						'type'         => 'textarea',
-						'rows'         => 3,
-						'instructions' => __( 'Facoltativo: breve testo sotto il titolo.', 'slug-theme' ),
-					),
-					array(
-						'key'           => 'field_ie_link',
-						'label'         => __( 'Link “Vedi tutti”', 'slug-theme' ),
-						'name'          => 'link',
-						'type'          => 'link',
-						'return_format' => 'array',
-						'instructions'  => __( 'Se vuoto punta alla pagina Immobili.', 'slug-theme' ),
-					),
-				),
-				'location' => starter_extra_block_location( 'immobili-in-evidenza' ),
-			)
-		);
-
-		starter_add_block_group(
-			array(
-				'key'      => 'group_starter_hero_home',
-				'title'    => __( 'Immobili — Hero home', 'slug-theme' ),
-				'fields'   => array(
-					array(
-						'key'       => 'field_hh_info',
-						'label'     => __( 'Immobile in hero', 'slug-theme' ),
-						'name'      => 'info',
-						'type'      => 'message',
-						'message'   => __( 'Immagine e card della hero vengono dall\'immobile più recente con Evidenza = “Hero home”: si usa il campo “Immagine hero” della scheda, altrimenti l\'immagine in evidenza.', 'slug-theme' ),
-						'new_lines' => 'wpautop',
-					),
-					array(
-						'key'          => 'field_hh_occhiello',
-						'label'        => __( 'Occhiello (H1 della pagina)', 'slug-theme' ),
-						'name'         => 'occhiello',
-						'type'         => 'text',
-						'instructions' => __( 'Il badge sopra al titolo è l\'H1 della pagina: scrivi qui la parola chiave principale.', 'slug-theme' ),
-					),
-					array(
-						'key'          => 'field_hh_titolo',
-						'label'        => __( 'Titolo grande', 'slug-theme' ),
-						'name'         => 'titolo',
-						'type'         => 'textarea',
-						'rows'         => 3,
-						'instructions' => __( 'Accetta HTML semplice: usa &lt;em&gt;…&lt;/em&gt; per la parte in corsivo.', 'slug-theme' ),
-					),
-					array(
-						'key'   => 'field_hh_testo',
-						'label' => __( 'Testo', 'slug-theme' ),
-						'name'  => 'testo',
-						'type'  => 'textarea',
-						'rows'  => 4,
-					),
-					array(
-						'key'           => 'field_hh_cta_primaria',
-						'label'         => __( 'Pulsante principale', 'slug-theme' ),
-						'name'          => 'cta_primaria',
-						'type'          => 'link',
-						'return_format' => 'array',
-					),
-					array(
-						'key'           => 'field_hh_cta_secondaria',
-						'label'         => __( 'Pulsante secondario', 'slug-theme' ),
-						'name'          => 'cta_secondaria',
-						'type'          => 'link',
-						'return_format' => 'array',
-					),
-				),
-				'location' => starter_extra_block_location( 'immobili-hero-home' ),
-			)
-		);
-	}
-);
 
 /* ------------------------------------------------------------------ Scheda e stili */
 
@@ -297,7 +137,7 @@ add_action(
 
 /* Starter Live: i campi della scheda dell'immobile (ACF, non blocchi) si modificano dal frontend come quelli dei blocchi. */
 add_filter(
-	'starter_live_acf_post_types',
+	'starter_live_meta_post_types',
 	static function ( $types ) {
 		$types[] = 'immobile';
 
@@ -307,7 +147,7 @@ add_filter(
 
 /* L'immagine "hero" dell'immobile compare solo nel blocco Hero home, non nella scheda: lì non va agganciata a una delle foto. */
 add_filter(
-	'starter_live_acf_post_skip',
+	'starter_live_meta_post_skip',
 	static function ( $skip, $post_type ) {
 		return 'immobile' === $post_type ? array_merge( (array) $skip, array( 'immagine_hero' ) ) : $skip;
 	},
@@ -718,3 +558,24 @@ function starter_imm_demo_variants( $base_id ) {
 
 	return $created;
 }
+
+/*
+ * Le scelte dei menu a tendina della scheda (badge come "Esclusiva", "Riscaldamento: Autonomo", tipi di punti di interesse…)
+ * si salvano nel campo in italiano: all'uscita passano dalla traduzione del tema, così in un'altra lingua (languages/en_US.po) cambiano.
+ */
+add_filter(
+	'starter_meta_value',
+	function ( $value, $field, $target ) {
+		if ( 'select' !== ( $field['type'] ?? '' ) || 'immobile' !== ( $target[2] ?? '' ) ) {
+			return $value;
+		}
+
+		$translate = static function ( $text ) {
+			return is_string( $text ) && '' !== $text ? translate( $text, 'slug-theme' ) : $text; // phpcs:ignore WordPress.WP.I18n
+		};
+
+		return is_array( $value ) ? array_map( $translate, $value ) : $translate( $value );
+	},
+	10,
+	3
+);

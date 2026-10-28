@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $starter_wa_url  = starter_whatsapp_opt( 'url' );
-$starter_wa_text = starter_whatsapp_opt( 'text' );
+$starter_wa_text = starter_wpml_translate_string( 'whatsapp_text', starter_whatsapp_opt( 'text' ) );
 
 if ( '' === $starter_wa_url ) {
 	return;

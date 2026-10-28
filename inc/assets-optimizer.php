@@ -272,6 +272,17 @@ function starter_html_block_tag( $tag ) {
 function starter_minify_html( $html ) {
 	$keep = array();
 
+	// 0. Codici e script scritti dall'utente (Opzioni → Codici e script): passano identici, senza compressione.
+	$html = preg_replace_callback(
+		'~<!--starter-code-->(.*?)<!--/starter-code-->~s',
+		function ( $m ) use ( &$keep ) {
+			$keep[] = $m[1];
+
+			return "\x03" . ( count( $keep ) - 1 ) . "\x04";
+		},
+		$html
+	);
+
 	// 1. Parti da non toccare o da trattare a parte, sostituite da segnaposto (\x03 = invisibile, \x01 = contenuto da lasciare com'è).
 	$html = preg_replace_callback(
 		'~<(pre|textarea)\b.*?</\1>~is',

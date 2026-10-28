@@ -1,6 +1,6 @@
 <?php
 /**
- * Compatibilità con gli aggiornamenti di WordPress, WooCommerce e ACF.
+ * Compatibilità con gli aggiornamenti di WordPress e WooCommerce.
  *
  * Il tema dichiara con quali versioni (maggiore.minore) è stato provato. Se un sito monta una versione più nuova, compare
  * un avviso in Bacheca, Aggiornamenti, Temi e Plugin, e un controllo in Strumenti → Salute del sito. Non blocca nulla:
@@ -20,7 +20,6 @@ function starter_compat_tested() {
 	return array(
 		'WordPress'   => '7.1',
 		'WooCommerce' => '11.2',
-		'ACF'         => '6.8',
 	);
 }
 
@@ -31,7 +30,6 @@ function starter_compat_current() {
 	return array(
 		'WordPress'   => (string) $wp_version,
 		'WooCommerce' => defined( 'WC_VERSION' ) ? (string) WC_VERSION : '',
-		'ACF'         => defined( 'ACF_VERSION' ) ? (string) ACF_VERSION : '',
 	);
 }
 
@@ -105,7 +103,7 @@ add_filter(
 						'label' => __( 'Tema', 'slug-theme' ),
 						'color' => 'blue',
 					),
-					'description' => '<p>' . esc_html__( 'WordPress, WooCommerce e ACF non superano le versioni con cui il tema è stato provato.', 'slug-theme' ) . '</p>',
+					'description' => '<p>' . esc_html__( 'WordPress e WooCommerce non superano le versioni con cui il tema è stato provato.', 'slug-theme' ) . '</p>',
 					'actions'     => '',
 					'test'        => 'starter_compat',
 				);

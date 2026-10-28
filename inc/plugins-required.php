@@ -3,9 +3,7 @@
  * Plugin richiesti e consigliati: schermata "Installa plugin" in Aspetto (libreria TGM Plugin Activation, in inc/tgmpa/).
  * Un solo elenco, qui sotto: da lì si installano e si attivano tutti i plugin in un colpo solo.
  * - Plugin del catalogo di WordPress: si scaricano da soli (basta lo slug).
- * - Starter Live e Starter Security: pacchetto allegato all'ultima release del loro repository GitHub.
- * - ACF Pro (a pagamento): si scarica con la chiave di licenza, da definire in wp-config.php come ACF_PRO_LICENSE
- *   (la stessa costante serve a ACF per attivare la licenza da solo). Senza la chiave compare un avviso.
+ * - Starter Blocks (obbligatorio), Starter Live e Starter Security: pacchetto allegato all'ultima release del loro repository GitHub.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -16,34 +14,9 @@ if ( is_admin() ) {
 	require_once get_template_directory() . '/inc/tgmpa/class-tgm-plugin-activation.php';
 }
 
-/* Indirizzo di download di ACF Pro con la chiave del sito; stringa vuota se la chiave non è definita. */
-function starter_acf_pro_package() {
-	if ( ! defined( 'ACF_PRO_LICENSE' ) || ! is_string( ACF_PRO_LICENSE ) || '' === ACF_PRO_LICENSE ) {
-		return '';
-	}
-
-	return add_query_arg(
-		array(
-			'p' => 'pro',
-			'k' => rawurlencode( ACF_PRO_LICENSE ),
-		),
-		'https://connect.advancedcustomfields.com/v2/plugins/download'
-	);
-}
-
 /* Elenco dei plugin. "required" => true: il tema avvisa finché mancano; false: solo consigliato. */
 function starter_register_required_plugins() {
 	$plugins = array();
-
-	// ACF Pro: nel catalogo non c'è, quindi solo con la chiave. Senza, l'avviso è in starter_acf_pro_notice().
-	if ( '' !== starter_acf_pro_package() ) {
-		$plugins[] = array(
-			'name'     => 'ACF Pro',
-			'slug'     => 'advanced-custom-fields-pro',
-			'source'   => starter_acf_pro_package(),
-			'required' => true,
-		);
-	}
 
 	$plugins = array_merge(
 		$plugins,
@@ -79,6 +52,12 @@ function starter_register_required_plugins() {
 				'required' => false,
 			),
 			array(
+				'name'     => 'Starter Blocks (blocchi e campi del tema)',
+				'slug'     => 'starter-blocks',
+				'source'   => 'https://github.com/BurOrub/StarterBlocksWP/releases/latest/download/starter-blocks.zip',
+				'required' => true,
+			),
+			array(
 				'name'     => 'Starter Live (modifica dal frontend)',
 				'slug'     => 'starter-live',
 				'source'   => 'https://github.com/BurOrub/StarterLiveWP/releases/latest/download/starter-live.zip',
@@ -112,26 +91,16 @@ function starter_register_required_plugins() {
 }
 add_action( 'tgmpa_register', 'starter_register_required_plugins' );
 
-/* Senza la chiave di licenza ACF Pro non si può scaricare da qui: se manca, un avviso dice cosa fare. */
-function starter_acf_pro_notice() {
-	if ( ! current_user_can( 'install_plugins' ) || '' !== starter_acf_pro_package() || ( function_exists( 'is_plugin_active' ) && is_plugin_active( 'advanced-custom-fields-pro/acf.php' ) ) ) {
-		return;
-	}
 
-	if ( function_exists( 'acf_get_setting' ) || class_exists( 'ACF' ) ) {
+/* I blocchi e i campi dei contenuti stanno nel plugin Starter Blocks: senza, il tema avvisa. */
+function starter_blocks_plugin_notice() {
+	if ( function_exists( 'starter_bf' ) || ! current_user_can( 'install_plugins' ) ) {
 		return;
 	}
 
 	printf(
 		'<div class="notice notice-warning"><p>%s</p></div>',
-		wp_kses(
-			__( '<strong>ACF Pro</strong> è necessario al tema e non è attivo. Aggiungi la chiave di licenza in <code>wp-config.php</code> (<code>define( \'ACF_PRO_LICENSE\', \'la-tua-chiave\' );</code>) per scaricarlo da <em>Aspetto → Installa plugin</em>, oppure installalo a mano.', 'slug-theme' ),
-			array(
-				'strong' => array(),
-				'code'   => array(),
-				'em'     => array(),
-			)
-		)
+		esc_html__( 'Il plugin Starter Blocks non è attivo: senza di lui mancano i blocchi del tema e i campi di Portfolio e Immobili.', 'slug-theme' )
 	);
 }
-add_action( 'admin_notices', 'starter_acf_pro_notice' );
+add_action( 'admin_notices', 'starter_blocks_plugin_notice' );

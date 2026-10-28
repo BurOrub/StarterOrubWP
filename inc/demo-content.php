@@ -277,7 +277,7 @@ function starter_demo_cookie_content() {
 }
 
 /*
- * Scrive un blocco ACF nel contenuto di una pagina, con testi e immagini segnaposto.
+ * Scrive un blocco nel contenuto di una pagina, con testi e immagini segnaposto.
  * $data: nome campo => valore; $keys: nome campo => chiave ACF (serve a ACF per leggere i valori dal blocco).
  */
 function starter_demo_block( $name, $data, $keys ) {

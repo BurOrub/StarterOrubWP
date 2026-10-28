@@ -3,7 +3,7 @@
  *
  * Caricato tramite add_editor_style() in functions.php. Serve a far
  * apparire nell'editor lo stesso stile che i blocchi (core e i custom
- * block ACF in /template-parts) hanno nel frontend, cosi' chi scrive i
+ * blocco in /template-parts) hanno nel frontend, cosi' chi scrive i
  * contenuti vede un'anteprima fedele. Duplica qui solo le regole visive
  * necessarie: non serve reimportare tutto style.css.
  */
@@ -13,7 +13,7 @@
 	color: var(--color-text, #1a1a1a);
 }
 
-/* Esempio: stile del blocco ACF "example-block" replicato per l'editor. */
+/* Esempio: stile del blocco "example-block" replicato per l'editor. */
 .wp-block-starter-theme-example-block {
 	padding: 1.5rem;
 	border: 1px dashed #cccccc;
@@ -31,18 +31,18 @@
 	margin-inline: auto;
 }
 
-/* I blocchi ACF a tutta larghezza annullano il padding laterale e arrivano ai bordi come sul sito. */
+/* I blocchi a tutta larghezza annullano il padding laterale e arrivano ai bordi come sul sito. */
 .editor-styles-wrapper .is-root-container > .wp-block[data-align="full"] {
 	margin-inline: calc(-1 * var(--gutter, 24px));
 }
 
 /* Blocchi con testo in Gutenberg dentro (Sezione affiancata): il contenitore di ACF si comporta come ".split__text--free" sul sito */
-.editor-styles-wrapper .split__text--free .acf-innerblocks-container {
+.editor-styles-wrapper .split__text--free .starter-inner {
 	display: grid;
 	gap: 20px;
 }
 
-.editor-styles-wrapper .split__text--free .acf-innerblocks-container > * {
+.editor-styles-wrapper .split__text--free .starter-inner > * {
 	margin: 0;
 }
 
@@ -124,7 +124,7 @@
 	display: none;
 }
 
-/* Nell'editor i link non devono funzionare: un clic su un pulsante o un link dell'anteprima di un blocco (ACF) non porta alla pagina collegata,
+/* Nell'editor i link non devono funzionare: un clic su un pulsante o un link dell'anteprima di un blocco  non porta alla pagina collegata,
    ma seleziona il blocco. Restano attivi i link dentro i testi che si stanno scrivendo (campi modificabili) e i pulsanti del core,
    che sono campi di testo editabili. */
 .editor-styles-wrapper a:not([contenteditable]):not([contenteditable] *) {

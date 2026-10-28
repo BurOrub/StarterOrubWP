@@ -1,6 +1,6 @@
 # Starter Theme · Documentazione
 
-*Versione del tema 1.0.4 · aggiornata al 27 ottobre 2026.* Questo file e `documentation.pdf` nascono dagli stessi testi e vanno di pari passo.
+*Versione del tema 1.0.4 · aggiornata al 28 ottobre 2026.* Questo file e `documentation.pdf` nascono dagli stessi testi e vanno di pari passo.
 
 
 # Benvenuto
@@ -48,7 +48,7 @@ La guida è pensata per chi conosce WordPress a livello **base o medio**: niente
 | **1 · Installazione e primi passi** | Scaricare e installare tema, tema figlio e plugin; i primi passi su un sito nuovo; aggiornamenti; la skill. |
 | **2 · Le Opzioni** | Il cuore del tema: tutte le sezioni del pannello Opzioni, una per una. |
 | **3 · I moduli (CPT)** | Portfolio, Immobili e i filtri degli elenchi: come si accendono e come si usano. |
-| **4 · I blocchi personalizzati** | I blocchi ACF disponibili nell'editor, a cosa servono e come si impostano. |
+| **4 · I blocchi personalizzati** | I blocchi disponibili nell'editor, a cosa servono e come si impostano. |
 
 **Come leggere i percorsi.** Le indicazioni su dove cliccare sono scritte così: **Aspetto → Personalizza → Opzioni → Generale**. Si legge: nel menu di WordPress a sinistra *Aspetto*, poi *Personalizza*, poi il pannello *Opzioni* e la sezione *Generale*.
 
@@ -70,7 +70,7 @@ La guida è pensata per chi conosce WordPress a livello **base o medio**: niente
 
 - **WordPress 6.4 o successivo** e **PHP 7.4 o successivo** (meglio una versione recente di PHP 8).
 - Un **sito WordPress vuoto** su cui lavorare: in locale (per esempio con Local) o su un hosting. Il tema è pensato anche per hosting LiteSpeed come Hostinger.
-- La **licenza di ACF Pro**: è l'unico componente a pagamento e serve per i blocchi e i loro campi.
+- Nessuna licenza a pagamento: i blocchi e i campi sono nel plugin **Starter Blocks**, incluso nel sistema.
 - Una ventina di minuti.
 
 ## 1.1 Scaricare il sistema
@@ -81,6 +81,7 @@ Tutto si scarica dalle pagine **Releases** dei repository su GitHub. Prendi semp
 |---|---|---|
 | Tema + tema figlio | github.com/BurOrub/StarterThemeWP/releases/latest | `starter-pacchetto-completo.zip`, oppure `starter-theme.zip` |
 | Tema figlio da solo | github.com/BurOrub/StarterChildWP/releases/latest | `starter-theme-child.zip` |
+| Starter Blocks | github.com/BurOrub/StarterBlocksWP/releases/latest | `starter-blocks.zip` (di solito non serve: lo installa il tema) |
 | Starter Live | github.com/BurOrub/StarterLiveWP/releases/latest | `starter-live.zip` (di solito non serve: lo installa il tema) |
 | Starter Security | github.com/BurOrub/StarterSecurityWP/releases/latest | `starter-security.zip` (idem) |
 | Skill per Claude | github.com/BurOrub/StarterSkillWP/releases/latest | `starter-theme-skill.zip` |
@@ -105,15 +106,9 @@ Sul sito si attiva il **tema figlio**; il padre resta installato accanto e fa il
 
 > **Nota.** Perché non caricare il pacchetto completo da *Carica tema*? Perché WordPress da quella schermata accetta un solo tema per zip. Il pacchetto completo va quindi decompresso direttamente nella cartella dei temi.
 
-## 1.3 La chiave di ACF Pro
+## 1.3 Il plugin Starter Blocks
 
-ACF Pro è a pagamento e non può essere distribuito insieme al tema: si scarica da ACF con la tua **chiave di licenza**. Per farlo in automatico, prima di installare i plugin aggiungi la chiave al file `wp-config.php` del sito, sopra la riga *"That's all, stop editing!"*:
-
-```
-define( 'ACF_PRO_LICENSE', 'la-tua-chiave' );
-```
-
-La stessa riga serve poi ad ACF per attivare la licenza da solo. Senza la chiave, nell'amministrazione compare un avviso e ACF Pro va installato a mano dal tuo account ACF.
+I blocchi del tema e i campi di Portfolio e Immobili stanno nel plugin **Starter Blocks** (gratuito, senza licenze). Va installato e attivato insieme al tema: senza, nell'amministrazione compare un avviso e i blocchi non si vedono. Si scarica dalla release del suo repository su GitHub, come gli altri plugin Starter.
 
 ## 1.4 Installare i plugin in un colpo solo
 
@@ -125,7 +120,7 @@ Dopo l'attivazione, WordPress mostra l'avviso *"Questo tema richiede i seguenti 
 
 | Plugin | Ruolo | Livello |
 |---|---|---|
-| **ACF Pro** | Campi personalizzati: servono ai blocchi del tema | Obbligatorio |
+| **Starter Blocks** | Blocchi del tema e campi di Portfolio e Immobili | Obbligatorio |
 | **Contact Form 7** | Moduli di contatto e newsletter | Obbligatorio |
 | Flamingo | Archivio dei messaggi inviati dai moduli | Consigliato |
 | Yoast SEO | SEO; fornisce anche le briciole di pane | Consigliato |
@@ -655,10 +650,10 @@ Questa parte è per chi sviluppa. Un modulo è una voce nell'elenco `starter_mod
 
 ## 4.1 Come si usano
 
-I blocchi del tema sono **blocchi ACF** (Advanced Custom Fields): si inseriscono dall'editor di WordPress come qualsiasi altro blocco, ma sono sezioni complete con i loro campi. **Servono ACF Pro** (vedi il capitolo 1).
+I blocchi del tema sono blocchi di Gutenberg del plugin **Starter Blocks** (vedi il capitolo 1): si inseriscono dall'editor di WordPress come qualsiasi altro blocco, ma sono sezioni complete con i loro campi.
 
 - **Dove si trovano.** Nel pulsante **+** dell'editor, nella categoria **Starter**. La pagina *Blocchi di prova* (dai *Contenuti di prova*) li mostra tutti.
-- **Come si compilano.** Selezionato il blocco, i campi compaiono nella colonna a destra o sotto al blocco. Le modifiche si vedono nell'anteprima del blocco.
+- **Come si compilano.** Selezionato il blocco, la **matita** nella barra del blocco apre una finestra con tutti i campi, divisi per schede (Contenuto, Layout, Avanzate…); *Salva* aggiorna l'anteprima, *Annulla* scarta. Le opzioni di sfondo e le classi CSS sono anche nella colonna a destra.
 - **I titoli** hanno il selettore del tag HTML (H1…H6, p, span): serve alla SEO, per tenere una gerarchia corretta (un solo H1 per pagina).
 - **I testi** ammettono grassetto, corsivo e link; in molti blocchi anche il sottolineato (barra **B / I / U**).
 - **I pulsanti** dei blocchi hanno un menu **Stile del pulsante**: *Predefinito del blocco*, *Pieno 1*, *Pieno 2*, *Contorno 1*, *Contorno 2* e, sopra le foto, *Chiaro*. I colori di ogni variante si decidono in *Opzioni → Pulsanti*.
@@ -674,7 +669,7 @@ Per regolare i margini di un blocco senza scrivere CSS, scrivi le classi nel cam
 | `mt2`, `mb1`, `pt3`, `pb4`, `p2`… | Margine sopra (`mt`) o sotto (`mb`), spazio interno sopra (`pt`) o sotto (`pb`), o tutto attorno (`p`); il numero è la misura in rem. |
 | `-tab`, `-sma` | Varianti per tablet e per mobile: `mt4 mt2-tab mt1-sma` = 4 su desktop, 2 su tablet, 1 su telefono. |
 
-### Una hero senza blocco ACF
+### Una hero senza blocco del tema
 
 La sezione di apertura può essere anche un normale blocco **Cover** di Gutenberg con la classe `hero-section`: l'header riconosce la hero guardando il contenuto della pagina, quindi qualunque pagina che inizia con quel blocco ottiene l'header trasparente.
 
@@ -758,10 +753,10 @@ Compaiono con il modulo **Immobili** acceso (capitolo 3).
 
 ## 4.8 Creare un nuovo blocco
 
-Questa parte è per chi sviluppa. Un blocco nuovo si registra da solo, senza toccare `functions.php`:
+Questa parte è per chi sviluppa. Un blocco nuovo si registra da solo, senza scrivere JavaScript:
 
-1. Nella cartella `template-parts/` **duplica** la cartella `example-block` e rinominala (per esempio `banner-promo`).
-2. Modifica `block.json` (nome e titolo) e `render.php` (cosa stampa il blocco).
-3. In ACF crea un gruppo di campi con posizione **Blocco → il tuo blocco**. I campi dei blocchi del tema si trovano in `inc/acf-blocks.php` e `inc/acf-blocks-extra.php`.
+1. Nella cartella `blocks/` del plugin Starter Blocks (o, per un sito solo, in `blocks/` del **tema figlio**) crea una cartella con il nome del blocco, partendo dall'esempio in `esempi/blocco-esempio` del figlio.
+2. `block.json`: nome e titolo. `fields.json`: l'elenco dei campi (testo, area di testo, scelta, pulsanti, interruttore, numero, link, foto, file, galleria, icona, ripetitore, categoria, contenuti scelti a mano; con schede e condizioni *mostra solo se*). `render.php`: cosa stampa il blocco, leggendo i campi con `starter_bf( 'nome' )`.
+3. Il pannello di modifica (matita, schede, ripetitori) lo disegna il plugin dai campi.
 
-Il blocco compare nella categoria **Starter**. **Con il tema figlio**, la stessa struttura si mette nella cartella `template-parts/` del figlio: un blocco del figlio con lo stesso nome di uno del padre lo sostituisce.
+Il blocco compare nella categoria **Starter**. Con lo stesso sistema i campi di un tipo di contenuto (per esempio un Servizio) si dichiarano in un file JSON nella cartella `meta/`: compaiono in un riquadro nella schermata di modifica e nel template si leggono con `starter_field( 'nome' )`.

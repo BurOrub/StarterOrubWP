@@ -98,7 +98,7 @@ add_action(
 			return;
 		}
 
-		$text = trim( (string) get_theme_mod( 'starter_shop_test_text', '' ) );
+		$text = trim( (string) starter_wpml_translate_string( 'shop_test_text', (string) get_theme_mod( 'starter_shop_test_text', '' ) ) );
 
 		if ( '' === $text ) {
 			$text = __( 'Negozio in modalità test.', 'slug-theme' );

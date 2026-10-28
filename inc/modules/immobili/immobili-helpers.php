@@ -29,15 +29,9 @@ function starter_imm_get_price_label( $post_id = null ) {
 	return $label;
 }
 
-/* Legge un campo ACF; se ACF non è attivo ripiega sul meta grezzo, così il tema non va in */
+/* Legge un campo dell'immobile (vedi starter_field in inc/block-helpers.php). */
 function starter_imm_field( $name, $post_id = null, $option = false ) {
-	$target = $option ? 'option' : ( $post_id ? $post_id : get_the_ID() );
-
-	if ( function_exists( 'get_field' ) ) {
-		return get_field( $name, $target );
-	}
-
-	return $option ? get_option( 'options_' . $name, '' ) : get_post_meta( $target, $name, true );
+	return starter_field( $name, $post_id, $option );
 }
 
 /* Titolo mostrato nella scheda */
@@ -152,15 +146,16 @@ function starter_imm_get_card_facts( $post_id = null ) {
 function starter_imm_get_featured_immobili( $term_slug, $limit, $exclude = array() ) {
 	return get_posts(
 		array(
-			'post_type'      => 'immobile',
-			'post_status'    => 'publish',
-			'posts_per_page' => $limit,
-			'orderby'        => array(
+			'post_type'        => 'immobile',
+			'post_status'      => 'publish',
+			'posts_per_page'   => $limit,
+			'suppress_filters' => false, // Solo immobili della lingua corrente (WPML).
+			'orderby'          => array(
 				'menu_order' => 'ASC',
 				'date'       => 'DESC',
 			),
-			'post__not_in'   => $exclude,
-			'tax_query'      => array(
+			'post__not_in'     => $exclude,
+			'tax_query'        => array(
 				array(
 					'taxonomy' => 'evidenza',
 					'field'    => 'slug',
@@ -193,7 +188,8 @@ function starter_imm_page_id() {
 		set_transient( 'starter_imm_page', $id, DAY_IN_SECONDS );
 	}
 
-	return (int) $id;
+	// La cache tiene la pagina di base: con WPML si passa alla sua traduzione nella lingua corrente (senza WPML il filtro non fa nulla).
+	return (int) apply_filters( 'wpml_object_id', (int) $id, 'page', true );
 }
 
 /* Se si salva o si cancella una pagina, la ricerca della pagina dell'elenco si rifà. */
@@ -360,9 +356,9 @@ function starter_imm_get_consultant( $post_id = null ) {
 	);
 }
 
-/* Legge un campo ACF ('' se ACF non c'è) */
+/* Legge un campo di un articolo o di un termine ('term_12' per i termini). */
 function starter_imm_field_of( $name, $ref ) {
-	return function_exists( 'get_field' ) ? get_field( $name, $ref ) : '';
+	return starter_field( $name, $ref );
 }
 
 /* Righe della tabella dati di un immobile: array di array( etichetta, valore ). Usata dalla scheda e dal PDF. */
@@ -490,7 +486,7 @@ function starter_imm_immobile_extra_items( $post_id ) {
 			'label'     => $label,
 			'value'     => $value,
 			'highlight' => ! empty( $row['altri_dati_risalto'] ),
-			'field'     => 'altri_dati_' . (int) $row_idx . '_' . $name, // nome del campo ACF (serve alla modifica dal frontend)
+			'field'     => 'altri_dati_' . (int) $row_idx . '_' . $name, // nome del campo (serve alla modifica dal frontend)
 		);
 	}
 
@@ -518,21 +514,22 @@ function starter_imm_immobile_highlights( $post_id ) {
 	return $chips;
 }
 
-/* Righe predefinite di "Caratteristiche" per un nuovo immobile (Cucina, Riscaldamento, Climatizzazione, Spese condominio). */
-function starter_imm_default_feature_rows( $value, $post_id, $field ) {
-	if ( ! empty( $value ) || 'auto-draft' !== get_post_status( $post_id ) ) {
-		return $value;
+/* Righe predefinite di "Caratteristiche" per un nuovo immobile (Cucina, Riscaldamento, Climatizzazione, Spese condominio): valori iniziali dell'editor. */
+function starter_imm_default_feature_rows( $flat, $post_id ) {
+	if ( 'immobile' !== get_post_type( $post_id ) || ! empty( $flat['altri_dati'] ) || 'auto-draft' !== get_post_status( $post_id ) ) {
+		return $flat;
 	}
 
-	$rows = array();
+	$labels = array( 'Cucina', 'Riscaldamento', 'Climatizzazione', 'Spese condominio' );
 
-	foreach ( array( 'Cucina', 'Riscaldamento', 'Climatizzazione', 'Spese condominio' ) as $label ) {
-		$rows[] = array(
-			'field_imm_altri_dati_elenco' => 1,
-			'field_imm_altri_dati_scelta' => $label,
-		);
+	$flat['altri_dati']  = count( $labels );
+	$flat['_altri_dati'] = 'field_imm_altri_dati';
+
+	foreach ( $labels as $i => $label ) {
+		$flat[ 'altri_dati_' . $i . '_altri_dati_elenco' ]  = 1;
+		$flat[ 'altri_dati_' . $i . '_altri_dati_scelta' ] = $label;
 	}
 
-	return $rows;
+	return $flat;
 }
-add_filter( 'acf/load_value/key=field_imm_altri_dati', 'starter_imm_default_feature_rows', 10, 3 );
+add_filter( 'starter_meta_initial', 'starter_imm_default_feature_rows', 10, 2 );

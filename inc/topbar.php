@@ -41,7 +41,7 @@ function starter_topbar_active() {
 
 /* Annunci: uno per riga. */
 function starter_topbar_messages() {
-	$lines = preg_split( '/\r\n|\r|\n/', (string) get_theme_mod( 'starter_topbar_text', '' ) );
+	$lines = preg_split( '/\r\n|\r|\n/', (string) starter_wpml_translate_string( 'topbar_text', (string) get_theme_mod( 'starter_topbar_text', '' ) ) );
 
 	return array_values( array_filter( array_map( 'trim', $lines ), 'strlen' ) );
 }
@@ -181,8 +181,8 @@ add_action(
 		}
 
 		$messages   = starter_topbar_messages();
-		$label      = trim( (string) get_theme_mod( 'starter_topbar_label', '' ) );
-		$link       = trim( (string) get_theme_mod( 'starter_topbar_link', '' ) );
+		$label      = trim( (string) starter_wpml_translate_string( 'topbar_label', (string) get_theme_mod( 'starter_topbar_label', '' ) ) );
+		$link       = trim( (string) apply_filters( 'wpml_permalink', get_theme_mod( 'starter_topbar_link', '' ) ) ); // Link interno: pagina nella lingua corrente (WPML).
 		$separators = starter_topbar_separators();
 		$sep        = isset( $separators[ get_theme_mod( 'starter_topbar_separator', 'dot' ) ] ) ? $separators[ get_theme_mod( 'starter_topbar_separator', 'dot' ) ] : '·';
 		$speed      = max( 10, (int) get_theme_mod( 'starter_topbar_speed', 60 ) );

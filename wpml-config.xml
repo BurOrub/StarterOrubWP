@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Configurazione WPML del tema Starter.
+	Dice a WPML quali contenuti sono traducibili e come trattare i campi ACF:
+	- translate = il testo va tradotto in ogni lingua
+	- copy      = il valore viene copiato dall'originale (numeri, immagini, scelte, link)
+	Aggiornare questo file quando si aggiunge un campo ACF o un blocco con testi.
+-->
+<wpml-config>
+	<custom-types>
+		<custom-type translate="1">portfolio</custom-type>
+		<custom-type translate="1">immobile</custom-type>
+	</custom-types>
+	<taxonomies>
+		<taxonomy translate="1">portfolio_category</taxonomy>
+		<taxonomy translate="1">portfolio_client_type</taxonomy>
+		<taxonomy translate="1">tipologia</taxonomy>
+		<taxonomy translate="1">contratto</taxonomy>
+		<taxonomy translate="1">zona</taxonomy>
+		<taxonomy translate="1">evidenza</taxonomy>
+		<taxonomy translate="0">consulente</taxonomy>
+	</taxonomies>
+	<custom-fields>
+		<!-- Pagine automatiche dei moduli (il tema le riconosce da questi meta) -->
+		<custom-field action="copy">_starter_module_page</custom-field>
+		<custom-field action="copy">_starter_page</custom-field>
+		<!-- Portfolio -->
+		<custom-field action="translate">progetto_testo</custom-field>
+		<custom-field action="copy">progetto_logo</custom-field>
+		<custom-field action="copy">progetto_copertina_full</custom-field>
+		<custom-field action="copy">progetto_link</custom-field>
+		<custom-field action="copy">progetto_video</custom-field>
+		<custom-field action="copy">progetto_agenzie</custom-field>
+		<custom-field action="copy">progetto_agenzie_*</custom-field>
+		<custom-field action="copy">progetto_correlati</custom-field>
+		<!-- Immobili: testi da tradurre -->
+		<custom-field action="translate">titolo_pagina</custom-field>
+		<custom-field action="translate">apertura</custom-field>
+		<custom-field action="translate">nota_locali</custom-field>
+		<custom-field action="translate">nota_bagni</custom-field>
+		<custom-field action="translate">piano</custom-field>
+		<custom-field action="translate">nota_piano</custom-field>
+		<custom-field action="translate">etichette_*_etichette_testo</custom-field>
+		<custom-field action="translate">altri_dati_*_altri_dati_etichetta</custom-field>
+		<custom-field action="translate">altri_dati_*_altri_dati_valore</custom-field>
+		<custom-field action="translate">titolo_descrizione</custom-field>
+		<custom-field action="translate">descrizione</custom-field>
+		<custom-field action="translate">punti_di_forza_*_punti_di_forza_titolo</custom-field>
+		<custom-field action="translate">punti_di_forza_*_punti_di_forza_testo</custom-field>
+		<custom-field action="translate">blocchi_piano_*_blocchi_piano_occhiello</custom-field>
+		<custom-field action="translate">blocchi_piano_*_blocchi_piano_titolo</custom-field>
+		<custom-field action="translate">blocchi_piano_*_blocchi_piano_testo</custom-field>
+		<custom-field action="translate">titolo_zona</custom-field>
+		<custom-field action="translate">testo_zona</custom-field>
+		<custom-field action="translate">punti_interesse_*_punti_interesse_nome</custom-field>
+		<custom-field action="translate">punti_interesse_*_punti_interesse_distanza</custom-field>
+		<!-- Immobili: valori uguali in tutte le lingue -->
+		<custom-field action="copy">prezzo</custom-field>
+		<custom-field action="copy">superficie</custom-field>
+		<custom-field action="copy">locali</custom-field>
+		<custom-field action="copy">locali_plus</custom-field>
+		<custom-field action="copy">camere</custom-field>
+		<custom-field action="copy">bagni</custom-field>
+		<custom-field action="copy">classe_energetica</custom-field>
+		<custom-field action="copy">epi</custom-field>
+		<custom-field action="copy">indirizzo</custom-field>
+		<custom-field action="copy">immagine_hero</custom-field>
+		<custom-field action="copy">galleria</custom-field>
+		<custom-field action="copy">planimetria</custom-field>
+		<custom-field action="copy">tour_3d</custom-field>
+		<custom-field action="copy">video_tour</custom-field>
+		<custom-field action="copy">etichette</custom-field>
+		<custom-field action="copy">etichette_*_etichette_elenco</custom-field>
+		<custom-field action="copy">etichette_*_etichette_scelta</custom-field>
+		<custom-field action="copy">altri_dati</custom-field>
+		<custom-field action="copy">altri_dati_*_altri_dati_elenco</custom-field>
+		<custom-field action="copy">altri_dati_*_altri_dati_scelta</custom-field>
+		<custom-field action="copy">altri_dati_*_altri_dati_valore_*</custom-field>
+		<custom-field action="copy">altri_dati_*_altri_dati_risalto</custom-field>
+		<custom-field action="copy">punti_di_forza</custom-field>
+		<custom-field action="copy">blocchi_piano</custom-field>
+		<custom-field action="copy">punti_interesse</custom-field>
+		<custom-field action="copy">punti_interesse_*_punti_interesse_tipo</custom-field>
+	</custom-fields>
+	<gutenberg-blocks>
+		<gutenberg-block type="starter-theme/testo-affiancato" translate="1">
+			<key name="data">
+				<key name="occhiello" />
+				<key name="titolo" />
+				<key name="testo" />
+				<key name="citazione" />
+				<key name="link"><key name="title" /></key>
+				<key name="/^checklist_\d+_voce$/" search-method="regex" />
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/sezione-voci" translate="1">
+			<key name="data">
+				<key name="occhiello" />
+				<key name="titolo" />
+				<key name="testo" />
+				<key name="cta_testo" />
+				<key name="link"><key name="title" /></key>
+				<key name="cta_link"><key name="title" /></key>
+				<key name="/^voci_\d+_titolo$/" search-method="regex" />
+				<key name="/^voci_\d+_testo$/" search-method="regex" />
+				<key name="/^voci_\d+_link$/" search-method="regex"><key name="title" /></key>
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/recensioni" translate="1">
+			<key name="data">
+				<key name="occhiello" />
+				<key name="titolo" />
+				<key name="link"><key name="title" /></key>
+				<key name="/^voci_\d+_nome$/" search-method="regex" />
+				<key name="/^voci_\d+_testo$/" search-method="regex" />
+				<key name="/^voci_\d+_data$/" search-method="regex" />
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/mappa" translate="1">
+			<key name="data">
+				<key name="pulsante" />
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/intestazione-pagina" translate="1">
+			<key name="data">
+				<key name="occhiello" />
+				<key name="titolo" />
+				<key name="testo" />
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/missione-visione" translate="1">
+			<key name="data">
+				<key name="/^voci_\d+_occhiello$/" search-method="regex" />
+				<key name="/^voci_\d+_titolo$/" search-method="regex" />
+				<key name="/^voci_\d+_testo$/" search-method="regex" />
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/hero-media" translate="1">
+			<key name="data">
+				<key name="occhiello" />
+				<key name="titolo" />
+				<key name="testo" />
+				<key name="clienti_testo" />
+				<key name="etichetta_foto" />
+				<key name="etichetta_video" />
+				<key name="cta_primaria"><key name="title" /></key>
+				<key name="cta_secondaria"><key name="title" /></key>
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/sezione-affiancata" translate="1">
+			<key name="data">
+				<key name="occhiello" />
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/hero-split" translate="1">
+			<key name="data">
+				<key name="occhiello" />
+				<key name="titolo" />
+				<key name="testo" />
+				<key name="cta_primaria"><key name="title" /></key>
+				<key name="cta_secondaria"><key name="title" /></key>
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/hero-slider" translate="1">
+			<key name="data">
+				<key name="occhiello" />
+				<key name="titolo" />
+				<key name="testo" />
+				<key name="link"><key name="title" /></key>
+				<key name="link_2"><key name="title" /></key>
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/hero-video" translate="1">
+			<key name="data">
+				<key name="occhiello" />
+				<key name="titolo" />
+				<key name="testo" />
+				<key name="link"><key name="title" /></key>
+				<key name="link_2"><key name="title" /></key>
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/striscia-valori" translate="1">
+			<key name="data">
+				<key name="/^voci_\d+_titolo$/" search-method="regex" />
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/slider" translate="1">
+			<key name="data">
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/ultimi-articoli" translate="1">
+			<key name="data">
+				<key name="occhiello" />
+				<key name="titolo" />
+				<key name="testo" />
+				<key name="link"><key name="title" /></key>
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/prodotti-in-evidenza" translate="1">
+			<key name="data">
+				<key name="occhiello" />
+				<key name="titolo" />
+				<key name="testo" />
+				<key name="link"><key name="title" /></key>
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/instagram" translate="1">
+			<key name="data">
+				<key name="occhiello" />
+				<key name="titolo" />
+				<key name="account" />
+				<key name="link"><key name="title" /></key>
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/team" translate="1">
+			<key name="data">
+				<key name="occhiello" />
+				<key name="titolo" />
+				<key name="testo" />
+				<key name="/^voci_\d+_voci_nome$/" search-method="regex" />
+				<key name="/^voci_\d+_voci_ruolo$/" search-method="regex" />
+				<key name="/^voci_\d+_voci_bio$/" search-method="regex" />
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/contatti" translate="1">
+			<key name="data">
+				<key name="occhiello" />
+				<key name="titolo" />
+				<key name="shortcode_form" />
+				<key name="/^recapiti_\d+_testo$/" search-method="regex" />
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/elenco-servizi" translate="1">
+			<key name="data">
+				<key name="/^voci_\d+_voci_id$/" search-method="regex" />
+				<key name="/^voci_\d+_voci_occhiello$/" search-method="regex" />
+				<key name="/^voci_\d+_voci_titolo$/" search-method="regex" />
+				<key name="/^voci_\d+_voci_etichetta$/" search-method="regex" />
+				<key name="/^voci_\d+_voci_testo$/" search-method="regex" />
+				<key name="/^voci_\d+_voci_elenco$/" search-method="regex" />
+				<key name="/^voci_\d+_voci_cta$/" search-method="regex"><key name="title" /></key>
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/progetti" translate="1">
+			<key name="data">
+				<key name="filtri_frase" />
+				<key name="transizione_testo" />
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/progetto-testo" translate="1">
+			<key name="data">
+				<key name="occhiello" />
+				<key name="titolo" />
+				<key name="testo" />
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/progetto-media" translate="1">
+			<key name="data">
+				<key name="/^elementi_\d+_elementi_didascalia$/" search-method="regex" />
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/progetto-crediti" translate="1">
+			<key name="data">
+				<key name="titolo" />
+				<key name="/^voci_\d+_voci_ruolo$/" search-method="regex" />
+				<key name="/^voci_\d+_voci_nome$/" search-method="regex" />
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/elenco-immobili" translate="1">
+			<key name="data">
+				<key name="occhiello" />
+				<key name="titolo" />
+				<key name="testo" />
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/immobili-in-evidenza" translate="1">
+			<key name="data">
+				<key name="occhiello" />
+				<key name="titolo" />
+				<key name="testo" />
+				<key name="link"><key name="title" /></key>
+			</key>
+		</gutenberg-block>
+		<gutenberg-block type="starter-theme/immobili-hero-home" translate="1">
+			<key name="data">
+				<key name="occhiello" />
+				<key name="titolo" />
+				<key name="testo" />
+				<key name="cta_primaria"><key name="title" /></key>
+				<key name="cta_secondaria"><key name="title" /></key>
+			</key>
+		</gutenberg-block>
+	</gutenberg-blocks>
+</wpml-config>

@@ -63,6 +63,7 @@ function starter_search_ids( $post_type, $q, $limit, $extra = array() ) {
 				'fields'              => 'ids',
 				'ignore_sticky_posts' => true,
 				'no_found_rows'       => true,
+				'suppress_filters'    => false, // get_posts() li salta di default: serve perché WPML limiti i risultati alla lingua corrente.
 			),
 			$extra
 		)

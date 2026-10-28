@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<a class="skip-link screen-reader-text" href="#site-content"><?php esc_html_e( 'Vai al contenuto', 'starter-theme' ); ?></a>
+<a class="skip-link screen-reader-text" href="#site-content"><?php esc_html_e( 'Vai al contenuto', 'slug-theme' ); ?></a>
 
 <?php
 // Icone dell'header: la ricerca funziona sempre; account, preferiti e carrello solo con WooCommerce attivo. Ognuna si attiva da Opzioni → Header → Icone.
@@ -80,7 +80,7 @@ $starter_has_icons    = $starter_show_search || $starter_show_account || $starte
 
 		<div class="site-header__nav-wrap" id="site-header-nav-wrap">
 
-			<nav class="main-navigation main-navigation--desktop" id="main-navigation" aria-label="<?php esc_attr_e( 'Menu principale', 'starter-theme' ); ?>">
+			<nav class="main-navigation main-navigation--desktop" id="main-navigation" aria-label="<?php esc_attr_e( 'Menu principale', 'slug-theme' ); ?>">
 				<?php
 				wp_nav_menu(
 					array(
@@ -104,7 +104,7 @@ $starter_has_icons    = $starter_show_search || $starter_show_account || $starte
 				 * due <nav> solo quando "body.has-mobile-menu" è presente).
 				 */
 				?>
-				<nav class="main-navigation main-navigation--mobile" id="main-navigation-mobile" aria-label="<?php esc_attr_e( 'Menu principale (mobile)', 'starter-theme' ); ?>">
+				<nav class="main-navigation main-navigation--mobile" id="main-navigation-mobile" aria-label="<?php esc_attr_e( 'Menu principale (mobile)', 'slug-theme' ); ?>">
 					<?php
 					wp_nav_menu(
 						array(
@@ -128,12 +128,12 @@ $starter_has_icons    = $starter_show_search || $starter_show_account || $starte
 				</div>
 			<?php endif; ?>
 
-			<?php $starter_cta_text = get_theme_mod( 'starter_cta_text', __( 'Contattami', 'slug-theme' ) ); ?>
+			<?php $starter_cta_text = starter_wpml_translate_string( 'cta_text', (string) get_theme_mod( 'starter_cta_text', __( 'Contattami', 'slug-theme' ) ) ); ?>
 			<?php if ( $starter_cta_text || $starter_social_links ) : ?>
 				<div class="site-header__actions">
 					<?php if ( $starter_cta_text ) : ?>
 						<a
-							href="<?php echo esc_url( get_theme_mod( 'starter_cta_url', '#' ) ); ?>"
+							href="<?php echo esc_url( apply_filters( 'wpml_permalink', get_theme_mod( 'starter_cta_url', '#' ) ) ); // Link interno: va alla pagina nella lingua corrente (con WPML). ?>"
 							class="button button--cta"
 							<?php echo get_theme_mod( 'starter_cta_new_tab', false ) ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>
 						>

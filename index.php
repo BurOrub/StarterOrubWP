@@ -48,15 +48,15 @@ get_header();
 		<?php
 		the_posts_pagination(
 			array(
-				'prev_text' => __( 'Precedenti', 'starter-theme' ),
-				'next_text' => __( 'Successivi', 'starter-theme' ),
+				'prev_text' => __( 'Precedenti', 'slug-theme' ),
+				'next_text' => __( 'Successivi', 'slug-theme' ),
 			)
 		);
 		?>
 
 	<?php else : ?>
 
-		<p><?php esc_html_e( 'Nessun contenuto trovato.', 'starter-theme' ); ?></p>
+		<p><?php esc_html_e( 'Nessun contenuto trovato.', 'slug-theme' ); ?></p>
 
 	<?php endif; ?>
 

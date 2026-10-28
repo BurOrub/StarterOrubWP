@@ -17,17 +17,17 @@ $starter_preview = ! empty( $args['preview'] );
 $starter_reveal  = $starter_preview ? '' : ' data-reveal';
 
 $starter_cats       = starter_portfolio_cats( $starter_id );
-$starter_text       = trim( (string) get_field( 'progetto_testo', $starter_id ) ); // Testo editoriale sotto il titolo.
+$starter_text       = trim( (string) starter_field( 'progetto_testo', $starter_id ) ); // Testo editoriale sotto il titolo.
 $starter_summary    = trim( wp_strip_all_tags( (string) get_post_field( 'post_excerpt', $starter_id ) ) ); // Riassunto: è l'H1, il nome del progetto è l'H2.
-$starter_link       = get_field( 'progetto_link', $starter_id );
+$starter_link       = starter_field( 'progetto_link', $starter_id );
 $starter_link_host  = is_array( $starter_link ) && ! empty( $starter_link['url'] ) ? preg_replace( '/^www\./i', '', (string) wp_parse_url( $starter_link['url'], PHP_URL_HOST ) ) : ''; // Il pulsante mostra il dominio del sito.
-$starter_video      = get_field( 'progetto_video', $starter_id );
+$starter_video      = starter_field( 'progetto_video', $starter_id );
 $starter_video      = is_array( $starter_video ) && ! empty( $starter_video['url'] ) ? $starter_video['url'] : '';
-$starter_cover_full = (bool) get_field( 'progetto_copertina_full', $starter_id ) && has_post_thumbnail( $starter_id );
+$starter_cover_full = (bool) starter_field( 'progetto_copertina_full', $starter_id ) && has_post_thumbnail( $starter_id );
 // Agenzie e partner: ogni riga ha un tipo; nella testata stanno in due voci affiancate (prima le agenzie, poi i partner). Le righe senza tipo sono agenzie.
 $starter_collabs    = array( 'agenzia' => array(), 'partner' => array() );
 
-foreach ( (array) get_field( 'progetto_agenzie', $starter_id ) as $starter_row ) {
+foreach ( (array) starter_field( 'progetto_agenzie', $starter_id ) as $starter_row ) {
 	if ( is_array( $starter_row ) && ! empty( $starter_row['link']['title'] ) ) {
 		$starter_collabs[ 'partner' === ( $starter_row['tipo'] ?? '' ) ? 'partner' : 'agenzia' ][] = $starter_row['link'];
 	}

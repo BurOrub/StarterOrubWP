@@ -45,7 +45,7 @@ function starter_icon_paths_base() {
 	);
 }
 
-/* Scelte per i campi ACF "Icona" (es. voci della Sezione voci in stile "icone"). */
+/* Scelte per i campi "Icona" (es. voci della Sezione voci in stile "icone"). */
 function starter_icon_choices() {
 	return array(
 		'key'       => __( 'Chiave', 'slug-theme' ),

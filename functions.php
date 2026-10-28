@@ -18,13 +18,11 @@ if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 }
 require_once get_template_directory() . '/inc/fonts-local.php';
 
-/* Icone SVG, funzioni condivise dai blocchi ACF, pagina Opzioni e campi dei blocchi in template-parts/ (richiedono ACF Pro). */
+/* Icone SVG, funzioni condivise dai blocchi, pulsante WhatsApp e opzioni comuni dei blocchi (i blocchi sono nel plugin Starter Blocks). */
 require_once get_template_directory() . '/inc/icons.php';
 require_once get_template_directory() . '/inc/block-helpers.php';
-require_once get_template_directory() . '/inc/acf-options.php';
-require_once get_template_directory() . '/inc/acf-field-icon.php';
-require_once get_template_directory() . '/inc/acf-blocks.php';
-require_once get_template_directory() . '/inc/acf-blocks-extra.php';
+require_once get_template_directory() . '/inc/whatsapp.php';
+require_once get_template_directory() . '/inc/block-options.php';
 
 /* Moduli del tema: shop (WooCommerce, preferiti, filtri), blog, breadcrumb, CF7, pagine di base. Ognuno è inerte se il plugin relativo non c'è. */
 require_once get_template_directory() . '/inc/woocommerce.php';
@@ -33,6 +31,7 @@ require_once get_template_directory() . '/inc/shop-filters.php';
 require_once get_template_directory() . '/inc/menu.php';
 require_once get_template_directory() . '/inc/header.php';
 require_once get_template_directory() . '/inc/topbar.php';
+require_once get_template_directory() . '/inc/custom-code.php';
 require_once get_template_directory() . '/inc/search.php';
 require_once get_template_directory() . '/inc/blog.php';
 require_once get_template_directory() . '/inc/breadcrumbs.php';
@@ -49,7 +48,7 @@ require_once get_template_directory() . '/inc/duplicate.php';
 /* Aggiornamenti del tema da GitHub (notifica classica di WordPress): inerte finché non è indicato il repository. */
 require_once get_template_directory() . '/inc/updater.php';
 
-/* Schermata "Aspetto → Installa plugin": ACF Pro, Contact Form 7, Yoast e gli altri plugin del sistema, da installare in un colpo solo. */
+/* Schermata "Aspetto → Installa plugin": Contact Form 7, Yoast e gli altri plugin del sistema, da installare in un colpo solo. */
 require_once get_template_directory() . '/inc/plugins-required.php';
 
 /* Setup tema: supporti, menu, textdomain. */
@@ -4087,7 +4086,7 @@ add_filter(
 );
 
 /* Google Fonts scelti in Personalizza → anche dentro l'editor a blocchi. */
-/* Editor: sfondo della sezione e classi personalizzate dei blocchi ACF (scheda Avanzate) visibili anche in Gutenberg. */
+/* Editor: sfondo della sezione e classi personalizzate dei blocchi (scheda Avanzate) visibili anche in Gutenberg. */
 add_action(
 	'enqueue_block_editor_assets',
 	function () {
@@ -4156,7 +4155,15 @@ function starter_wpml_register_string( $name, $value ) {
 		return;
 	}
 
-	do_action( 'wpml_register_single_string', 'Starter Theme', $name, $value );
+	// Si registra solo dalla lingua predefinita: in un'altra lingua il valore predefinito di un campo (un __()) arriva già tradotto e sovrascriverebbe l'originale.
+	$default = apply_filters( 'wpml_default_language', null );
+
+	if ( $default && apply_filters( 'wpml_current_language', null ) !== $default ) {
+		return;
+	}
+
+	// Lingua d'origine = quella predefinita del sito (i testi si scrivono in Personalizza): senza, WPML userebbe quella della pagina visitata in quel momento.
+	do_action( 'wpml_register_single_string', 'Starter Theme', $name, $value, false, apply_filters( 'wpml_default_language', null ) );
 }
 
 /* Ritorna la stringa tradotta via WPML, o il valore originale se WPML non è attivo. */
@@ -4524,17 +4531,17 @@ function starter_dist_ready() {
 		&& filemtime( get_theme_file_path( 'JS/dist/scripts.min.js' ) ) >= filemtime( get_theme_file_path( 'JS/scripts.js' ) );
 }
 
-/* Vero se in pagina c'è almeno uno dei blocchi ACF in template-parts/ (vedi inc/acf-blocks.php). */
+/* Vero se in pagina c'è almeno uno dei blocchi in template-parts/ (vedi inc/acf-blocks.php). */
 function starter_has_content_block() {
 	if ( ! is_singular() ) {
 		return false;
 	}
 
-	// Qualunque blocco ACF del tema (template-parts/*): "<!-- wp:starter-theme/nome ... -->" nel contenuto.
+	// Qualunque blocco del tema (template-parts/*): "<!-- wp:starter-theme/nome ... -->" nel contenuto.
 	return str_contains( (string) get_post_field( 'post_content', get_queried_object_id() ), 'wp:starter-theme/' );
 }
 
-/* Vero se la pagina corrente contiene il blocco ACF del tema indicato (es. 'ultimi-articoli'). */
+/* Vero se la pagina corrente contiene il blocco del tema indicato (es. 'ultimi-articoli'). */
 function starter_page_has_block( $name ) {
 	return is_singular() && str_contains( (string) get_post_field( 'post_content', get_queried_object_id() ), 'wp:starter-theme/' . $name );
 }
@@ -4665,7 +4672,7 @@ add_action(
 		}
 
 		$content = (string) get_theme_mod( 'starter_preloader_content', 'text' );
-		$label   = in_array( $content, array( 'name', 'logo' ), true ) ? get_bloginfo( 'name' ) : (string) get_theme_mod( 'starter_preloader_text', __( 'Caricamento…', 'slug-theme' ) );
+		$label   = in_array( $content, array( 'name', 'logo' ), true ) ? get_bloginfo( 'name' ) : (string) starter_wpml_translate_string( 'preloader_text', (string) get_theme_mod( 'starter_preloader_text', __( 'Caricamento…', 'slug-theme' ) ) );
 		$bg      = starter_resolve_named_color( (string) get_theme_mod( 'starter_preloader_bg', '' ) );
 		$fg      = starter_resolve_named_color( (string) get_theme_mod( 'starter_preloader_fg', '' ) );
 		$classes = ' pt-' . $mode . ( 'percent' === $content ? ' pt-counter' : '' ) . ' pt-go pt-in';
@@ -4716,31 +4723,7 @@ add_action( 'wp_enqueue_scripts', 'starter_enqueue_animation_assets' );
 
 /* CPT "Portfolio", categorie, archivio e scheda del progetto: vedi inc/portfolio.php (si spegne da Opzioni → Portfolio). */
 
-/* Registra automaticamente ogni blocco ACF con block.json in /template-parts; senza ACF resta registrato ma senza campi. */
-function starter_theme_register_acf_blocks() {
-	$skip     = starter_modules_inactive_blocks(); // Blocchi dei moduli spenti (Opzioni → Moduli).
-	$registry = WP_Block_Type_Registry::get_instance();
-
-	// Prima il tema figlio (se attivo), poi il padre: un blocco del figlio con lo stesso nome sostituisce quello del padre.
-	foreach ( array_unique( array( get_stylesheet_directory(), get_template_directory() ) ) as $dir ) {
-		foreach ( (array) glob( $dir . '/template-parts/*/block.json' ) as $block_json ) {
-			if ( in_array( basename( dirname( $block_json ) ), $skip, true ) ) {
-				continue;
-			}
-
-			$data = json_decode( (string) file_get_contents( $block_json ), true );
-
-			if ( ! empty( $data['name'] ) && $registry->is_registered( $data['name'] ) ) {
-				continue;
-			}
-
-			register_block_type( dirname( $block_json ) );
-		}
-	}
-}
-add_action( 'init', 'starter_theme_register_acf_blocks' );
-
-/* Categoria "Starter" nell'inserimento blocchi, per i blocchi ACF del tema in template-parts/. */
+/* Categoria "Starter" nell'inserimento blocchi, per i blocchi del tema (plugin Starter Blocks). */
 function starter_block_categories( $categories ) {
 	array_unshift(
 		$categories,

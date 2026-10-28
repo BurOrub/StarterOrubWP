@@ -51,7 +51,7 @@ get_header();
 
 				wp_link_pages(
 					array(
-						'before' => '<nav class="page-links">' . esc_html__( 'Pagine:', 'starter-theme' ),
+						'before' => '<nav class="page-links">' . esc_html__( 'Pagine:', 'slug-theme' ),
 						'after'  => '</nav>',
 					)
 				);

@@ -32,7 +32,7 @@ while ( have_posts() ) :
 	$starter_opening   = trim( (string) starter_imm_field( 'apertura', $starter_id ) );
 	$starter_zone_h    = starter_imm_field( 'titolo_zona', $starter_id );
 	$starter_zone_t    = starter_imm_field( 'testo_zona', $starter_id );
-	$starter_form      = trim( (string) get_theme_mod( 'starter_imm_form_request', '' ) );
+	$starter_form      = trim( (string) starter_wpml_translate_string( 'imm_form_request', (string) get_theme_mod( 'starter_imm_form_request', '' ) ) ); // Con WPML si può mettere un form diverso per lingua (String Translation).
 	$starter_list_url  = starter_imm_get_immobili_page_url();
 	$starter_strengths = starter_imm_field( 'punti_di_forza', $starter_id );
 	$starter_video     = starter_imm_field( 'video_tour', $starter_id );
@@ -73,7 +73,7 @@ while ( have_posts() ) :
 	?>
 
 <main class="immobile" id="site-content">
-<?php ob_start(); // Il contenuto della scheda passa dal filtro di Starter Live, che rende modificabili i campi ACF (solo per chi può modificare). ?>
+<?php ob_start(); // Il contenuto della scheda passa dal filtro di Starter Live, che rende modificabili i campi (solo per chi può modificare). ?>
 
 	<section class="immobile-head">
 		<?php starter_breadcrumb_inline(); ?>
@@ -413,11 +413,12 @@ while ( have_posts() ) :
 			$starter_related,
 			get_posts(
 				array(
-					'post_type'      => 'immobile',
-					'post_status'    => 'publish',
-					'posts_per_page' => 3 - count( $starter_related ),
-					'post__not_in'   => array_merge( array( $starter_id ), wp_list_pluck( $starter_related, 'ID' ) ),
-					'orderby'        => array(
+					'post_type'        => 'immobile',
+					'post_status'      => 'publish',
+					'posts_per_page'   => 3 - count( $starter_related ),
+					'suppress_filters' => false, // Solo immobili della lingua corrente (WPML).
+					'post__not_in'     => array_merge( array( $starter_id ), wp_list_pluck( $starter_related, 'ID' ) ),
+					'orderby'          => array(
 						'menu_order' => 'ASC',
 						'date'       => 'DESC',
 					),

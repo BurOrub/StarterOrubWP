@@ -1,19 +1,19 @@
 <?php
 /**
  * Pulsante WhatsApp fisso in basso a destra. I campi sono in Aspetto → Personalizza → Opzioni → Generale
- * (prima stavano in una pagina "Opzioni tema" di ACF, ora tolta: chi aveva già compilato i campi li ritrova qui).
+ * (prima stavano in una pagina "Opzioni tema", ora tolta: chi aveva già compilato i campi li ritrova qui).
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/* Valore di un campo WhatsApp ('url' o 'text'); ripiego sui vecchi campi ACF se il sito li aveva compilati. */
+/* Valore di un campo WhatsApp ('url' o 'text'); ripiego sui vecchi campi delle opzioni se il sito li aveva compilati. */
 function starter_whatsapp_opt( $which ) {
 	$value = trim( (string) get_theme_mod( "starter_whatsapp_{$which}", '' ) );
 
-	if ( '' === $value && function_exists( 'get_field' ) ) {
-		$value = trim( (string) get_field( 'url' === $which ? 'whatsapp_url' : 'whatsapp_testo', 'option' ) );
+	if ( '' === $value ) {
+		$value = trim( (string) get_option( 'url' === $which ? 'options_whatsapp_url' : 'options_whatsapp_testo', '' ) );
 	}
 
 	return $value;

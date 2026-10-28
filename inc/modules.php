@@ -90,7 +90,7 @@ function starter_modules_active() {
 	);
 }
 
-/* Cartelle dei blocchi dei moduli spenti (starter_theme_register_acf_blocks le salta). */
+/* Cartelle dei blocchi dei moduli spenti (il plugin Starter Blocks li salta). */
 function starter_modules_inactive_blocks() {
 	$blocks = array();
 
@@ -195,12 +195,13 @@ function starter_module_ensure_page( $id ) {
 function starter_module_draft_pages( $id ) {
 	$pages = get_posts(
 		array(
-			'post_type'      => 'page',
-			'post_status'    => 'publish',
-			'meta_key'       => '_starter_module_page', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
-			'meta_value'     => $id, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
-			'posts_per_page' => -1,
-			'fields'         => 'ids',
+			'post_type'        => 'page',
+			'post_status'      => 'publish',
+			'meta_key'         => '_starter_module_page', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+			'meta_value'       => $id, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+			'posts_per_page'   => -1,
+			'fields'           => 'ids',
+			'suppress_filters' => true, // Tutte le lingue (WPML filtrerebbe solo quella corrente e lascerebbe pubbliche le traduzioni).
 		)
 	);
 
